@@ -1,0 +1,12 @@
+!!!
+%html
+  %head
+    %title Shothere | #{I18n.t "title.sentence"}
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    / Devise flash msgs
+    %p.notice= notice
+    %p.alert= alert
+    = yield

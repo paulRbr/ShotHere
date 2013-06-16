@@ -1,0 +1,3 @@
+%h1= I18n.t "hello.you", :name => current_user.name
+%label{:for => "email"} #{I18n.t "form.email"}:
+%input{:type => "text", :name => "email", :class => "text", :value => current_user.email}

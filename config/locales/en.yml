@@ -1,0 +1,16 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+en:
+  hello:
+    you: "Hello %{name}"
+    home: "Hello home page"
+  form:
+    email: "Your email"
+  title:
+    sentence: "The awesome rails app"
+  sign:
+    in: 
+      link: "Sign in"
+      as: "Signed in as %{name}"
+    out: "Sign out"
+  register: "Register"

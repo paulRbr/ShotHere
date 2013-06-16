@@ -1,0 +1,7 @@
+#user_nav
+  - if user_signed_in?
+    #{I18n.t "sign.in.as", :name => current_user.email}.
+    #{link_to I18n.t('sign.out'), destroy_user_session_path, :method => 'DELETE'}
+  - else
+    #{link_to I18n.t('register'), new_user_registration_path}
+    or #{link_to I18n.t('sign.in.link'), new_user_session_path}

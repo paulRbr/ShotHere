@@ -216,7 +216,6 @@ Devise.setup do |config|
 
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
-  # up on your models and hooks.
   config.omniauth :github, ENV['GITHUB_KEY_SHOTHERE'], ENV['GITHUB_SECRET_SHOTHERE'], :scope => 'popox,ShotHere'
   config.omniauth :google_oauth2, ENV['GOOGLE_KEY_SHOTHERE'], ENV['GOOGLE_SECRET_SHOTHERE'], { access_type: "offline", approval_prompt: "" }
   config.omniauth :twitter, ENV['TWITTER_KEY_SHOTHERE'], ENV['TWITTER_SECRET_SHOTHERE'], :client_options => {:authorize_path => '/oauth/authenticate'}

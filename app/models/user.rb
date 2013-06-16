@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
 
   def self.find_for_twitter(access_token, signed_in_resource=nil)
     data = access_token.info
+    Rails.logger.debug data.inspect
     user = User.where(:email => data["email"]).first
 
     unless user

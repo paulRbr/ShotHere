@@ -6,7 +6,15 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    / Devise flash msgs
-    %p.notice= notice
-    %p.alert= alert
-    = yield
+    #page
+      #header
+        = yield :header
+      #body
+        / Devise flash msgs
+        %p.notice= notice
+        %p.alert= alert
+        = yield
+        = yield :body
+      #footer
+        = yield :footer
+      

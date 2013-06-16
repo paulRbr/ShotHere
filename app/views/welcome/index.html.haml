@@ -1,4 +1,8 @@
-%h1 #{I18n.t "hello.home"}
-%p Find me in app/views/welcome/index.html.erb
-
-= render "user-nav"
+- content_for :header do
+  %h1 #{I18n.t "hello.home"}
+- content_for :body do
+  #body
+    = render "leaflet_test"
+- content_for :footer do
+  #footer
+    = render "user_nav"

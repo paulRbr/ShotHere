@@ -1,3 +1,35 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$light_gray: #dcdcdc;
+$white: #fff;
+$black: #000;
+
+html {
+	background-color: $light_gray;
+}
+
+#page {
+	margin-top: 10px;
+	padding: 20px;
+	width: 960px;
+	background-color: $white;
+	border: 1px solid $black;
+	margin: 0 auto;
+
+	#header {
+		margin-bottom: 10px;
+	}
+	#body {
+		margin-bottom: 10px;
+	}
+	#footer {
+		margin-bottom: 10px;
+	}
+}
+
+#map {
+  height: 180px;
+  width: 800px;
+  margin: 0 auto;
+}

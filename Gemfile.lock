@@ -170,6 +170,7 @@ DEPENDENCIES
   devise-encryptable
   haml-rails
   jquery-rails
+  omniauth
   omniauth-github
   omniauth-google-oauth2
   omniauth-twitter

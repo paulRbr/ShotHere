@@ -29,12 +29,11 @@ gem 'rspec-rails'
 gem 'devise'
 gem 'devise-encryptable'
 
+gem 'omniauth'
 # Google OAuth 2.0
 gem 'omniauth-google-oauth2'
-
 # Twitter OAuth 1.1
 gem 'omniauth-twitter'
-
 # GitHub OAuth 2.0
 gem 'omniauth-github'
 

@@ -1,4 +1,7 @@
 Shothere::Application.routes.draw do
+  resources :movies
+
+
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks"}
   resources :users, :only => [:show]
 

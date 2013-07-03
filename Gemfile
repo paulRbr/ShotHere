@@ -20,6 +20,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'rails-backbone'
 gem 'jquery-rails'
 
 # Rspec
@@ -38,6 +39,7 @@ gem 'omniauth-twitter'
 gem 'omniauth-github'
 
 # Move to Haml templating framework
+gem 'hamstache'
 gem "haml-rails"
 
 # To use ActiveModel has_secure_password

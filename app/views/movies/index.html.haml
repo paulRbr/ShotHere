@@ -1,28 +1,5 @@
-%h1 Listing movies
+%div#movies
 
-%table
-  %tr
-    %th Title
-    %th Imdb
-    %th
-    %th
-    %th
-
-  - @movies.each do |movie|
-    %tr
-      %td= movie.title
-      %td= movie.imdb_id
-      %td= link_to 'Show', movie
-      %td= link_to 'Edit', edit_movie_path(movie)
-      %td= link_to 'Destroy', movie, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Movie', new_movie_path
-
-:javascript
-  $(function() {
-    // Blog is the app name
-    window.router = new Shother.Routers.MoviesRouter({movies: #{@movies.to_json.html_safe}});
-    Backbone.history.start();
-  });
+:coffeescript
+  window.router = new Shothere.Routers.MoviesRouter({movies: #{@movies.to_json.html_safe}})
+  Backbone.history.start()  

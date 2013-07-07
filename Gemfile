@@ -14,8 +14,12 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
 
+  gem 'haml_coffee_assets'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
+
+  # Move to Haml templating framework
+  gem "haml-rails"
 
   gem 'uglifier', '>= 1.0.3'
 end
@@ -37,10 +41,6 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-twitter'
 # GitHub OAuth 2.0
 gem 'omniauth-github'
-
-# Move to Haml templating framework
-gem 'hamstache'
-gem "haml-rails"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

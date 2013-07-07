@@ -1,7 +1,7 @@
 Shothere.Views.Movies ||= {}
 
 class Shothere.Views.Movies.IndexView extends Backbone.View
-  template: JST["backbone/templates/movies/index"]
+  template: JST["templates/movies/index"]
 
   initialize: () ->
     @options.movies.bind('reset', @addAll)

@@ -1,0 +1,9 @@
+%td= @title
+%td= @imdb_id
+
+%td 
+  %a{:href=> "#/#{@id}" } Show
+%td
+  %a{:href=>"#/#{@id}/edit"} Edit
+%td
+  %a{:href=>"#/#{@id}/destroy", :class=>"destroy", :data-confirm=>"Are you sure?"} Destroy

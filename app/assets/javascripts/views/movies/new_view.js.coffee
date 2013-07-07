@@ -1,7 +1,7 @@
 Shothere.Views.Movies ||= {}
 
 class Shothere.Views.Movies.NewView extends Backbone.View
-  template: JST["backbone/templates/movies/new"]
+  template: JST["templates/movies/new"]
 
   events:
     "submit #new-movie": "save"

@@ -1,0 +1,13 @@
+%h1 Listing movies
+
+%table#movies-table
+  %tr
+    %th Title
+    %th Imdb
+    %th
+    %th
+    %th
+    
+%br
+
+%a{:href=>"#/new"} New Movie

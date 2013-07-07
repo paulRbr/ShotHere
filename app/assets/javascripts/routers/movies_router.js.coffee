@@ -2,7 +2,6 @@ class Shothere.Routers.MoviesRouter extends Backbone.Router
   initialize: (options) ->
     @movies = new Shothere.Collections.MoviesCollection()
     @movies.reset options.movies if options.movies
-    @movies.on( 'add', @index, @)
 
   routes:
     "new"      : "newMovie"

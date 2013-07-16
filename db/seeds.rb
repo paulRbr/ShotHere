@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+movies = Movie.create([
+	{imdb_id: 76759},
+	{imdb_id: 1130884}
+	])

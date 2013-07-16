@@ -14,9 +14,10 @@ You can see it live hosted by the coool paas service -OpenShift- here : [http://
 Thinking about helping this app grow?
 
 Here's what you can do:
-    * Write an idea to integrate in the app
-    * Code a new feature
-    * Promote the app to your friends
-    * Eat an Oreo
-    * Buy me a beer
-    * Help someone in need :)
+
+* Write an idea to integrate in the app
+* Code a new feature
+* Promote the app to your friends
+* Eat an Oreo
+* Buy me a beer
+* Help someone in need :)

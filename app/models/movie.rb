@@ -3,7 +3,7 @@ require 'uri'
 require 'json'
 
 class Movie < ActiveRecord::Base
-  attr_accessible :imdb_id, :title
+  attr_accessible :imdb_id, :title, :id, :updated_at, :created_at
   
   validates_presence_of :imdb_id
   validates_uniqueness_of :imdb_id

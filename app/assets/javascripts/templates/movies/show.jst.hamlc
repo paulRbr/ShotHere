@@ -1,0 +1,7 @@
+%p
+  %b Title: #{@title}
+
+%p
+  %b Imdb: #{@imdb_id}
+  
+%a{:href=>"#/index"} Back

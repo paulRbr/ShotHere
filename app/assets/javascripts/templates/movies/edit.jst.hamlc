@@ -1,0 +1,22 @@
+%h1 Edit movie
+
+%form#edit-movie(name="movie")
+  - if @errors
+    #error_explanation
+      %ul
+        - for field,error of @errors
+          %li= "#{field} #{error}"
+          - setTimeout(-> $("#"+field).addClass "error", 300)
+
+  .field
+    %label(for="title") Title:
+    %input#imdb_id(type="text" name="title" value=@title disabled=true)
+
+  .field
+    %label(for="imdb_id") Imdb Id:
+    %input#imdb_id(type="text" name="imdb_id" value=@imdb_id)
+
+  .actions
+    %input(type="submit" value="Update")
+
+%a{:href=>"#/index"} Back

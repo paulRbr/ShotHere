@@ -27,6 +27,8 @@ class Shothere.Views.Movies.NewView extends Backbone.View
 
       error: (movie, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
+
+      wait: true
     )
 
   render: ->

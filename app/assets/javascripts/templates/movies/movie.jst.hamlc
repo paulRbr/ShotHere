@@ -1,5 +1,6 @@
 %td= @title
 %td= @imdb_id
+%td= @location
 
 %td 
   %a{:href=> "#/#{@id}" } Show

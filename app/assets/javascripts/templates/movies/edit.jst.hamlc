@@ -13,6 +13,10 @@
     %input#imdb_id(type="text" name="title" value=@title disabled=true)
 
   .field
+    %label(for="location") Location:
+    %input#imdb_id(type="text" name="location" value=@location disabled=true)
+
+  .field
     %label(for="imdb_id") Imdb Id:
     %input#imdb_id(type="text" name="imdb_id" value=@imdb_id)
 

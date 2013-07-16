@@ -3,5 +3,8 @@
 
 %p
   %b Imdb: #{@imdb_id}
-  
+
+%p
+  %b Location: #{@location}
+
 %a{:href=>"#/index"} Back

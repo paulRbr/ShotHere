@@ -4,9 +4,10 @@
   %tr
     %th Title
     %th Imdb
-    %th
-    %th
-    %th
+    %th Location
+    %th # show 
+    %th # edit 
+    %th # destroy
     
 %br
 

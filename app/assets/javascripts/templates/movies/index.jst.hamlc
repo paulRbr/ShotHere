@@ -5,9 +5,9 @@
     %th Title
     %th Imdb
     %th Location
-    %th # show 
-    %th # edit 
-    %th # destroy
+    %th 
+    %th 
+    %th 
     
 %br
 

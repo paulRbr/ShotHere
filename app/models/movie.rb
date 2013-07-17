@@ -3,7 +3,7 @@ require 'uri'
 require 'json'
 
 class Movie < ActiveRecord::Base
-  attr_accessible :imdb_id, :title, :id, :updated_at, :created_at, :location
+  attr_accessible :imdb_id, :title, :id, :updated_at, :created_at, :location, :poster, :imdb_url
   
   validates_presence_of :imdb_id
   validates_uniqueness_of :imdb_id
@@ -17,6 +17,8 @@ class Movie < ActiveRecord::Base
     unless data["error"]
       self.title = data["title"] if data["title"]
       self.location = data["filming_locations"] if data["filming_locations"]   
+      self.poster = data["poster"] if data["poster"]   
+      self.imdb_url = data["imdb_url"] if data["imdb_url"]   
     else
       errors.add(:imdb_id, "doesn't represent any movie on imdb")
       return false

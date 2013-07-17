@@ -2,7 +2,11 @@
   %b Title: #{@title}
 
 %p
-  %b Imdb: #{@imdb_id}
+  %img{:src=>@poster, :alt=>@title}
+
+%p
+  %b Imdb: 
+  %a{:href=>@imdb_url}= @imdb_id
 
 %p
   %b Location: #{@location}

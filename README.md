@@ -4,7 +4,7 @@
 
 "This scene is amazing, I would love to see that place"
 
-Ever though about that when whatching a movie? Well I did :)!
+Ever thought about that when whatching a movie? Well I did :)!
 I also wanted to gain experience in developing a [Rails](http://rubyonrails.org/ "Rails") app with a strong front-end integration with [Backbone.js](http://backbonejs.org/ "Backbone.js"). So here is the result!
 
 You can see it live hosted by the coool paas service -OpenShift- here : [http://shot-shothere.rhcloud.com/](http://shot-shothere.rhcloud.com/)

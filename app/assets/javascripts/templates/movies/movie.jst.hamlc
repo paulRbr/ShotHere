@@ -1,5 +1,6 @@
 %td= @title
-%td= @imdb_id
+%td
+  %a{:href=>@imdb_url}= @imdb_id
 %td= @location
 
 %td 

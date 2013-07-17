@@ -42,6 +42,9 @@ gem 'omniauth-twitter'
 # GitHub OAuth 2.0
 gem 'omniauth-github'
 
+# Ruby Geocoder
+gem "geocoder"
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

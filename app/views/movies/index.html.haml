@@ -1,5 +1,7 @@
 %div#movies
 
 :coffeescript
-  window.router = new Shothere.Routers.MoviesRouter({movies: #{@movies.to_json.html_safe}})
-  Backbone.history.start()  
+	YUI().use('node', 'json-parse', (Y) ->
+		window.router = new Shothere.Routers.MoviesRouter({movies: #{@movies.to_json.html_safe}})
+		Backbone.history.start()  
+	)

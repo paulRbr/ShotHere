@@ -26,13 +26,13 @@ class Shothere.Views.Movies.NewView extends Backbone.View
         window.location.hash = "/#{@model.id}"
 
       error: (movie, jqXHR) =>
-        @model.set({errors: $.parseJSON(jqXHR.responseText)})
+        @model.set({errors: Y.JSON.parse(jqXHR.responseText)})
 
       wait: true
     )
 
   render: ->
-    $(@el).html(@template(@model.toJSON() ))
+    Y.one(@el).setHTML(@template(@model.toJSON() ))
 
     this.$("form").backboneLink(@model)
 

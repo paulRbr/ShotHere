@@ -11,10 +11,10 @@ class Shothere.Views.Movies.IndexView extends Backbone.View
 
   addOne: (movie) =>
     view = new Shothere.Views.Movies.MovieView({model : movie})
-    @$("tbody").append(view.render().el)
+    @Y.one("tbody").append(view.render().el)
 
   render: =>
-    $(@el).html(@template(movies: @options.movies.toJSON() ))
+    Y.one(@el).setHTML(@template(movies: @options.movies.toJSON() ))
     @addAll()
 
     return this

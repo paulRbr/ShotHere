@@ -15,5 +15,5 @@ class Shothere.Views.Movies.MovieView extends Backbone.View
     return false
 
   render: ->
-    $(@el).html(@template(@model.toJSON() ))
+    Y.one(@el).setHTML(@template(@model.toJSON() ))
     return this

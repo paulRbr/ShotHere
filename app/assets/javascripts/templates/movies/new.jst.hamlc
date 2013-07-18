@@ -7,7 +7,7 @@
       %ul
         - for field,error of @errors
           %li= "#{field} #{error}"
-          - setTimeout(-> $("#"+field).addClass "error", 300)
+          - setTimeout(-> Y.one("#"+field).addClass "error", 300)
 
   .field
     %label(for="imdb_id") Imdb Id:

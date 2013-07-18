@@ -12,20 +12,20 @@ class Shothere.Routers.MoviesRouter extends Backbone.Router
 
   newMovie: ->
     @view = new Shothere.Views.Movies.NewView(collection: @movies)
-    $("#movies").html(@view.render().el)
+    Y.one("#movies").setHTML(@view.render().el)
 
   index: ->
     @view = new Shothere.Views.Movies.IndexView(movies: @movies)
-    $("#movies").html(@view.render().el)
+    Y.one("#movies").setHTML(@view.render().el)
 
   show: (id) ->
     movie = @movies.get(id)
 
     @view = new Shothere.Views.Movies.ShowView(model: movie)
-    $("#movies").html(@view.render().el)
+    Y.one("#movies").setHTML(@view.render().el)
 
   edit: (id) ->
     movie = @movies.get(id)
 
     @view = new Shothere.Views.Movies.EditView(model: movie)
-    $("#movies").html(@view.render().el)
+    Y.one("#movies").setHTML(@view.render().el)

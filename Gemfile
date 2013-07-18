@@ -26,6 +26,7 @@ end
 
 gem 'rails-backbone'
 gem 'jquery-rails'
+gem 'yui-rails'
 
 # Rspec
 gem 'rspec-rails'

@@ -7,6 +7,8 @@ gem 'rails', '3.2.13'
 
 gem 'sqlite3'
 
+# For caching
+gem 'redis' 
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -41,6 +43,9 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-twitter'
 # GitHub OAuth 2.0
 gem 'omniauth-github'
+
+# Ruby Geocoder
+gem "geocoder"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

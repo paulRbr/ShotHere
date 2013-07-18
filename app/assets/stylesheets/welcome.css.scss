@@ -10,7 +10,7 @@ html {
 }
 
 #page {
-	margin-top: 10px;
+	margin: 10px auto;
 	padding: 20px;
 	width: 960px;
 	background-color: $white;
@@ -29,7 +29,5 @@ html {
 }
 
 #map {
-  height: 180px;
-  width: 800px;
-  margin: 0 auto;
+  height: 200px;
 }

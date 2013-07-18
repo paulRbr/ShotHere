@@ -9,6 +9,6 @@
     %th 
     %th 
     
-%br
+#map
 
 %a{:href=>"#/new"} New Movie

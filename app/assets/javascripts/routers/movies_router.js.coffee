@@ -2,6 +2,7 @@ class Shothere.Routers.MoviesRouter extends Backbone.Router
   initialize: (options) ->
     @movies = new Shothere.Collections.MoviesCollection()
     @movies.reset options.movies if options.movies
+    @center = options.center if options.center
 
   routes:
     "new"      : "newMovie"
@@ -15,7 +16,7 @@ class Shothere.Routers.MoviesRouter extends Backbone.Router
     $("#movies").html(@view.render().el)
 
   index: ->
-    @view = new Shothere.Views.Movies.IndexView(movies: @movies)
+    @view = new Shothere.Views.Movies.IndexView(movies: @movies, center: @center)
     $("#movies").html(@view.render().el)
 
   show: (id) ->

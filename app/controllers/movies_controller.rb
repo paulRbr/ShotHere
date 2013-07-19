@@ -3,6 +3,8 @@ class MoviesController < ApplicationController
   # GET /movies.json
   def index
     @movies = Movie.all
+    @center = Geocoder::Calculations.geographic_center @movies
+    Rails.logger.debug "center : #{@center}"
 
     respond_to do |format|
       format.html # index.html.erb

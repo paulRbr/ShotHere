@@ -4,8 +4,8 @@ gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-gem 'sqlite3'
+gem 'mysql2' # prod
+gem 'sqlite3' # test
 
 # For caching
 gem 'redis' 

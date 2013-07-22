@@ -28,6 +28,7 @@ gem "haml-rails"
 
 gem 'rails-backbone'
 gem 'jquery-rails'
+gem 'leaflet-rails'
 
 # Rspec
 gem 'rspec-rails'

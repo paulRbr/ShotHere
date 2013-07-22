@@ -14,3 +14,5 @@ en:
       as: "Signed in as %{name}"
     out: "Sign out"
   register: "Register"
+  list:
+    movies: "List all movies"

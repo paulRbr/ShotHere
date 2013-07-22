@@ -12,6 +12,8 @@ class Movie < ActiveRecord::Base
   before_validation :populate_from_imdb, :only => [:imdb_id]
 
   def populate_from_imdb
+    parse_imdb_id
+    Rails.logger.debug self.imdb_id
     uri = URI.parse("http://mymovieapi.com/?id=tt#{self.imdb_id}&type=json")
     response = Net::HTTP.get_response(uri)
     Rails.logger.debug response.body
@@ -40,5 +42,10 @@ class Movie < ActiveRecord::Base
     end
     errors.empty?
   end
+
+  def parse_imdb_id
+    self.imdb_id = self.imdb_id.gsub!(/\D/, "")
+  end
+
 
 end

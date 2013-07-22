@@ -18,12 +18,18 @@ class Shothere.Routers.MoviesRouter extends Backbone.Router
   index: ->
     @view = new Shothere.Views.Movies.IndexView(movies: @movies, center: @center)
     $("#movies").html(@view.render().el)
+    @view.renderMap @center, 2
+    @movies.each((movie)=> @view.addMarkerWithPopup movie.get("latitude"), movie.get("longitude"), @view.templatePopup, movie.toJSON())
 
   show: (id) ->
     movie = @movies.get(id)
 
     @view = new Shothere.Views.Movies.ShowView(model: movie)
     $("#movies").html(@view.render().el)
+    if movie.get('latitude')
+      @view.renderMap [movie.get('latitude'), movie.get('longitude')], 10
+      @view.addMarkerWithPopup movie.get("latitude"), movie.get("longitude"), @view.templatePopup, movie.toJSON()
+
 
   edit: (id) ->
     movie = @movies.get(id)

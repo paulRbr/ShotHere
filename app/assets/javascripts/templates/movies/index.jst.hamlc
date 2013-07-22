@@ -12,3 +12,5 @@
 #map
 
 %a{:href=>"#/new"} New Movie
+
+%a{:href=>"/"} Back home

@@ -12,6 +12,7 @@
   .field
     %label(for="imdb_id") Imdb Id:
     %input#imdb_id(type="text" name="imdb_id" value=@imdb_id)
+    %b (Tip: you can C-C C-V the url of the imdb movie in this field)
 
   .actions
     %input(type="submit" value="Save")

@@ -1,6 +1,6 @@
 Shothere.Views.Movies ||= {}
 
-class Shothere.Views.Movies.IndexView extends Backbone.view
+class Shothere.Views.Movies.IndexView extends Backbone.View
   template: JST["templates/movies/index"]
 
   templatePopup: JST["templates/movies/popup"]

@@ -3,8 +3,12 @@ class MoviesController < ApplicationController
   # GET /movies.json
   def index
     @movies = Movie.all
-    @center = Geocoder::Calculations.geographic_center @movies
-    Rails.logger.debug "center : #{@center}"
+    unless @movies.empty?
+      @center = Geocoder::Calculations.geographic_center @movies
+    else
+      @center = Geocoder.search("48.835008,2.392179").first.coordinates
+    end
+    Rails.logger.debug "center : #{@center}"   
 
     respond_to do |format|
       format.html # index.html.erb

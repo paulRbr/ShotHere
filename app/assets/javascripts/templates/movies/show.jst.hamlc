@@ -11,6 +11,4 @@
 %p
   %b Location: #{@location}
 
-#map
-
 %a{:href=>"#/index"} Back

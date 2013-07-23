@@ -53,7 +53,7 @@ Shothere::Application.routes.draw do
   #   end
 
   # My root url!
-  root :to => 'welcome#index'
+  root :to => 'movies#index'
 
   # See how all your routes lay out with "rake routes"
 

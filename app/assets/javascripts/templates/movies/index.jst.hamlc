@@ -8,8 +8,6 @@
     %th 
     %th 
     %th 
-    
-#map
 
 %a{:href=>"#/new"} New Movie
 

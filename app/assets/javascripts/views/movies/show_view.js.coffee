@@ -1,9 +1,7 @@
 Shothere.Views.Movies ||= {}
 
-class Shothere.Views.Movies.ShowView extends Shothere.Views.MapView
+class Shothere.Views.Movies.ShowView extends Backbone.view
   template: JST["templates/movies/show"]
-
-  templatePopup: JST["templates/movies/popup"]
 
   render: ->
     $(@el).html(@template(@model.toJSON()))

@@ -17,7 +17,7 @@ class Shothere.Routers.MoviesRouter extends Shothere.Routers.AbsMapRouter
     $("#movies").html(@view.render().el)
 
   index: ->
-    @map.setView([0.0, 0.0], 2)
+    @map.setView([0.0, 10.0], 2)
 
     @view = new Shothere.Views.Movies.IndexView(movies: @movies)
     $("#movies").html(@view.render().el)

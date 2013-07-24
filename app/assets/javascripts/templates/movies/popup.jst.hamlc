@@ -1,3 +1,8 @@
-%b= @title
+%h4
+  %a{:href=> "#/#{@id}"}= @title
 
-%p Was shot there!
+%h6
+  %a{:href=>@imdb_url} More details on imdb
+
+%a{:href=> "#/#{@id}"}
+  %img{:src=>@poster, :alt=>@title, :width=>"100px"}

@@ -1,5 +1,7 @@
 #movies
 
+#map
+
 :coffeescript
   window.router = new Shothere.Routers.MoviesRouter({movies: #{@movies.to_json.html_safe}, center: #{@center}})
   Backbone.history.start()  

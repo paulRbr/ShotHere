@@ -22,6 +22,7 @@ class Shothere.Views.Movies.NewView extends Backbone.View
 
     @collection.create(@model.toJSON(),
       success: (movie) =>
+        router.addMarkerWithPopup movie
         @model = movie
         window.location.hash = "/#{@model.id}"
 

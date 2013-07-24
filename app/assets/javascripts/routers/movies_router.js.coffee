@@ -1,8 +1,9 @@
-class Shothere.Routers.MoviesRouter extends Backbone.Router
+class Shothere.Routers.MoviesRouter extends Shothere.Routers.AbsMapRouter
   initialize: (options) ->
     @movies = new Shothere.Collections.MoviesCollection()
     @movies.reset options.movies if options.movies
-    @center = options.center if options.center
+    # Init map
+    super options
 
   routes:
     "new"      : "newMovie"
@@ -16,19 +17,18 @@ class Shothere.Routers.MoviesRouter extends Backbone.Router
     $("#movies").html(@view.render().el)
 
   index: ->
-    @view = new Shothere.Views.Movies.IndexView(movies: @movies, center: @center)
+    @map.setView([0.0, 0.0], 2)
+
+    @view = new Shothere.Views.Movies.IndexView(movies: @movies)
     $("#movies").html(@view.render().el)
-    @view.renderMap @center, 2
-    @movies.each((movie)=> @view.addMarkerWithPopup movie.get("latitude"), movie.get("longitude"), @view.templatePopup, movie.toJSON())
 
   show: (id) ->
     movie = @movies.get(id)
 
+    @map.setView([movie.get('latitude').toFixed(3), movie.get('longitude').toFixed(3)], 10)
+
     @view = new Shothere.Views.Movies.ShowView(model: movie)
     $("#movies").html(@view.render().el)
-    if movie.get('latitude')
-      @view.renderMap [movie.get('latitude'), movie.get('longitude')], 10
-      @view.addMarkerWithPopup movie.get("latitude"), movie.get("longitude"), @view.templatePopup, movie.toJSON()
 
 
   edit: (id) ->

@@ -1,10 +1,7 @@
-%td= @title
+%td
+  %a{:href=> "#/#{@id}" }= @title
 %td
   %a{:href=>@imdb_url}= @imdb_id
-%td= @location
-
-%td 
-  %a{:href=> "#/#{@id}" } Show
 %td
   %a{:href=>"#/#{@id}/edit"} Edit
 %td

@@ -15,5 +15,5 @@ class Shothere.Routers.AbsMapRouter extends Backbone.Router
     marker
 
   addMarkerWithPopup: (geoModel) ->
-    template = JST["templates/movies/show"]
+    template = JST["templates/movies/popup"]
     @addMarker(geoModel).bindPopup(template(geoModel.toJSON()))

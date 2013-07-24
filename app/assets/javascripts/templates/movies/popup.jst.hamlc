@@ -1,3 +1,4 @@
-%b= @title
+%b
+  %a{:href=> "#/#{@id}"}= @title
 
 %p Was shot there!

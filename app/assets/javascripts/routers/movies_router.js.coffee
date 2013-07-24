@@ -17,7 +17,7 @@ class Shothere.Routers.MoviesRouter extends Shothere.Routers.AbsMapRouter
     $("#movies").html(@view.render().el)
 
   index: ->
-    @map.setView([@center[0].toFixed(3), @center[1].toFixed(3)], 2)
+    @map.setView([0.0, 0.0], 2)
 
     @view = new Shothere.Views.Movies.IndexView(movies: @movies)
     $("#movies").html(@view.render().el)
@@ -25,7 +25,6 @@ class Shothere.Routers.MoviesRouter extends Shothere.Routers.AbsMapRouter
   show: (id) ->
     movie = @movies.get(id)
 
-    @addMarkerWithPopup movie
     @map.setView([movie.get('latitude').toFixed(3), movie.get('longitude').toFixed(3)], 10)
 
     @view = new Shothere.Views.Movies.ShowView(model: movie)

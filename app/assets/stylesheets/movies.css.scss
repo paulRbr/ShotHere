@@ -9,14 +9,25 @@ html {
   background-color: transparent;
 }
 
+.navbar {
+  -moz-box-shadow: 0 0 3px $black;
+  -webkit-box-shadow: 0 0 3px $black;
+  box-shadow: 0 0 3px $black;
+  
+  .navbar-inner {
+    background-image: none;
+    background-color: rgba(20,20,20,0.75);
+  }
+}
+
 #body {
   margin-bottom: 10px;
-   
+
   #map {
-    height: 100%;
-    width: 100%;
+    width: 70%;
     position: absolute;
-    top: 40px;
+    top: 0;
+    bottom: 0;
     left: 0;
     z-index:-1;
   }
@@ -25,13 +36,29 @@ html {
     z-index: 1;
     margin: 0 auto;
     padding: 20px;
+    padding-top: 50px;
     background-color: $white;
-    border: 1px solid $black;
+    -moz-box-shadow: 0 0 3px $black;
+    -webkit-box-shadow: 0 0 3px $black;
+    box-shadow: 0 0 3px $black;
     position: absolute;
-    top: 40px;
+    top: 0;
     bottom: 0;
     right: 0;
-    width: 40%;
-    overflow: scroll;
+    width: 30%;
+    overflow: hidden;
+  }
+}
+
+// Overwrite Leaflet defaults
+.leaflet-top {
+  .leaflet-control {
+    margin-top: 50px;
+  }
+}
+
+.leaflet-right {
+  .leaflet-control {
+    margin-right: 50px;
   }
 }

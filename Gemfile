@@ -4,8 +4,13 @@ gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-gem 'mysql2' # prod
-gem 'sqlite3' # test
+
+group :test, :development do
+  gem 'sqlite3' # test
+  gem 'rspec-rails'
+end
+
+gem 'mysql2', :group => :production
 
 # For caching
 gem 'redis' 
@@ -29,9 +34,6 @@ gem "haml-rails"
 gem 'rails-backbone'
 gem 'jquery-rails'
 gem 'leaflet-rails'
-
-# Rspec
-gem 'rspec-rails'
 
 # Devise - Authentication gem
 gem 'devise'

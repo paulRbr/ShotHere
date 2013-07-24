@@ -1,14 +1,16 @@
-%p
-  %b Title: #{@title}
+.left
+  %p
+    %b Title: #{@title}
 
-%p
-  %img{:src=>@poster, :alt=>@title}
+  %p
+    %img{:src=>@poster, :alt=>@title}
 
-%p
-  %b Imdb: 
-  %a{:href=>@imdb_url}= @imdb_id
+.right
+  %p
+    %b Imdb: 
+    %a{:href=>@imdb_url}= @imdb_id
 
-%p
-  %b Location: #{@location}
+  %p
+    %b Location: #{@location}
 
 %a{:href=>"#/index"} Back

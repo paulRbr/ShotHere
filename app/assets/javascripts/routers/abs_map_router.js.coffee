@@ -1,5 +1,6 @@
 class Shothere.Routers.AbsMapRouter extends Backbone.Router
   initialize: (options) ->
+    L.Icon.Default.imagePath = '/assets/' # Because of strange error from Leaflet on SetView later
     @center = options.center if options.center
     @map = L.map('map')
     cloudmadeUrl = 'http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.jpg';

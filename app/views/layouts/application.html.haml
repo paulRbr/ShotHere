@@ -7,12 +7,33 @@
     = csrf_meta_tags
   %body
     #page
-      #header
-        = yield :header
+      .navbar.navbar-inverse.navbar-fixed-top
+        .navbar-inner
+          .container
+            %button.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse", :type => "button"}
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+            %a.brand{:href => "#"} Shothere
+            .nav-collapse.collapse
+              %ul.nav
+                %li.active
+                  %a{:href => "#/"} Home
+                %li
+                  %a{:href => "#/about"} About
+                %li
+                  %a{:href => "#/contact"} Contact
+              %form.navbar-form.pull-right
+                %input.span2{:placeholder => "Email", :type => "text"}/
+                %input.span2{:placeholder => "Password", :type => "password"}/
+                %button.btn{:type => "submit"} Sign in
+            / /.nav-collapse
       #body
         / Devise flash msgs
-        %p.notice= notice
-        %p.alert= alert
+        - unless alert.nil?
+          %p.notice= notice
+        - unless alert.nil?
+          %p.alert= alert
         = yield
         = yield :body
       #footer

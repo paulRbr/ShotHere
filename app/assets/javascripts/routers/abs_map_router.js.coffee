@@ -17,21 +17,24 @@ class Shothere.Routers.AbsMapRouter extends Backbone.Router
     )
     baseLayers = {"CloudMade": cloudmade, "OpenStreetMap": osm}
 
-    movies = L.layerGroup(@movies.map((movie)=> @markerWithPopup(movie, @template)))
+    movies = L.layerGroup(@movies.map((movie)=> @markerWithPopup(movie, @template)).filter((movie)=> movie))
     overlayMaps = {"Movies": movies}
     
     @map = L.map('map', {maxBounds: bounds, layers: [osm, movies]})
     L.control.layers(baseLayers, overlayMaps).addTo @map
 
   marker: (geoModel) ->
-    m = L.marker([geoModel.get('latitude').toFixed(3), geoModel.get('longitude').toFixed(3)])
+    m = L.marker([geoModel.get('latitude').toFixed(3), geoModel.get('longitude').toFixed(3)]) if geoModel.get('latitude')
     m
 
   markerWithPopup: (geoModel, template) ->
-    @marker(geoModel).bindPopup(template(geoModel.toJSON()))
+    m = @marker(geoModel)
+    m.bindPopup(template(geoModel.toJSON())) if m
 
   addMarker: (geoModel) ->
-    @marker(geoModel).addTo @map
+    m = @marker(geoModel)
+    m.addTo @map if m
 
   addMarkerWithPopup: (geoModel) ->
-    @markerWithPopup(geoModel, @template).addTo @map
+    m = @markerWithPopup(geoModel, @template)
+    m.addTo @map if m

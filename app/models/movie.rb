@@ -44,7 +44,8 @@ class Movie < ActiveRecord::Base
   end
 
   def parse_imdb_id
-    self.imdb_id = self.imdb_id.gsub!(/\D/, "")
+
+    self.imdb_id = self.imdb_id.to_s.gsub(/\D/, "")
   end
 
 

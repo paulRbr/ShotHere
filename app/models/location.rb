@@ -27,5 +27,4 @@ class Location < ActiveRecord::Base
     true
    end
 
-
 end

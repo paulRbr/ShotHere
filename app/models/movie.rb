@@ -21,33 +21,33 @@ class Movie < ActiveRecord::Base
       return imdb_id_or_url_or_array
     end
     imdb_id_or_url = imdb_id_or_url_or_array
-    imdb_id = imdb_id_or_url.to_s.gsub(/\D/, "")
 
-    data = get_imdb_data imdb_id
-    movie = new ({:imdb_id => imdb_id})
-    puts "Brand new: #{movie.inspect}"
-    %w(title poster imdb_url).each {
-        |attr| movie[attr] = "#{data[attr]}" unless data[attr].nil?
-    }
-    puts "Imdb Data added: #{movie.inspect}"
-    find_main_location movie, data["filming_locations"]
-    movie.locations.each {|loc| puts loc.inspect }
+    movie = new ({:imdb_id => imdb_id_or_url})
     movie.save
     movie
   end
 
+  def imdb_id=(imdb_id_or_url)
+    an_id = imdb_id_or_url.to_s.gsub(/\D/, "")
+    data = get_imdb_data an_id
+    self[:imdb_id] = an_id
+    %w(title poster imdb_url).each { |attr| self[attr] = "#{data[attr]}" unless data[attr].nil? }
+    find_main_location data["filming_locations"]
+  end
+
+
   private
 
-  def self.find_main_location(movie, location_name)
+  def find_main_location(location_name)
     return if location_name.nil?
     location = Location.new({:address => location_name})
-    movie.locations << location
+    locations << location
   rescue => e
-    movie.errors.add :locations, e.message
+    errors.add :locations, e.message
     Rails.logger.warn e
   end
 
-  def self.get_imdb_data(imdb_id)
+  def get_imdb_data(imdb_id)
     Rails.logger.debug imdb_id
     uri = URI.parse("http://mymovieapi.com/?id=tt#{imdb_id}&type=json")
     response = Net::HTTP.get_response(uri)

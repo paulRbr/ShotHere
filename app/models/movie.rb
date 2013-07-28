@@ -17,7 +17,8 @@ class Movie < ActiveRecord::Base
 
   def self.create_imdb_movie(imdb_id_or_url_or_array)
     if imdb_id_or_url_or_array.is_a? Array
-      imdb_id_or_url_or_array.each { |imdb_id_or_url| create_imdb_movie imdb_id_or_url }
+      imdb_id_or_url_or_array.map { |imdb_id_or_url| create_imdb_movie imdb_id_or_url }
+      return imdb_id_or_url_or_array
     end
     imdb_id_or_url = imdb_id_or_url_or_array
     imdb_id = imdb_id_or_url.to_s.gsub(/\D/, "")

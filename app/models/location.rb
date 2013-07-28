@@ -9,6 +9,7 @@ class Location < ActiveRecord::Base
   after_validation :fine_tune_location
 
   def fine_tune_location
+    initial_address = self.address
     unless self.address.nil?
       Rails.logger.debug "Geocoding #{self.address}..."
       self.geocode
@@ -19,11 +20,12 @@ class Location < ActiveRecord::Base
       end until self.geocoded? or self.address.empty?
       Rails.logger.debug "#{self.address} geocoded as: [#{self.latitude}, #{self.longitude}]" if self.geocoded?
     end
-    puts self.inspect
+    unless self.geocoded?
+      Rails.logger.warn "Cannot geocode at all. Restoring initial data."
+      self.address = initial_address
+    end
     true
    end
-
-
 
 
 end

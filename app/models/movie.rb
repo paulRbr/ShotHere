@@ -13,8 +13,6 @@ class Movie < ActiveRecord::Base
   validates_presence_of :imdb_id
   validates_uniqueness_of :imdb_id
 
-
-
   def self.create_imdb_movie(imdb_id_or_url_or_array)
     if imdb_id_or_url_or_array.is_a? Array
       imdb_id_or_url_or_array.map { |imdb_id_or_url| create_imdb_movie imdb_id_or_url }
@@ -33,8 +31,11 @@ class Movie < ActiveRecord::Base
     self[:imdb_id] = an_id
     %w(title poster imdb_url).each { |attr| self[attr] = "#{data[attr]}" unless data[attr].nil? }
     find_main_location data["filming_locations"]
+    if data["error"]
+      errors.add(:imdb_id, data["error"])
+      Rails.logger.warn data["error"]
+    end
   end
-
 
   private
 

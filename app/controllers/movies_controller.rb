@@ -6,7 +6,7 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @movies }
+      format.json { render json: @movies, :include => :locations }
     end
   end
 
@@ -38,7 +38,7 @@ class MoviesController < ApplicationController
   # POST /movies
   # POST /movies.json
   def create
-    @movie = Movie.new(params[:movie])
+    @movie = Movie.new(params[:movie].select {|k,v| k == "imdb_id"})
 
     respond_to do |format|
       if @movie.save

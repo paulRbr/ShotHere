@@ -31,7 +31,8 @@ gem 'haml_coffee_assets'
 # Move to Haml templating framework instead of erb
 gem "haml-rails"
 
-gem 'rails-backbone'
+gem 'backbone-rails', :git => 'https://github.com/popox/backbone-rails.git',:branch => 'v1.1'
+gem 'backbone-relational-rails'
 gem 'jquery-rails'
 gem 'leaflet-rails'
 

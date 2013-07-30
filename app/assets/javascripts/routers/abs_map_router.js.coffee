@@ -16,25 +16,34 @@ class Shothere.Routers.AbsMapRouter extends Backbone.Router
        attribution: "&copy; <a href=\"http://osm.org/copyright\">OpenStreetMap</a> contributors"
     )
     baseLayers = {"CloudMade": cloudmade, "OpenStreetMap": osm}
+    defaultLayers = [osm]
+    overlayMovies = {}
 
-    movies = L.layerGroup(@movies.map((movie)=> @markerWithPopup(movie, @template)).filter((movie)=> movie))
-    overlayMaps = {"Movies": movies}
-    
-    @map = L.map('map', {maxBounds: bounds, layers: [osm, movies]})
-    L.control.layers(baseLayers, overlayMaps).addTo @map
+    @movies.each (movie) =>      
+      movie.fetchRelated("locations") unless movie.get("locations")
+      overlayMovies[movie.get("title")] = L.layerGroup movie.get("locations").map((location)=> @markerWithPopup(location, @template(movie.toJSON()))).filter((location)-> location)
+      defaultLayers.push overlayMovies[movie.get("title")]
+
+
+
+    @map = L.map('map', {maxBounds: bounds, layers: defaultLayers})
+    L.control.layers(baseLayers, overlayMovies).addTo @map
 
   marker: (geoModel) ->
     m = L.marker([geoModel.get('latitude').toFixed(3), geoModel.get('longitude').toFixed(3)]) if geoModel.get('latitude')
     m
 
-  markerWithPopup: (geoModel, template) ->
+  markerWithPopup: (geoModel, htmlData) ->
     m = @marker(geoModel)
-    m.bindPopup(template(geoModel.toJSON())) if m
+    m.bindPopup(htmlData) if m
+    m
 
-  addMarker: (geoModel) ->
+  addMarker: (geoModel) =>
     m = @marker(geoModel)
     m.addTo @map if m
+    m
 
-  addMarkerWithPopup: (geoModel) ->
-    m = @markerWithPopup(geoModel, @template)
+  addMarkerWithPopup: (geoModel, htmlData) =>
+    m = @markerWithPopup(geoModel, htmlData)
     m.addTo @map if m
+    m

@@ -11,18 +11,32 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130717145711) do
+ActiveRecord::Schema.define(:version => 20130727135040) do
+
+  create_table "locations", :force => true do |t|
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "comment"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "movie_location_infos", :force => true do |t|
+    t.integer  "movie_id"
+    t.integer  "location_id"
+    t.string   "comment"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "movies", :force => true do |t|
     t.string   "title"
     t.string   "imdb_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.string   "location"
     t.string   "poster"
     t.string   "imdb_url"
-    t.float    "latitude"
-    t.float    "longitude"
   end
 
   create_table "users", :force => true do |t|

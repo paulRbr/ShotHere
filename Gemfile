@@ -36,7 +36,7 @@ gem 'jquery-rails'
 gem 'leaflet-rails'
 
 # Bootstrap
-gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails', :github => 'anjlab/bootstrap-rails',:branch => 'v2.3.0.0'
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails', :git => 'https://github.com/anjlab/bootstrap-rails.git',:branch => 'v2.3.0.0'
 
 # Devise - Authentication gem
 gem 'devise'

@@ -7,6 +7,14 @@ GIT
       railties (>= 3.0)
       sass (>= 3.2)
 
+GIT
+  remote: https://github.com/popox/backbone-rails.git
+  revision: 5e1cec753a4a4a56b7838de2a7a2bc3264203adf
+  branch: v1.0
+  specs:
+    backbone-rails (1.0.0.1)
+      rails (>= 3.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -38,8 +46,6 @@ GEM
       i18n (= 0.6.1)
       multi_json (~> 1.0)
     arel (3.0.2)
-    backbone-rails (1.0.0)
-      rails (>= 3.0.0)
     backbone-relational-rails (0.8.5)
       railties (~> 3.1)
     bcrypt-ruby (3.0.1)
@@ -187,7 +193,7 @@ PLATFORMS
 
 DEPENDENCIES
   anjlab-bootstrap-rails!
-  backbone-rails
+  backbone-rails!
   backbone-relational-rails
   coffee-rails (~> 3.2.1)
   devise

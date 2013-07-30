@@ -29,13 +29,12 @@ class Movie < ActiveRecord::Base
     an_id = imdb_id_or_url.to_s.gsub(/\D/, "")
     data = get_imdb_data an_id
     self[:imdb_id] = an_id
-    if data.empty?
-      errors.add(:imdb_id, data["error"])
-      Rails.logger.warn data["error"]
-    else
-      %w(title poster imdb_url).each { |attr| self[attr] = "#{data[attr]}" unless data[attr].nil? }
-    end
+    Rails.logger.debug data
+    %w(title poster imdb_url).each { |attr| self[attr] = "#{data[attr]}" unless data[attr].nil? }
     find_main_location data["filming_locations"]
+  rescue => e
+    errors.add :imdb_id, e.message
+    Rails.logger.warn e
   end
 
   private
@@ -44,9 +43,6 @@ class Movie < ActiveRecord::Base
     return if location_name.nil?
     location = Location.new({:address => location_name})
     locations << location
-  rescue => e
-    errors.add :locations, e.message
-    Rails.logger.warn e
   end
 
   def get_imdb_data(imdb_id)
@@ -61,6 +57,10 @@ class Movie < ActiveRecord::Base
     end
     if data.nil?
       raise "Unable to use mymovieapi.com"
+    elsif !data.kind_of?(Array) and data["error"]
+      raise data["error"]
+    elsif data.kind_of?(Array) and data.empty?
+      raise "No result found"
     end
     data.first
   end

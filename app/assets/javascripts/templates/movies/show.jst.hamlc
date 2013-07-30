@@ -13,6 +13,6 @@
   %ul 
     - for location in @locations
       %li 
-        = location.get("address")
+        = location.address
 
 %a{:href=>"#/index"} Back

@@ -16,13 +16,16 @@ class Shothere.Routers.AbsMapRouter extends Backbone.Router
        attribution: "&copy; <a href=\"http://osm.org/copyright\">OpenStreetMap</a> contributors"
     )
     baseLayers = {"CloudMade": cloudmade, "OpenStreetMap": osm}
+    overlayMaps = {}
 
     @movies.each (movie) =>      
       movie.fetchRelated("locations") unless movie.get("locations")
-      movie.get("locations").map((location)=> @addMarkerWithPopup(location, @template(movie.toJSON()))).filter((location)=> location)
+      overlayMaps[movie.get("title")] = L.layerGroup movie.get("locations").map((location)=> @markerWithPopup(location, @template(movie.toJSON()))).filter((location)-> location)
+
+
 
     @map = L.map('map', {maxBounds: bounds, layers: [osm]})
-    L.control.layers(baseLayers).addTo @map
+    L.control.layers(baseLayers, overlayMaps).addTo @map
 
   marker: (geoModel) ->
     m = L.marker([geoModel.get('latitude').toFixed(3), geoModel.get('longitude').toFixed(3)]) if geoModel.get('latitude')

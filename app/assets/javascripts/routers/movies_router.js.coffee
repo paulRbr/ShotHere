@@ -24,8 +24,10 @@ class Shothere.Routers.MoviesRouter extends Shothere.Routers.AbsMapRouter
 
   show: (id) ->
     movie = @movies.get(id)
+    movie.fetchRelated("locations") unless movie.get("locations")
 
-    @map.setView([movie.locations.first().get('latitude').toFixed(3), movie.locations.first().get('longitude').toFixed(3)], 10) if movie.locations.length > 0
+    if movie.get("locations").length > 0
+      @map.setView [movie.get("locations").first().get('latitude').toFixed(3), movie.get("locations").first().get('longitude').toFixed(3)], 10
 
     @view = new Shothere.Views.Movies.ShowView(model: movie)
     $("#movies").html(@view.render().el)

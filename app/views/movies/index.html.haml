@@ -3,5 +3,5 @@
 #map
 
 :coffeescript
-  window.router = new Shothere.Routers.MoviesRouter({movies: #{@movies.to_json(:include=>:locations).html_safe}})
+  window.router = new Shothere.Routers.MoviesRouter({movies: #{@movies.to_json.html_safe}})
   Backbone.history.start()  

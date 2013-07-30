@@ -9,8 +9,8 @@ GIT
 
 GIT
   remote: https://github.com/popox/backbone-rails.git
-  revision: 5e1cec753a4a4a56b7838de2a7a2bc3264203adf
-  branch: v1.0
+  revision: ae65c1b5b3d74feea7e1b1df64d3abacd1f71563
+  branch: v1.1
   specs:
     backbone-rails (1.0.0.1)
       rails (>= 3.0.0)

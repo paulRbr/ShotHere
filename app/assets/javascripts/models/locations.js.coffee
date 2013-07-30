@@ -1,4 +1,4 @@
-class Shothere.Models.Locations extends Backbone.Model
+class Shothere.Models.Location extends Backbone.RelationalModel
   paramRoot: 'location'
 
   defaults:
@@ -8,7 +8,7 @@ class Shothere.Models.Locations extends Backbone.Model
     longitude: null
 
 class Shothere.Collections.LocationsCollection extends Backbone.Collection
-  model: Shothere.Models.Locations
-  initialize: (model, args) ->
-    @url = ->
-      args.movie_url + "/locations"
+  model: Shothere.Models.Location
+
+  url: (models, options) ->
+    options.movie_url + "/locations"

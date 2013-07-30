@@ -29,12 +29,13 @@ class Movie < ActiveRecord::Base
     an_id = imdb_id_or_url.to_s.gsub(/\D/, "")
     data = get_imdb_data an_id
     self[:imdb_id] = an_id
-    %w(title poster imdb_url).each { |attr| self[attr] = "#{data[attr]}" unless data[attr].nil? }
-    find_main_location data["filming_locations"]
-    if data["error"]
+    if data.empty?
       errors.add(:imdb_id, data["error"])
       Rails.logger.warn data["error"]
+    else
+      %w(title poster imdb_url).each { |attr| self[attr] = "#{data[attr]}" unless data[attr].nil? }
     end
+    find_main_location data["filming_locations"]
   end
 
   private
@@ -50,7 +51,7 @@ class Movie < ActiveRecord::Base
 
   def get_imdb_data(imdb_id)
     Rails.logger.debug imdb_id
-    uri = URI.parse("http://mymovieapi.com/?id=tt#{imdb_id}&type=json")
+    uri = URI.parse("http://mymovieapi.com/?ids=tt#{imdb_id}&type=json")
     response = Net::HTTP.get_response(uri)
     Rails.logger.debug response.body
     begin
@@ -61,7 +62,7 @@ class Movie < ActiveRecord::Base
     if data.nil?
       raise "Unable to use mymovieapi.com"
     end
-    data
+    data.first
   end
 
 end

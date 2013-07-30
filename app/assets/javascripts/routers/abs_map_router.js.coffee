@@ -17,12 +17,9 @@ class Shothere.Routers.AbsMapRouter extends Backbone.Router
     )
     baseLayers = {"CloudMade": cloudmade, "OpenStreetMap": osm}
 
-    @movies.each (movie) =>
-      movie.loadLocations()
-      do (movie) =>
-        movie.locations.fetch success: =>
-          movie.locations.map((location)=> @addMarkerWithPopup(location, @template(movie.toJSON()))).filter((location)=> location)
-      movie.locations.fetch() unless movie.locations
+    @movies.each (movie) =>      
+      movie.fetchRelated("locations") unless movie.get("locations")
+      movie.get("locations").map((location)=> @addMarkerWithPopup(location, @template(movie.toJSON()))).filter((location)=> location)
 
     @map = L.map('map', {maxBounds: bounds, layers: [osm]})
     L.control.layers(baseLayers).addTo @map
@@ -36,12 +33,12 @@ class Shothere.Routers.AbsMapRouter extends Backbone.Router
     m.bindPopup(htmlData) if m
     m
 
-  addMarker: (geoModel) ->
+  addMarker: (geoModel) =>
     m = @marker(geoModel)
     m.addTo @map if m
     m
 
-  addMarkerWithPopup: (geoModel, htmlData) ->
+  addMarkerWithPopup: (geoModel, htmlData) =>
     m = @markerWithPopup(geoModel, htmlData)
     m.addTo @map if m
     m

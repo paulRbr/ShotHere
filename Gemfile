@@ -31,7 +31,8 @@ gem 'haml_coffee_assets'
 # Move to Haml templating framework instead of erb
 gem "haml-rails"
 
-gem 'rails-backbone'
+gem 'backbone-rails'
+gem 'backbone-relational-rails'
 gem 'jquery-rails'
 gem 'leaflet-rails'
 

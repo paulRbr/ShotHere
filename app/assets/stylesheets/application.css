@@ -10,5 +10,7 @@
  *
  *= require_self
  *= require leaflet
+ *= require twitter/bootstrap
+ *= require twitter/bootstrap-responsive
  *= require_tree .
  */

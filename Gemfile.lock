@@ -1,3 +1,20 @@
+GIT
+  remote: https://github.com/anjlab/bootstrap-rails.git
+  revision: 033a759c4c953cca4b86847a01a3675f90d23544
+  branch: v2.3.0.0
+  specs:
+    anjlab-bootstrap-rails (2.3.0.0)
+      railties (>= 3.0)
+      sass (>= 3.2)
+
+GIT
+  remote: https://github.com/popox/backbone-rails.git
+  revision: ae65c1b5b3d74feea7e1b1df64d3abacd1f71563
+  branch: v1.1
+  specs:
+    backbone-rails (1.0.0.1)
+      rails (>= 3.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -29,6 +46,8 @@ GEM
       i18n (= 0.6.1)
       multi_json (~> 1.0)
     arel (3.0.2)
+    backbone-relational-rails (0.8.5)
+      railties (~> 3.1)
     bcrypt-ruby (3.0.1)
     builder (3.0.4)
     coffee-rails (3.2.2)
@@ -46,7 +65,6 @@ GEM
     devise-encryptable (0.1.2)
       devise (>= 2.1.0)
     diff-lcs (1.2.4)
-    ejs (1.0.0)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -125,10 +143,6 @@ GEM
       activesupport (= 3.2.13)
       bundler (~> 1.0)
       railties (= 3.2.13)
-    rails-backbone (0.7.2)
-      coffee-script (~> 2.2.0)
-      ejs (~> 1.0.0)
-      railties (>= 3.1.0)
     railties (3.2.13)
       actionpack (= 3.2.13)
       activesupport (= 3.2.13)
@@ -178,6 +192,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  anjlab-bootstrap-rails!
+  backbone-rails!
+  backbone-relational-rails
   coffee-rails (~> 3.2.1)
   devise
   devise-encryptable
@@ -192,7 +209,6 @@ DEPENDENCIES
   omniauth-google-oauth2
   omniauth-twitter
   rails (= 3.2.13)
-  rails-backbone
   redis
   rspec-rails
   sass-rails (~> 3.2.3)

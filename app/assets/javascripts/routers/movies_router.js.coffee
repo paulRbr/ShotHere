@@ -17,15 +17,17 @@ class Shothere.Routers.MoviesRouter extends Shothere.Routers.AbsMapRouter
     $("#movies").html(@view.render().el)
 
   index: ->
-    @map.setView([0.0, 0.0], 2)
+    @map.setView([0.0, 10.0], 2)
 
     @view = new Shothere.Views.Movies.IndexView(movies: @movies)
     $("#movies").html(@view.render().el)
 
   show: (id) ->
     movie = @movies.get(id)
+    movie.fetchRelated("locations") unless movie.get("locations")
 
-    @map.setView([movie.get('latitude').toFixed(3), movie.get('longitude').toFixed(3)], 10)
+    if movie.get("locations").length > 0
+      @map.setView [movie.get("locations").first().get('latitude').toFixed(3), movie.get("locations").first().get('longitude').toFixed(3)], 10
 
     @view = new Shothere.Views.Movies.ShowView(model: movie)
     $("#movies").html(@view.render().el)

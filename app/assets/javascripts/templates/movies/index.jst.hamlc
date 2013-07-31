@@ -3,12 +3,10 @@
 %table#movies-table
   %tr
     %th Title
-    %th Imdb
-    %th Location
-    %th 
     %th 
     %th 
 
-%a{:href=>"#/new"} New Movie
+%br
 
-%a{:href=>"/"} Back home
+%p
+  %a{:href=>"#/new"} New Movie

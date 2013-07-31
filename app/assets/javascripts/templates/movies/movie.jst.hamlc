@@ -1,11 +1,8 @@
-%td= @title
 %td
-  %a{:href=>@imdb_url}= @imdb_id
-%td= @location
-
-%td 
-  %a{:href=> "#/#{@id}" } Show
+  %a{:href=> "#/#{@id}" }= @title
 %td
-  %a{:href=>"#/#{@id}/edit"} Edit
+  %a{:href=>"#/#{@id}/edit"}
+    %button.btn Edit
 %td
-  %a{:href=>"#/#{@id}/destroy", :class=>"destroy", :data-confirm=>"Are you sure?"} Destroy
+  %a{:href=>"#/#{@id}/destroy", :class=>"destroy", "data-confirm"=>"Are you sure?"} 
+    %button.btn X

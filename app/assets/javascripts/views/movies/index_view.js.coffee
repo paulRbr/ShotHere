@@ -3,8 +3,6 @@ Shothere.Views.Movies ||= {}
 class Shothere.Views.Movies.IndexView extends Backbone.View
   template: JST["templates/movies/index"]
 
-  templatePopup: JST["templates/movies/popup"]
-
   initialize: () ->
     @options.movies.bind('reset', @addAll)
 

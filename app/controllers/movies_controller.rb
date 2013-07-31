@@ -30,11 +30,6 @@ class MoviesController < ApplicationController
     end
   end
 
-  # GET /movies/1/edit
-  def edit
-    @movie = Movie.find(params[:id])
-  end
-
   # POST /movies
   # POST /movies.json
   def create

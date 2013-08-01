@@ -64,5 +64,8 @@ module Shothere
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Search limits when querying ...?q=search
+    config.search_limit = 10
   end
 end

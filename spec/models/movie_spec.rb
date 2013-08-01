@@ -9,8 +9,8 @@ describe Movie do
   end
 
   describe "a Movie to_json" do
-    it "contains locations" do
-      JSON.parse(@movie.to_json).should include('locations')
+    it "doesn't contain locations" do
+      JSON.parse(@movie.to_json).should_not include('locations')
     end
   end
 end

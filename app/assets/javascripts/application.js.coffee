@@ -12,6 +12,7 @@
 #
 #= require jquery
 #= require jquery_ujs
+#= require jquery.tokeninput
 #= require twitter/bootstrap
 #= require leaflet
 #= require hamlcoffee
@@ -29,3 +30,10 @@ window.Shothere =
   Collections: {}
   Routers: {}
   Views: {}
+
+$.fn.fadeSlideLeft = (px, speed,fn) ->
+  if $(@).css('right') == '-'+px+'px'
+    $(@).animate {right : '+='+px}, speed || 400, -> $.isFunction(fn) && fn.call(this)
+$.fn.fadeSlideRight = (px, speed,fn) ->
+  if $(@).css('right') == '0px'
+    $(@).animate {right : '-='+px}, speed || 400, -> $.isFunction(fn) && fn.call(this)

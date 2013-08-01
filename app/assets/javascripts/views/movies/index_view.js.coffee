@@ -14,6 +14,7 @@ class Shothere.Views.Movies.IndexView extends Backbone.View
     @$("tbody").append(view.render().el)
 
   render: =>
+    $('#searchbox').tokenInput "clear"
     $(@el).html(@template(movies: @options.movies.toJSON() ))
     @addAll()
     return this

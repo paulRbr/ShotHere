@@ -26,8 +26,9 @@ class Shothere.Routers.AbsMapRouter extends Backbone.Router
 
 
 
-    @map = L.map('map', {maxBounds: bounds, layers: defaultLayers})
+    @map = L.map 'map', {maxBounds: bounds, layers: defaultLayers}
     L.control.layers(baseLayers, overlayMovies).addTo @map
+    @map.on('click', -> $('#movies').fadeSlideRight(380))
 
   marker: (geoModel) ->
     m = L.marker([geoModel.get('latitude').toFixed(3), geoModel.get('longitude').toFixed(3)]) if geoModel.get('latitude')

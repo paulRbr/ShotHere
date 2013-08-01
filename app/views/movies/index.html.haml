@@ -3,5 +3,6 @@
 #map
 
 :coffeescript
-  window.router = new Shothere.Routers.MoviesRouter({movies: #{@movies.to_json.html_safe}})
-  Backbone.history.start()  
+  window.router = new Shothere.Routers.MoviesRouter { movies: #{@movies.to_json(include: :locations).html_safe}, tokenInput: {propertyToSearch: "title", minChars: 3, tokenLimit: 1, onAdd: (item) => window.location.hash = "/"+item.id} }
+  Backbone.history.start()
+  $('#movies').mouseover(-> $(@).fadeSlideLeft(380))  

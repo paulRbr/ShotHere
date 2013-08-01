@@ -15,3 +15,44 @@
  *= require twitter/bootstrap-responsive
  *= require_tree .
  */
+$light_gray: #dcdcdc;
+$white: #fff;
+$black: #000;
+
+html {
+  background-color: transparent;
+
+  body {
+  	overflow: hidden;
+  }
+  .navbar {
+    -moz-box-shadow: 0 0 3px $black;
+    -webkit-box-shadow: 0 0 3px $black;
+    box-shadow: 0 0 3px $black;
+  
+    .navbar-inner {
+      background-image: none;
+      background-color: rgba(20,20,20,0.75);
+    }
+  }
+  #body {
+    margin-bottom: 10px;
+
+    #search {
+    	z-index: 100;
+    }
+  }
+
+  // Overwrite Leaflet defaults
+  .leaflet-top {
+    .leaflet-control {
+      margin-top: 50px;
+    }
+  }
+
+  .leaflet-right {
+    .leaflet-control {
+      margin-right: 80px;
+    }
+  }
+}

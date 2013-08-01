@@ -23,10 +23,8 @@
                   %a{:href => "#/about"} About
                 %li
                   %a{:href => "#/contact"} Contact
-              %form.navbar-form.pull-right
-                %input.span2{:placeholder => "Email", :type => "text"}/
-                %input.span2{:placeholder => "Password", :type => "password"}/
-                %button.btn{:type => "submit"} Sign in
+              #search.pull-right
+                %input#searchbox
             / /.nav-collapse
       #body
         / Devise flash msgs
@@ -34,8 +32,6 @@
           %p.notice= notice
         - unless alert.nil?
           %p.alert= alert
-        #search
-          %input#searchbox
         = yield
         = yield :body
       #footer

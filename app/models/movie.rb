@@ -37,11 +37,6 @@ class Movie < ActiveRecord::Base
     Rails.logger.warn e
   end
 
-  # Force including locations related models when a Movie to_json 
-  def as_json(options={})
-    super(:include => :locations)
-  end
-
   private
 
   def find_main_location(location_name)

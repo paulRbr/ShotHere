@@ -20,6 +20,7 @@ class Shothere.Views.Movies.EditView extends Backbone.View
     )
 
   render : ->
+    $('#searchbox').tokenInput "clear"
     $(@el).html(@template(@model.toJSON() ))
 
     this.$("form").backboneLink(@model)

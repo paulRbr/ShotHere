@@ -7,6 +7,9 @@ Shothere::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks"}
   resources :users, :only => [:show]
 
+  # Searches accross the BE
+  get 'search/:action' => 'searches#:action'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

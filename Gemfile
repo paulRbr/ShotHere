@@ -34,6 +34,7 @@ gem "haml-rails"
 gem 'backbone-rails', :git => 'https://github.com/popox/backbone-rails.git',:branch => 'v1.1'
 gem 'backbone-relational-rails'
 gem 'jquery-rails'
+gem 'jquery-tokeninput-rails'
 gem 'leaflet-rails'
 
 # Bootstrap

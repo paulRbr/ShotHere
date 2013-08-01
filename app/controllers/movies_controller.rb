@@ -16,7 +16,7 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
 
     respond_to do |format|
-      format.json { render json: @movie }
+      format.json { render json: @movie, :include => :locations }
     end
   end
 
@@ -30,11 +30,6 @@ class MoviesController < ApplicationController
     end
   end
 
-  # GET /movies/1/edit
-  def edit
-    @movie = Movie.find(params[:id])
-  end
-
   # POST /movies
   # POST /movies.json
   def create
@@ -42,7 +37,7 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       if @movie.save
-        format.json { render json: @movie, status: :created, location: @movie, notice: 'Movie was successfully created.' }
+        format.json { render json: @movie, :include => :locations, status: :created, location: @movie, notice: 'Movie was successfully created.' }
       else
         format.json { render json: @movie.errors, status: :unprocessable_entity }
       end

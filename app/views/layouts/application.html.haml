@@ -34,6 +34,8 @@
           %p.notice= notice
         - unless alert.nil?
           %p.alert= alert
+        #search
+          %input#searchbox
         = yield
         = yield :body
       #footer

@@ -1,5 +1,6 @@
 class Shothere.Routers.MoviesRouter extends Shothere.Routers.AbsMapRouter
   initialize: (options) ->
+    $("#searchbox").tokenInput("http://"+document.location.host+"/search/movies.json/")
     @movies = new Shothere.Collections.MoviesCollection()
     @movies.reset options.movies if options.movies
     # Init map

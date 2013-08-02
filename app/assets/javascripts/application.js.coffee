@@ -32,8 +32,6 @@ window.Shothere =
   Views: {}
 
 $.fn.fadeSlideLeft = (px, speed,fn) ->
-  if $(@).css('right') == '-'+px+'px'
-    $(@).animate {right : '+='+px}, speed || 400, -> $.isFunction(fn) && fn.call(this)
+  $(@).stop().animate {right : '0px'}, speed || 400, -> $.isFunction(fn) && fn.call(this)
 $.fn.fadeSlideRight = (px, speed,fn) ->
-  if $(@).css('right') == '0px'
-    $(@).animate {right : '-='+px}, speed || 400, -> $.isFunction(fn) && fn.call(this)
+  $(@).stop().animate {right : '-'+px+'px'}, speed || 400, -> $.isFunction(fn) && fn.call(this)

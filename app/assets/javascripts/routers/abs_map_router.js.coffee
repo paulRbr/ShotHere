@@ -19,7 +19,7 @@ class Shothere.Routers.AbsMapRouter extends Backbone.Router
     @allMoviesLayer = L.layerGroup(@movies.map (movie)-> movie.markers())
     @oneMovieLayer = L.layerGroup()
     defaultLayers = [osm, @allMoviesLayer, @oneMovieLayer]
-    @map = L.map 'map', {maxBounds: bounds, layers: defaultLayers}
+    @map = L.map 'map', {layers: defaultLayers}
     @map.setView([0.0, 0.0], 2)
 
     baseLayers = {"CloudMade": cloudmade, "OpenStreetMap": osm}

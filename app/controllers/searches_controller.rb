@@ -11,6 +11,17 @@ class SearchesController < ApplicationController
     end
   end
 
+  def imdb_movies
+    search do 
+      begin
+        search_imdb_data(params[:q]) 
+      rescue => e
+        Rails.logger.debug e
+        []
+      end
+    end
+  end
+
   private
 
   def search(&block)    
@@ -26,4 +37,25 @@ class SearchesController < ApplicationController
       end
     end
   end
+
+  def search_imdb_data(query)
+    query.gsub!(/[ ]/, '+')
+    Rails.logger.debug query
+    uri = URI.parse("http://mymovieapi.com/?title=#{query}&type=json&limit=5")
+    response = Net::HTTP.get_response(uri)
+    begin
+      data = JSON.parse(response.body)
+    rescue JSON::ParseError
+      data = nil
+    end
+    if data.nil?
+      raise "Unable to use mymovieapi.com"
+    elsif !data.kind_of?(Array) and data["error"]
+      raise data["error"]
+    elsif data.kind_of?(Array) and data.empty?
+      raise "No result found"
+    end
+    data
+  end
+
 end

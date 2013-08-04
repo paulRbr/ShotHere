@@ -3,10 +3,3 @@
 %table#movies-table
   %tr
     %th Title
-    %th 
-    %th 
-
-%br
-
-%p
-  %a{:href=>"#/new"} New Movie

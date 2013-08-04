@@ -1,8 +1,2 @@
 %td
   %a{:href=> "#/#{@id}" }= @title
-%td
-  %a{:href=>"#/#{@id}/edit"}
-    %button.btn Edit
-%td
-  %a{:href=>"#/#{@id}/destroy", :class=>"destroy", "data-confirm"=>"Are you sure?"} 
-    %button.btn X

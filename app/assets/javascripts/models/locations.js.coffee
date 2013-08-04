@@ -1,5 +1,5 @@
 class Shothere.Models.Location extends Backbone.RelationalModel
-  paramRoot: 'location'
+  urlRoot: '/locations'
 
   defaults:
     address: null

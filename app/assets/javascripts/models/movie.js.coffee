@@ -1,5 +1,5 @@
 class Shothere.Models.Movie extends Backbone.RelationalModel
-  paramRoot: 'movie'
+  urlRoot: '/movies'
 
   defaults:
     title: null

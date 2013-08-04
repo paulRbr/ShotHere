@@ -24,7 +24,8 @@
                 %li
                   %a{:href => "#/contact"} Contact
               #search.pull-right
-                %input#searchbox
+                %input#searchbox{:type => 'text', :name => 'search'}
+                %i.icon-search.absolute-right.middle
             / /.nav-collapse
       #body
         / Devise flash msgs

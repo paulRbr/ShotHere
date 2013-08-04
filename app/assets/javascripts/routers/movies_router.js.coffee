@@ -1,49 +1,58 @@
 class Shothere.Routers.MoviesRouter extends Shothere.Routers.AbsMapRouter
   initialize: (options) ->
-    $("#searchbox").tokenInput(
-      "http://"+document.location.host+"/search/movies.json/",
-      options.tokenInput
-    )
+    $('#movies').hover (-> $(@).fadeSlideLeft()), (-> $(@).fadeSlideRight 380)
     @movies = new Shothere.Collections.MoviesCollection()
     @movies.reset options.movies if options.movies
+    @initSearchInput()
     # Init map
     super options
 
   routes:
-    "new"      : "newMovie"
     "index"    : "index"
-    ":id/edit" : "edit"
     ":id"      : "show"
     ".*"        : "index"
 
-  newMovie: ->
-    @view = new Shothere.Views.Movies.NewView(collection: @movies)
-    $("#movies").fadeSlideLeft(380)
-    $("#movies").html(@view.render().el)
-
   index: ->
-    @map.setView([0.0, 10.0], 2)
+    @map.setView([0.0, 0.0], 2)
+    @map.addLayer @allMoviesLayer unless @map.hasLayer @allMoviesLayer
 
     @view = new Shothere.Views.Movies.IndexView(movies: @movies)
-    $("#movies").fadeSlideRight(380)
     $("#movies").html(@view.render().el)
 
   show: (id) ->
     movie = @movies.get(id)
-    movie.fetchRelated("locations") unless movie.get("locations")
+    unless movie
+      movie = new Shothere.Models.Movie({id:id})
+      @movies.add movie
 
-    if movie.get("locations").length > 0
-      @map.setView [movie.get("locations").first().get('latitude').toFixed(3), movie.get("locations").first().get('longitude').toFixed(3)], 10
-
+    @map.removeLayer @allMoviesLayer if @map.hasLayer @allMoviesLayer
+    markers = movie.markers()
+    @map.addLayer markers unless @map.hasLayer markers
+    @map.setView(markers.getBounds().getCenter(), 3)
     @view = new Shothere.Views.Movies.ShowView(model: movie)
-    $("#movies").fadeSlideLeft(380)
     $("#movies").html(@view.render().el)
 
+  initSearchInput: =>
+    $("#searchbox").tokenInput(
+      "/search/movies/?format=json",
+      propertyToSearch: "title",
+      minChars: 3,
+      tokenLimit: 1,
+      onAdd: (item) =>
+        $("#wait-overlay").show()
+        window.location.hash = "/"+item.id if item.id
+        if item.imdb_id
+          model = new @movies.model({imdb_id:item.imdb_id})
+          @movies.create(model.toJSON(),
+              success: (movie) =>
+                $("#wait-overlay").hide()
+                window.location.hash = "/#{movie.id}"
 
+              error: (movie, jqXHR) =>
+                window.location.hash = "/error"
+                console.log $.parseJSON(jqXHR.responseText)
 
-  edit: (id) ->
-    movie = @movies.get(id)
-
-    @view = new Shothere.Views.Movies.EditView(model: movie)
-    $("#movies").fadeSlideLeft(380)
-    $("#movies").html(@view.render().el)
+              wait: true
+            )
+      onDelete: (item) => window.location.hash = "/"
+    )

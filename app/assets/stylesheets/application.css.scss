@@ -42,7 +42,11 @@ html {
     	z-index: 100;
     }
   }
-
+  .absolute-right {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+  }
   // Overwrite Leaflet defaults
   .leaflet-top {
     .leaflet-control {

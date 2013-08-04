@@ -16,3 +16,6 @@ en:
   register: "Register"
   list:
     movies: "List all movies"
+  movie:
+    loading: "Loading movie.."
+  wait: "Please wait."

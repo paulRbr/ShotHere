@@ -39,11 +39,13 @@ class Shothere.Routers.MoviesRouter extends Shothere.Routers.AbsMapRouter
       minChars: 3,
       tokenLimit: 1,
       onAdd: (item) =>
+        $("#wait-overlay").show()
         window.location.hash = "/"+item.id if item.id
         if item.imdb_id
           model = new @movies.model({imdb_id:item.imdb_id})
           @movies.create(model.toJSON(),
               success: (movie) =>
+                $("#wait-overlay").hide()
                 window.location.hash = "/#{movie.id}"
 
               error: (movie, jqXHR) =>

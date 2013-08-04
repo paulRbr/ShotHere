@@ -17,7 +17,8 @@ class Shothere.Routers.AbsMapRouter extends Backbone.Router
     )
 
     @allMoviesLayer = L.layerGroup(@movies.map (movie)-> movie.markers())
-    defaultLayers = [osm, @allMoviesLayer]
+    @oneMovieLayer = L.layerGroup()
+    defaultLayers = [osm, @allMoviesLayer, @oneMovieLayer]
     @map = L.map 'map', {maxBounds: bounds, layers: defaultLayers}
     @map.setView([0.0, 0.0], 2)
 

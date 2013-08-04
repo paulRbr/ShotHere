@@ -14,6 +14,7 @@ class Shothere.Routers.MoviesRouter extends Shothere.Routers.AbsMapRouter
 
   index: ->
     @map.setView([0.0, 0.0], 2)
+    @map.addLayer @oneMovieLayer.clearLayers() unless @map.hasLayer @oneMovieLayer
     @map.addLayer @allMoviesLayer unless @map.hasLayer @allMoviesLayer
 
     @view = new Shothere.Views.Movies.IndexView(movies: @movies)
@@ -25,9 +26,12 @@ class Shothere.Routers.MoviesRouter extends Shothere.Routers.AbsMapRouter
       movie = new Shothere.Models.Movie({id:id})
       @movies.add movie
 
+    @oneMovieLayer.clearLayers()
     @map.removeLayer @allMoviesLayer if @map.hasLayer @allMoviesLayer
     markers = movie.markers()
-    @map.addLayer markers unless @map.hasLayer markers
+    @allMoviesLayer.addLayer markers unless @allMoviesLayer.hasLayer markers
+    @oneMovieLayer.addLayer markers
+    @map.addLayer @oneMovieLayer unless @map.hasLayer @oneMovieLayer
     @map.setView(markers.getBounds().getCenter(), 3)
     @view = new Shothere.Views.Movies.ShowView(model: movie)
     $("#movies").html(@view.render().el)
@@ -39,9 +43,9 @@ class Shothere.Routers.MoviesRouter extends Shothere.Routers.AbsMapRouter
       minChars: 3,
       tokenLimit: 1,
       onAdd: (item) =>
-        $("#wait-overlay").show()
         window.location.hash = "/"+item.id if item.id
         if item.imdb_id
+          $("#wait-overlay").show()
           model = new @movies.model({imdb_id:item.imdb_id})
           @movies.create(model.toJSON(),
               success: (movie) =>
@@ -49,6 +53,7 @@ class Shothere.Routers.MoviesRouter extends Shothere.Routers.AbsMapRouter
                 window.location.hash = "/#{movie.id}"
 
               error: (movie, jqXHR) =>
+                $("#wait-overlay").hide()
                 window.location.hash = "/error"
                 console.log $.parseJSON(jqXHR.responseText)
 

@@ -1,4 +1,4 @@
-class Shothere.Models.Location extends Backbone.RelationalModel
+class Shothere.Models.Location extends Shothere.Models.AbsMarkerModel
   urlRoot: '/locations'
 
   defaults:
@@ -6,6 +6,8 @@ class Shothere.Models.Location extends Backbone.RelationalModel
     comment: null
     latitude: null
     longitude: null
+
+Shothere.Models.Location.setup()
 
 class Shothere.Collections.LocationsCollection extends Backbone.Collection
   model: Shothere.Models.Location

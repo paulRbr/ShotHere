@@ -1,6 +1,10 @@
 class Shothere.Models.Movie extends Backbone.RelationalModel
   urlRoot: '/movies'
 
+  markers: ->
+    @markersGroup = @markersGroup || L.featureGroup @.get("locations").map((location) =>
+      location.markerWithPopup JST["templates/movies/popup"](@.toJSON()))
+
   defaults:
     title: null
     imdb_id: null
@@ -13,7 +17,13 @@ class Shothere.Models.Movie extends Backbone.RelationalModel
       includeInJSON: true
       autoFetch: true
       collectionType: "Shothere.Collections.LocationsCollection"
+      reverseRelation: {
+        type: Backbone.HasOne,
+        key: 'movie'
+      }
     ]
+
+Shothere.Models.Movie.setup()
 
 class Shothere.Collections.MoviesCollection extends Backbone.Collection
   model: Shothere.Models.Movie

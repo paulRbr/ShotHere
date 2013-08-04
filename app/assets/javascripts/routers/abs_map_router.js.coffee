@@ -13,31 +13,17 @@ class Shothere.Routers.AbsMapRouter extends Backbone.Router
     cloudmadeAttrib = 'Data, imagery and map information provided by <a href="http://open.mapquest.co.uk" target="_blank">MapQuest</a>, <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a>'
     cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttrib, subdomains: subDomains})
     osm = L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png",
-       attribution: "&copy; <a href=\"http://osm.org/copyright\">OpenStreetMap</a> contributors"
+       attribution: "&copy; <a href=\"http://osm.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors"
     )
-    baseLayers = {"CloudMade": cloudmade, "OpenStreetMap": osm}
-    defaultLayers = [osm]
-    overlayMovies = {}
 
-    @movies.each (movie) =>      
-      movie.fetchRelated("locations") unless movie.get("locations")
-      overlayMovies[movie.get("title")] = L.layerGroup movie.get("locations").map((location)=> @markerWithPopup(location, @template(movie.toJSON()))).filter((location)-> location)
-      defaultLayers.push overlayMovies[movie.get("title")]
-
-
-
+    @allMoviesLayer = L.layerGroup(@movies.map (movie)-> movie.markers())
+    defaultLayers = [osm, @allMoviesLayer]
     @map = L.map 'map', {maxBounds: bounds, layers: defaultLayers}
-    L.control.layers(baseLayers, overlayMovies).addTo @map
-    @map.on('click', -> $('#movies').fadeSlideRight(380))
+    @map.setView([0.0, 0.0], 2)
 
-  marker: (geoModel) ->
-    m = L.marker([geoModel.get('latitude').toFixed(3), geoModel.get('longitude').toFixed(3)]) if geoModel.get('latitude')
-    m
-
-  markerWithPopup: (geoModel, htmlData) ->
-    m = @marker(geoModel)
-    m.bindPopup(htmlData) if m
-    m
+    baseLayers = {"CloudMade": cloudmade, "OpenStreetMap": osm}
+    overlays = {"all": defaultLayers}
+    L.control.layers(baseLayers, overlays).addTo @map
 
   addMarker: (geoModel) =>
     m = @marker(geoModel)

@@ -2,16 +2,12 @@ class SearchesController < ApplicationController
   def movies
     search do
       list = Movie.select("title, id").limit(Rails.configuration.search_limit).where "title LIKE ?", "%#{params[:q]}%"
-      if list.empty?
-        begin
-          search_imdb_data(params[:q]) 
-        rescue => e
-          Rails.logger.debug e
-          []
-        end
-      else
-        list
+      begin
+        list = list.concat search_imdb_data(params[:q]) 
+      rescue => e
+        Rails.logger.debug e
       end
+      list.uniq {|movie| movie["title"]}
     end
   end
 

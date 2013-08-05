@@ -10,7 +10,6 @@ class MoviesController < ApplicationController
     end
   end
 
-  # GET /movies/1
   # GET /movies/1.json
   def show
     @movie = Movie.find(params[:id])
@@ -20,7 +19,6 @@ class MoviesController < ApplicationController
     end
   end
 
-  # GET /movies/new
   # GET /movies/new.json
   def new
     @movie = Movie.new
@@ -30,7 +28,6 @@ class MoviesController < ApplicationController
     end
   end
 
-  # POST /movies
   # POST /movies.json
   def create
     @movie = Movie.new(params[:movie].select {|k,v| k == "imdb_id"})
@@ -44,7 +41,6 @@ class MoviesController < ApplicationController
     end
   end
 
-  # PUT /movies/1
   # PUT /movies/1.json
   def update
     @movie = Movie.find(params[:id])
@@ -58,7 +54,6 @@ class MoviesController < ApplicationController
     end
   end
 
-  # DELETE /movies/1
   # DELETE /movies/1.json
   def destroy
     @movie = Movie.find(params[:id])

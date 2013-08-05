@@ -10,6 +10,7 @@ class Shothere.Routers.MoviesRouter extends Shothere.Routers.AbsMapRouter
   routes:
     "index"    : "index"
     ":id"      : "show"
+    "imdb/:id" : "show_imdb"
     ".*"        : "index"
 
   index: ->
@@ -19,6 +20,14 @@ class Shothere.Routers.MoviesRouter extends Shothere.Routers.AbsMapRouter
 
     @view = new Shothere.Views.Movies.IndexView(movies: @movies)
     $("#movies").html(@view.render().el)
+
+  show_imdb: (id) ->
+    movie = @movies.find (movie)=> (movie.get('imdb_id') == id)
+    unless movie
+      movie = new Shothere.Models.Movie({imdb_id:id})
+      @movies.add movie
+
+    window.location.hash = "/"+movie.id
 
   show: (id) ->
     movie = @movies.get(id)
@@ -32,7 +41,7 @@ class Shothere.Routers.MoviesRouter extends Shothere.Routers.AbsMapRouter
     @allMoviesLayer.addLayer markers unless @allMoviesLayer.hasLayer markers
     @oneMovieLayer.addLayer markers
     @map.addLayer @oneMovieLayer unless @map.hasLayer @oneMovieLayer
-    @map.setView(markers.getBounds().getCenter(), 3)
+    @map.setView(markers.getBounds().getCenter(), 3) if movie.get('locations').length > 0
     @view = new Shothere.Views.Movies.ShowView(model: movie)
     $("#movies").html(@view.render().el)
 
@@ -54,7 +63,7 @@ class Shothere.Routers.MoviesRouter extends Shothere.Routers.AbsMapRouter
 
               error: (movie, jqXHR) =>
                 $("#wait-overlay").hide()
-                window.location.hash = "/error"
+                window.location.hash = "/imdb/"+ movie.get('imdb_id').match(/[0-9]+/)
                 console.log $.parseJSON(jqXHR.responseText)
 
               wait: true

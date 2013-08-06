@@ -13,11 +13,11 @@ class Location < ActiveRecord::Base
     unless self.address.nil?
       Rails.logger.debug "Geocoding #{self.address}..."
       self.geocode
-      begin
+      until self.geocoded? or self.address.empty?
         self.address = self.address.split(',')[1..-1].join(',')
         Rails.logger.debug "Geocoding #{self.address}..."
         self.geocode
-      end until self.geocoded? or self.address.empty?
+      end 
       Rails.logger.debug "#{self.address} geocoded as: [#{self.latitude}, #{self.longitude}]" if self.geocoded?
     end
     unless self.geocoded?

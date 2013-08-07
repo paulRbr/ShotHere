@@ -37,6 +37,8 @@ gem 'jquery-rails'
 gem 'jquery-tokeninput-rails'
 gem 'leaflet-rails'
 
+gem 'meta-tags', :require => 'meta_tags'
+
 # Bootstrap
 gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails', :git => 'https://github.com/anjlab/bootstrap-rails.git',:branch => 'v2.3.0.0'
 

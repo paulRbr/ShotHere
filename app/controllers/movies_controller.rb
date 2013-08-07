@@ -4,6 +4,8 @@ class MoviesController < ApplicationController
   def index
     @movies = Movie.all
 
+    set_meta_tags :title => 'The awesome rails app',
+                  :viewport => "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @movies, :include => :locations }

@@ -1,0 +1,17 @@
+/*
+ * Additional css for mobiles only
+ *
+ *= require_self
+ *= require_tree ./mobile
+ */
+html {
+ height: 100%; 
+ body {
+   padding: 0;
+   margin: 0;
+   height: 100%;
+   #map {
+     height: 100%;
+   }
+ }
+}

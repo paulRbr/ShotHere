@@ -41,3 +41,9 @@ Shothere::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 end
+
+require 'rspec/core' 
+require 'rspec/rails'
+RSpec.configure do |config|
+  config.include FactoryGirl::Syntax::Methods
+end

@@ -32,7 +32,7 @@ describe MoviesController do
 
   describe "GET index" do
     it "assigns all movies as @movies" do
-      movie = Movie.create! valid_attributes
+      movie = create :movie
       get :index, {}, valid_session
       assigns(:movies).should eq([movie])
       response.should_not == ""
@@ -41,7 +41,7 @@ describe MoviesController do
 
   describe "GET show" do
     it "assigns the requested movie as @movie" do
-      movie = Movie.create! valid_attributes
+      movie = create :movie
       get :show, {:id => movie.to_param, format: :json}, valid_session
       assigns(:movie).should eq(movie)
     end
@@ -68,9 +68,9 @@ describe MoviesController do
         assigns(:movie).should be_persisted
       end
 
-      it "return the created movie in JSON" do
+      it "return the created movie in JSON including the locations" do
         post :create, {:movie => valid_attributes, format: :json}, valid_session
-        response.body.should == Movie.last.to_json
+        response.body.should == Movie.last.to_json(include: :locations)
       end
     end
 
@@ -94,7 +94,7 @@ describe MoviesController do
   describe "PUT update .json format" do
     describe "with valid params" do
       it "updates the requested movie" do
-        movie = Movie.create! valid_attributes
+        movie = create :movie
         # Assuming there are no other movies in the database, this
         # specifies that the Movie created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -104,13 +104,13 @@ describe MoviesController do
       end
 
       it "assigns the requested movie as @movie" do
-        movie = Movie.create! valid_attributes
+        movie = create(:movie, imdb_id: "113088")
         put :update, {:id => movie.to_param, :movie => valid_attributes, format: :json}, valid_session
         assigns(:movie).should eq(movie)
       end
 
       it "respond with no content (204 response)" do
-        movie = Movie.create! valid_attributes
+        movie = create :movie
         put :update, {:id => movie.to_param, :movie => valid_attributes, format: :json}, valid_session
         response.status.should eq(204)
       end
@@ -118,7 +118,7 @@ describe MoviesController do
 
     describe "with invalid params" do
       it "assigns the movie as @movie" do
-        movie = Movie.create! valid_attributes
+        movie = create :movie
         # Trigger the behavior that occurs when invalid params are submitted
         Movie.any_instance.stub(:save).and_return(false)
         put :update, {:id => movie.to_param, :movie => { "title" => "invalid value" }, format: :json}, valid_session
@@ -126,7 +126,7 @@ describe MoviesController do
       end
 
       it "respond with a 422 unpreprocessable entity error" do
-        movie = Movie.create! valid_attributes
+        movie = create :movie
         # Trigger the behavior that occurs when invalid params are submitted
         Movie.any_instance.stub(:save).and_return(false)
         put :update, {:id => movie.to_param, :movie => { "title" => "invalid value" }, format: :json}, valid_session
@@ -137,14 +137,14 @@ describe MoviesController do
 
   describe "DELETE destroy .json format" do
     it "destroys the requested movie" do
-      movie = Movie.create! valid_attributes
+      movie = create :movie
       expect {
         delete :destroy, {:id => movie.to_param, format: :json}, valid_session
       }.to change(Movie, :count).by(-1)
     end
 
     it "respond with no content (204 response)" do
-      movie = Movie.create! valid_attributes
+      movie = create :movie
       delete :destroy, {:id => movie.to_param, format: :json}, valid_session
       response.status.should eq(204)
     end

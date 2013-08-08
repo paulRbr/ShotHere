@@ -27,8 +27,8 @@ class Movie < ActiveRecord::Base
 
   def imdb_id=(imdb_id_or_url)
     an_id = imdb_id_or_url.to_s.gsub(/\D/, "")
-    data = get_imdb_data an_id
     self[:imdb_id] = an_id
+    data = get_imdb_data an_id
     Rails.logger.debug data
     %w(title poster imdb_url).each { |attr| self[attr] = "#{data[attr]}" unless data[attr].nil? }
     find_main_location data["filming_locations"]
@@ -52,7 +52,8 @@ class Movie < ActiveRecord::Base
     Rails.logger.debug response.body
     begin
       data = JSON.parse(response.body)
-    rescue JSON::ParseError
+    rescue => e
+      Rails.logger.warn "Bad response from mymovieapi: #{e}"
       data = nil
     end
     if data.nil?

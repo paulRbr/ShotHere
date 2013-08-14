@@ -110,6 +110,8 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    marionette-rails (1.0.4)
+      rails (>= 3.1.0)
     meta-tags (1.5.0)
       actionpack
     mime-types (1.23)
@@ -221,6 +223,7 @@ DEPENDENCIES
   jquery-rails
   jquery-tokeninput-rails
   leaflet-rails
+  marionette-rails
   meta-tags
   mysql2
   omniauth

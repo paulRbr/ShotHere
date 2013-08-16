@@ -35,3 +35,10 @@ Shothere::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
 end
+
+require 'rspec/core' 
+require 'rspec/rails'
+RSpec.configure do |config|
+  config.include FactoryGirl::Syntax::Methods
+end
+

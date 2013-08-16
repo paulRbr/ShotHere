@@ -2,8 +2,11 @@ language: ruby
 rvm:
   - 1.9.3
 env:
-  - DB=sqlite
+  - DB=sqlite DISPLAY=":99.0"
+before_script:
+  - 'sh -e /etc/init.d/xvfb start'
 script: 
   - RAILS_ENV=test bundle exec rake db:migrate --trace
   - bundle exec rake db:test:prepare
   - bundle exec rspec spec/
+  - bundle exec rake teaspoon DRIVER=selenium

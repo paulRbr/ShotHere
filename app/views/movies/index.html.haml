@@ -1,10 +1,1 @@
-#movies
-
-#map
-
-#wait-overlay.container
-  .message= "#{I18n.t "movie.loading"} #{I18n.t "wait"}"
-
-:coffeescript
-  window.router = new Shothere.Routers.MoviesRouter { movies: #{@movies.to_json(:include => :locations).html_safe} }
-  Backbone.history.start()
+#movies.hidden-phone

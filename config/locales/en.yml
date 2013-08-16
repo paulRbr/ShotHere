@@ -12,6 +12,7 @@ en:
     in: 
       link: "Sign in"
       as: "Signed in as %{name}"
+      please: "You are not logged in!"
     out: "Sign out"
   register: "Register"
   list:

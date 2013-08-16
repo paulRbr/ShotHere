@@ -8,6 +8,10 @@ gem 'rails', '3.2.13'
 group :test, :development do
   gem 'sqlite3' # test
   gem 'rspec-rails'
+  gem 'debugger'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'teaspoon'
+  gem 'selenium-webdriver'
 end
 
 gem 'mysql2', :group => :production
@@ -19,7 +23,17 @@ gem 'redis'
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'haml_coffee_assets'
+
+  gem 'backbone-rails', :git => 'https://github.com/popox/backbone-rails.git',:branch => 'v1.1'
+  gem 'backbone-relational-rails'
+  gem 'marionette-rails'
+  gem 'jquery-rails'
+  gem 'jquery-tokeninput-rails'
+  gem 'leaflet-rails'
+
+  # Bootstrap
+  gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails', :git => 'https://github.com/anjlab/bootstrap-rails.git',:branch => 'v2.3.0.0'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -27,20 +41,10 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'haml_coffee_assets'
 # Move to Haml templating framework instead of erb
-gem "haml-rails"
-
-gem 'backbone-rails', :git => 'https://github.com/popox/backbone-rails.git',:branch => 'v1.1'
-gem 'backbone-relational-rails'
-gem 'jquery-rails'
-gem 'jquery-tokeninput-rails'
-gem 'leaflet-rails'
+gem 'haml-rails'
 
 gem 'meta-tags', :require => 'meta_tags'
-
-# Bootstrap
-gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails', :git => 'https://github.com/anjlab/bootstrap-rails.git',:branch => 'v2.3.0.0'
 
 # Devise - Authentication gem
 gem 'devise'
@@ -55,7 +59,7 @@ gem 'omniauth-twitter'
 gem 'omniauth-github'
 
 # Ruby Geocoder
-gem "geocoder"
+gem 'geocoder'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

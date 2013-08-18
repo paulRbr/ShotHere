@@ -1,11 +1,14 @@
 class SearchesController < ApplicationController
   def movies
     search do
-      list = Movie.select("title, id").limit(Rails.configuration.search_limit).where "title LIKE ?", "%#{params[:q]}%"
-      begin
-        list = list.concat search_imdb_data(params[:q]) 
-      rescue => e
-        Rails.logger.debug e
+      by = params[:by] || "title"
+      list = Movie.select("title, id").limit(Rails.configuration.search_limit).where "#{by} LIKE ?", "%#{params[:q]}%"
+      if params[:imdb]
+        begin
+          list = list.concat search_imdb_data(params[:q], by)
+        rescue => e
+          Rails.logger.debug e
+        end
       end
       list.uniq {|movie| movie["title"]}
     end
@@ -13,7 +16,8 @@ class SearchesController < ApplicationController
 
   def locations
     search do
-      Location.select("address, id").limit(Rails.configuration.search_limit).where "address LIKE ?", "%#{params[:q]}%"
+      by = params[:by] || "address"
+      Location.select("address, id").limit(Rails.configuration.search_limit).where "#{by} LIKE ?", "%#{params[:q]}%"
     end
   end
 
@@ -44,10 +48,11 @@ class SearchesController < ApplicationController
     end
   end
 
-  def search_imdb_data(query)
+  def search_imdb_data(query, by)
     query.gsub!(/[ ]/, '+')
+    by.gsub!(/imdb_/,'')
     Rails.logger.debug query
-    uri = URI.parse("http://mymovieapi.com/?title=#{query}&type=json&limit=5")
+    uri = URI.parse("http://mymovieapi.com/?#{by}=#{query}&type=json&limit=#{Rails.configuration.search_limit}")
     response = Net::HTTP.get_response(uri)
     begin
       data = JSON.parse(response.body)

@@ -24,6 +24,7 @@
 #= require_tree ./models
 #= require_tree ./views
 #= require_tree ./routers
+#= require_tree ./modules
 #= require_tree .
 
 # Define namespaces for the app

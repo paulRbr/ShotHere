@@ -1,5 +1,5 @@
-%h1 Listing movies
+%h1 Latest viewed movies
 
 %table#movies-table
   %tr
-    %th Title
+    %th

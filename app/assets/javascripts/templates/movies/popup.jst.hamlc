@@ -1,8 +1,8 @@
 %h4
-  %a{:href=> "#/#{@id}"}= @title
+  %a{:href=> "#/movie/#{@id}"}= @title
 
 %h6
   %a{:href=>@imdb_url} More details on imdb
 
-%a{:href=> "#/#{@id}"}
+%a{:href=> "#/movie/#{@id}"}
   %img{:src=>@poster, :alt=>@title, :width=>"100px"}

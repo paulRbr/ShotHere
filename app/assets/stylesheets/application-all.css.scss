@@ -38,7 +38,10 @@ html {
     #search {
       z-index: 100;
       position: relative;
-      margin-left: 20px;
+
+      ul.token-input-list {
+        padding-left: 30px;
+      }
     }
     #body {
       margin-bottom: 10px;

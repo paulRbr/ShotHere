@@ -1,15 +1,9 @@
-class Shothere.Routers.MoviesRouter extends Backbone.Router
+class Shothere.Controllers.MoviesController extends Marionette.Controller
   initialize: (options) ->
     $('#movies').hover (-> $(@).fadeSlideLeft()), (-> $(@).fadeSlideRight 380)
     @movies = new Shothere.Collections.MoviesCollection()
     @movies.reset options.movies if options.movies
     Shothere.App.trigger "app:after:router/init", @movies
-
-  routes:
-    "index"    : "index"
-    "movie/:id"      : "show"
-    "imdb/:id" : "show_imdb"
-    ".*"        : "index"
 
   index: ->
     Shothere.App.trigger "app:show/index"
@@ -32,7 +26,7 @@ class Shothere.Routers.MoviesRouter extends Backbone.Router
           movie = new Shothere.Models.Movie(item)
           @movies.add movie
 
-    window.location.hash = "/movie/#{movie.id}"
+    Backbone.history.navigate "/movie/#{movie.id}", true
 
   show: (id) ->
     movie = @movies.get(id)

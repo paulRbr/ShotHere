@@ -4,6 +4,8 @@ describe "The global application", ->
       expect(Shothere.Models).toBeDefined()
     it "should define a Routers namespace", ->
       expect(Shothere.Routers).toBeDefined()
+    it "should define a Controllers namespace", ->
+      expect(Shothere.Controllers).toBeDefined()
     it "should define a Collections namespace", ->
       expect(Shothere.Collections).toBeDefined()
     it "should define a Views namespace", ->
@@ -12,12 +14,14 @@ describe "The global application", ->
     it "should be instanciated", ->
       expect(Shothere.App).toBeDefined()
       expect(Shothere.App).not.toBe(null)
-    describe "when started", ->
+    describe "starting", ->
       beforeEach ->
         spyOn Backbone.history, "start"
-        spyOn Shothere.Routers, "MoviesRouter"
+        spyOn Shothere.Controllers, "MoviesController"
+        spyOn Shothere.Routers, "MainRouter"
         Shothere.App.start({})
-      it "should start the backbone history and create the main router", ->
+      it "should create the main router with its controller and start backbone's history", ->
         expect(Backbone.history.start).toHaveBeenCalled()
-        expect(Shothere.Routers.MoviesRouter).toHaveBeenCalled()
+        expect(Shothere.Controllers.MoviesController).toHaveBeenCalled()
+        expect(Shothere.Routers.MainRouter).toHaveBeenCalledWith({controller: new Shothere.Controllers.MoviesController()})
 

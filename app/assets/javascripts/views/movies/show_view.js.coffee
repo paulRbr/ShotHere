@@ -4,8 +4,8 @@ class Shothere.Views.Movies.ShowView extends Backbone.View
   template: JST["templates/movies/show"]
 
   initialize: ->
-    @model.fetch();
-    @model.bind('change', @render, @);
+    @model.fetch()
+    @model.on('change', @render, @)
 
   render: ->
     $(@el).html(@template(@model.toJSON()))

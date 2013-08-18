@@ -13,29 +13,31 @@ TokenInputModule = (TIM, App, Backbone, Marionette, $, _) ->
       minChars: 3,
       tokenLimit: 1,
       onAdd: (item) =>
-        window.location.hash = "/movie/#{item.id}" if item.id
+        Backbone.history.navigate "/movie/#{item.id}", true if item.id
         if item.imdb_id
           $("#overlay").show()
           model = new options.movies.model({imdb_id:item.imdb_id})
           options.movies.create(model.toJSON(),
             success: (movie) =>
               $("#overlay").hide()
-              window.location.hash = "/movie/#{movie.id}"
+              Backbone.history.navigate "/movie/#{movie.id}", true
 
             error: (movie, jqXHR) =>
               $("#overlay").hide()
-              window.location.hash = "/imdb/#{movie.get('imdb_id').match(/[0-9]+/)}" if movie.get('imdb_id')
+              Backbone.history.navigate "/imdb/#{movie.get('imdb_id').match(/[0-9]+/)}", true if movie.get('imdb_id')
               console.debug $.parseJSON(jqXHR.responseText)
 
             wait: true
           )
-      onDelete: (item) => window.location.hash = "/"
+      onDelete: (item) => Backbone.history.navigate "/", true
     )
 
+  ## Subscribed events ##
   TIM.addInitializer () ->
-    Shothere.App.on "app:show/index", TIM.onShowIndex
+    Shothere.App.on "app:show/index", TIM.clearInput
+    Shothere.App.on 'click .token-input-token', TIM.clearInput
 
-  TIM.onShowIndex = ->
+  TIM.clearInput = ->
     $('#searchbox').tokenInput "clear"
 
 Shothere.App.module "TokenInputModule", TokenInputModule

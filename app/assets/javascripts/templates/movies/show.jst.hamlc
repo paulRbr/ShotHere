@@ -15,4 +15,4 @@
       %li 
         = location.address
 
-%a{:href=>"#/index"} Back
+%a{:href=>"/index"} Back

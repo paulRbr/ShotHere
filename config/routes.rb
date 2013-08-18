@@ -10,6 +10,11 @@ Shothere::Application.routes.draw do
   # Searches accross the BE
   get 'search/:action' => 'searches#:action'
 
+  # Make frontend routes available on backend for a pushState ready app
+  get 'index' => 'movies#index'
+  get 'movie/:id' => 'movies#index'
+  get 'imdb/:id' => 'movies#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

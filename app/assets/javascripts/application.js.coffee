@@ -31,12 +31,25 @@
 window.Shothere =
   Models: {}
   Collections: {}
+  Controllers: {}
   Routers: {}
   Views: {}
 
 # Create the single page application
 Shothere.App = new Backbone.Marionette.Application();
 
+# Prevent default clicks on links for a pushState ready app
+
+Shothere.App.addInitializer () ->
+  $(document).on 'click', 'a:not([data-bypass])', (evt) ->
+    href = $(@).attr('href')
+    protocol = @.protocol + '//'
+    if (href.slice(protocol.length) != protocol)
+      evt.preventDefault()
+      Backbone.history.navigate(href, true)
+
+# Create main router and start history
 Shothere.App.addInitializer (options) ->
-  new Shothere.Routers.MoviesRouter options
-  Backbone.history.start()
+  moviesController = new Shothere.Controllers.MoviesController options
+  new Shothere.Routers.MainRouter {controller: moviesController}
+  Backbone.history.start {pushState: true}

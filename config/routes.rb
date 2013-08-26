@@ -1,6 +1,8 @@
 Shothere::Application.routes.draw do
   resources :movies do
     resources :locations, only: [:index]
+    resources :directors, only: [:index]
+    resources :genres, only: [:index]
   end
 
 

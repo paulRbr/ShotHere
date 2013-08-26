@@ -8,7 +8,7 @@ class MoviesController < ApplicationController
                   :viewport => "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @movies, :include => :locations }
+      format.json { render json: @movies, :include => [:locations, :directors, :genres] }
     end
   end
 
@@ -17,7 +17,7 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
 
     respond_to do |format|
-      format.json { render json: @movie, :include => :locations }
+      format.json { render json: @movie, :include => [:locations, :directors, :genres] }
     end
   end
 
@@ -32,11 +32,12 @@ class MoviesController < ApplicationController
 
   # POST /movies.json
   def create
-    @movie = Movie.new(params[:movie].select {|k,v| k == "imdb_id"})
+    @movie = Movie.where(params[:movie].select {|k,v| k == "imdb_id"}).first_or_create
+    @movie.update_attributes(params[:movie].select {|k,v| k == "imdb_id"})
 
     respond_to do |format|
       if @movie.save
-        format.json { render json: @movie, :include => :locations, status: :created, location: @movie, notice: 'Movie was successfully created.' }
+        format.json { render json: @movie, :include => [:locations, :directors, :genres], status: :created, location: @movie, notice: 'Movie was successfully created.' }
       else
         format.json { render json: @movie.errors, status: :unprocessable_entity }
       end
@@ -48,7 +49,7 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
 
     respond_to do |format|
-      if @movie.update_attributes(params[:movie])
+      if @movie.update_attributes(params[:movie].select {|k,v| k == "imdb_id"})
         format.json { head :no_content, notice: 'Movie was successfully updated.' }
       else
         format.json { render json: @movie.errors, status: :unprocessable_entity }

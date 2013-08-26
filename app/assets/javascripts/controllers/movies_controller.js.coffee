@@ -38,3 +38,12 @@ class Shothere.Controllers.MoviesController extends Marionette.Controller
 
     @view = new Shothere.Views.Movies.ShowView(model: movie)
     $("#movies").html(@view.render().el)
+
+  update: (id) ->
+    movie = @movies.get(id)
+    movie.save(null,
+      success : (movie) =>
+        Backbone.history.navigate "/movie/#{movie.id}", true
+      error: (movie, jqXHR) =>
+        console.warn($.parseJSON(jqXHR.responseText))
+    ) if movie

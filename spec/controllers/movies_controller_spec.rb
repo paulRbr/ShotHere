@@ -24,6 +24,8 @@ describe MoviesController do
   # Movie. As you add validations to Movie, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) { { "imdb_id" => "1130884" } }
+  let(:other_valid_attributes) { { "imdb_id" => "1130884" } }
+  let(:invalid_attributes) { { "imdb_id" => "bzzzz" } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -68,9 +70,9 @@ describe MoviesController do
         assigns(:movie).should be_persisted
       end
 
-      it "return the created movie in JSON including the locations" do
+      it "return the created movie in JSON including the locations, genres and directors" do
         post :create, {:movie => valid_attributes, format: :json}, valid_session
-        response.body.should == Movie.last.to_json(include: :locations)
+        response.body.should == Movie.last.to_json(include: [:locations, :directors, :genres])
       end
     end
 
@@ -78,14 +80,14 @@ describe MoviesController do
       it "assigns a newly created but unsaved movie as @movie" do
         # Trigger the behavior that occurs when invalid params are submitted
         Movie.any_instance.stub(:save).and_return(false)
-        post :create, {:movie => { "title" => "invalid value" }, format: :json}, valid_session
+        post :create, {:movie => invalid_attributes, format: :json}, valid_session
         assigns(:movie).should be_a_new(Movie)
       end
 
       it "respond with a 422 unpreprocessable entity error" do
         # Trigger the behavior that occurs when invalid params are submitted
         Movie.any_instance.stub(:save).and_return(false)
-        post :create, {:movie => { "title" => "invalid value" }, format: :json}, valid_session
+        post :create, {:movie => invalid_attributes, format: :json}, valid_session
         response.status.should eq(422)
       end
     end
@@ -99,8 +101,8 @@ describe MoviesController do
         # specifies that the Movie created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Movie.any_instance.should_receive(:update_attributes).with({ "title" => "MyString" })
-        put :update, {:id => movie.to_param, :movie => { "title" => "MyString" }, format: :json}, valid_session
+        Movie.any_instance.should_receive(:update_attributes).with(valid_attributes)
+        put :update, {:id => movie.to_param, :movie => valid_attributes, format: :json}, valid_session
       end
 
       it "assigns the requested movie as @movie" do
@@ -121,7 +123,7 @@ describe MoviesController do
         movie = create :movie
         # Trigger the behavior that occurs when invalid params are submitted
         Movie.any_instance.stub(:save).and_return(false)
-        put :update, {:id => movie.to_param, :movie => { "title" => "invalid value" }, format: :json}, valid_session
+        put :update, {:id => movie.to_param, :movie => invalid_attributes, format: :json}, valid_session
         assigns(:movie).should eq(movie)
       end
 
@@ -129,7 +131,7 @@ describe MoviesController do
         movie = create :movie
         # Trigger the behavior that occurs when invalid params are submitted
         Movie.any_instance.stub(:save).and_return(false)
-        put :update, {:id => movie.to_param, :movie => { "title" => "invalid value" }, format: :json}, valid_session
+        put :update, {:id => movie.to_param, :movie => invalid_attributes, format: :json}, valid_session
         response.status.should eq(422)
       end
     end

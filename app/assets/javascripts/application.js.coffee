@@ -39,7 +39,6 @@ window.Shothere =
 Shothere.App = new Backbone.Marionette.Application();
 
 # Prevent default clicks on links for a pushState ready app
-
 Shothere.App.addInitializer () ->
   $(document).on 'click', 'a:not([data-bypass])', (evt) ->
     href = $(@).attr('href')

@@ -7,6 +7,7 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
+    #map
     #page
       .navbar.navbar-inverse.navbar-fixed-top
         .navbar-inner
@@ -36,12 +37,10 @@
           %p.alert= alert
         = yield
         = yield :body
-        #map
         #overlay.container
           .message= "#{I18n.t "movie.loading"} #{I18n.t "wait"}"
       #footer
         = yield :footer
-
-      :coffeescript
-        $ ->
-          Shothere.App.start({})
+    :coffeescript
+      $ ->
+        Shothere.App.start({})

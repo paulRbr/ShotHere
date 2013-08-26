@@ -11,13 +11,41 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130727135040) do
+ActiveRecord::Schema.define(:version => 20130823201733) do
+
+  create_table "directors", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "genres", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "locations", :force => true do |t|
     t.string   "address"
     t.float    "latitude"
     t.float    "longitude"
     t.string   "comment"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "movie_director_infos", :force => true do |t|
+    t.integer  "movie_id"
+    t.integer  "director_id"
+    t.string   "comment"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "movie_genre_infos", :force => true do |t|
+    t.string   "comment"
+    t.integer  "movie_id"
+    t.integer  "genre_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -33,10 +61,12 @@ ActiveRecord::Schema.define(:version => 20130727135040) do
   create_table "movies", :force => true do |t|
     t.string   "title"
     t.string   "imdb_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.string   "poster"
     t.string   "imdb_url"
+    t.integer  "year"
+    t.decimal  "rating",     :precision => 2, :scale => 0
   end
 
   create_table "users", :force => true do |t|

@@ -26,15 +26,15 @@ MapModule = (MM, App, Backbone, Marionette, $, _, L) ->
     MM.map.setView([0.0, 0.0], 2)
 
   MM.addInitializer () ->
-    Shothere.App.on "app:show/index", MM.onShowIndex
-    Shothere.App.on "app:show/movie", MM.onShowMovie
+    @listenTo Shothere.App, "app:show/index", MM.onShowIndex
+    @listenTo Shothere.App, "app:show/movie", MM.onShowMovie
 
   MM.onShowIndex = ->
     MM.map.setView([0.0, 0.0], 2)
     MM.map.addLayer MM.oneMovieLayer.clearLayers()
 
   MM.onShowMovie = (movie) ->
-    movie.on('change', MM.updateMarkers, movie)
+    @listenTo movie, 'change', MM.updateMarkers, movie
     MM.updateMarkers(movie)
 
   MM.updateMarkers = (movie) ->

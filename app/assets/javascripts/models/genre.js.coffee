@@ -1,16 +1,13 @@
-class Shothere.Models.Location extends Shothere.Models.AbsMarkerModel
-  urlRoot: '/locations'
+class Shothere.Models.Genre extends Backbone.RelationalModel
+  urlRoot: '/genres'
 
   defaults:
-    address: null
-    comment: null
-    latitude: null
-    longitude: null
+    name: null
 
-Shothere.Models.Location.setup()
+Shothere.Models.Genre.setup()
 
-class Shothere.Collections.LocationsCollection extends Backbone.Collection
-  model: Shothere.Models.Location
+class Shothere.Collections.GenresCollection extends Backbone.Collection
+  model: Shothere.Models.Genre
 
   url: (models, options) ->
-    options.movie_url + "/locations"
+    options.movie_url + "/genres"

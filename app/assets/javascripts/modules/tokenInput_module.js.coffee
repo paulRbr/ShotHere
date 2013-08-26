@@ -34,8 +34,8 @@ TokenInputModule = (TIM, App, Backbone, Marionette, $, _) ->
 
   ## Subscribed events ##
   TIM.addInitializer () ->
-    Shothere.App.on "app:show/index", TIM.clearInput
-    Shothere.App.on 'click .token-input-token', TIM.clearInput
+    @listenTo Shothere.App, "app:show/index", TIM.clearInput
+    @listenTo Shothere.App, 'click .token-input-token', TIM.clearInput
 
   TIM.clearInput = ->
     $('#searchbox').tokenInput "clear"

@@ -25,6 +25,14 @@ html {
 
   body {
   	overflow: hidden;
+    #map {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index:0;
+    }
     .navbar {
       -moz-box-shadow: 0 0 3px $black;
       -webkit-box-shadow: 0 0 3px $black;
@@ -45,15 +53,6 @@ html {
     }
     #body {
       margin-bottom: 10px;
-
-      #map {
-        width: 100%;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        z-index:-1;
-      }
       #overlay {
         display: none;
         position: absolute;

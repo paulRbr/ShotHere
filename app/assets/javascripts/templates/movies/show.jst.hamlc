@@ -9,10 +9,31 @@
   %a{:href=>@imdb_url}= @imdb_id
 
 %p
-  %b Location: 
+  %b Year: #{@year}
+
+%p
+  %b Rating: #{@rating}
+
+%p
+  %b Genres:
+  %ul
+    - for genre in @genres
+      %li
+        = genre.name
+
+%p
+  %b Directors:
+  %ul
+    - for director in @directors
+      %li
+        = director.name
+
+%p
+  %b Locations:
   %ul 
     - for location in @locations
       %li 
         = location.address
 
 %a{:href=>"/index"} Back
+%a{:href=> "/movie/#{@id}/update"} Update

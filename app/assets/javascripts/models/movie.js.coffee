@@ -10,6 +10,9 @@ class Shothere.Models.Movie extends Backbone.RelationalModel
   defaults:
     title: null
     imdb_id: null
+    year: null
+    rating: null
+    poster: null
 
   relations: 
     [
@@ -19,10 +22,29 @@ class Shothere.Models.Movie extends Backbone.RelationalModel
       includeInJSON: true
       autoFetch: true
       collectionType: "Shothere.Collections.LocationsCollection"
-      reverseRelation: {
-        type: Backbone.HasOne,
+      reverseRelation:
+        type: Backbone.HasOne
         key: 'movie'
-      }
+    ,
+      type: Backbone.HasMany
+      key: "directors"
+      relatedModel: "Shothere.Models.Director"
+      includeInJSON: true
+      autoFetch: true
+      collectionType: "Shothere.Collections.DirectorsCollection"
+      reverseRelation:
+        type: Backbone.HasOne
+        key: 'shot'
+    ,
+      type: Backbone.HasMany
+      key: "genres"
+      relatedModel: "Shothere.Models.Genre"
+      includeInJSON: true
+      autoFetch: true
+      collectionType: "Shothere.Collections.GenresCollection"
+      reverseRelation:
+        type: Backbone.HasOne
+        key: 'movie'
     ]
 
 Shothere.Models.Movie.setup()

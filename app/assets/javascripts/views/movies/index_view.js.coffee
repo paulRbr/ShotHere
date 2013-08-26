@@ -4,7 +4,8 @@ class Shothere.Views.Movies.IndexView extends Backbone.View
   template: JST["templates/movies/index"]
 
   initialize: () ->
-    @options.movies.on('reset', @addAll)
+    @listenTo @options.movies, 'reset', @addAll
+    $('#movies').hover (-> $(@).fadeSlideLeft()), (-> $(@).fadeSlideRight 380)
 
   addAll: () =>
     @options.movies.each(@addOne)

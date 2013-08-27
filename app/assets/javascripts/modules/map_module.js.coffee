@@ -39,7 +39,10 @@ MapModule = (MM, App, Backbone, Marionette, $, _, L) ->
 
   MM.updateMarkers = (movie) ->
     MM.oneMovieLayer.clearLayers()
-    markers = movie.markers()
+    if movie.get("locations").length > 0
+      markers = L.featureGroup movie.get("locations").map((location) ->
+        location.markerWithPopup(JST["templates/movies/popup"](movie.toJSON())).openPopup()
+      )
     if markers
       MM.oneMovieLayer.addLayer markers
       MM.map.addLayer MM.oneMovieLayer unless MM.map.hasLayer MM.oneMovieLayer

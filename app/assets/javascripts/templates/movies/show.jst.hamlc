@@ -6,7 +6,7 @@
 
 %p
   %b Imdb: 
-  %a{:href=>@imdb_url}= @imdb_id
+  %a{:href=>@imdb_url, :data-bypass => true, :target => "_blank"}= @imdb_id
 
 %p
   %b Year: #{@year}

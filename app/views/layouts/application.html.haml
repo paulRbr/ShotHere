@@ -8,27 +8,10 @@
     = csrf_meta_tags
   %body
     #map
+    #search.pull-right
+      %i.icon-search.absolute-left.middle
+      %input#searchbox{:type => 'text', :name => 'search'}
     #page
-      .navbar.navbar-inverse.navbar-fixed-top
-        .navbar-inner
-          .container
-            %button.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse", :type => "button"}
-              %span.icon-bar
-              %span.icon-bar
-              %span.icon-bar
-            %a.brand{:href => "#"} Shothere
-            .nav-collapse.collapse
-              %ul.nav
-                %li.active
-                  %a{:href => "#/"} Home
-                %li
-                  %a{:href => "#/about"} About
-                %li
-                  %a{:href => "#/contact"} Contact
-              #search.pull-right
-                %i.icon-search.absolute-left.middle
-                %input#searchbox{:type => 'text', :name => 'search'}
-            / /.nav-collapse
       #body
         / Devise flash msgs
         - unless alert.nil?
@@ -37,10 +20,10 @@
           %p.alert= alert
         = yield
         = yield :body
-        #overlay.container
-          .message= "#{I18n.t "movie.loading"} #{I18n.t "wait"}"
       #footer
         = yield :footer
+    #overlay.container
+      .message= "#{I18n.t "movie.loading"} #{I18n.t "wait"}"
     :coffeescript
       $ ->
         Shothere.App.start({})

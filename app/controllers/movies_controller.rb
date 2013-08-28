@@ -2,21 +2,28 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.all
+    @movies = Movie.order(:rating).take(100)
 
-    set_meta_tags :title => 'The awesome rails app',
-                  :viewport => "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    respond_to do |format|
-      format.html # index.html.erb
+  respond_to do |format|
+      format.html # index.html.haml
       format.json { render json: @movies, :include => [:locations, :directors, :genres] }
     end
   end
+
+  # GET /
+  def empty_index
+    respond_to do |format|
+      format.html { render :index } # index.html.haml
+    end
+  end
+
 
   # GET /movies/1.json
   def show
     @movie = Movie.find(params[:id])
 
     respond_to do |format|
+      format.html { render :index }
       format.json { render json: @movie, :include => [:locations, :directors, :genres] }
     end
   end

@@ -22,6 +22,14 @@ MapModule = (MM, App, Backbone, Marionette, $, _, L) ->
     MM.oneMovieLayer = L.layerGroup()
     defaultLayers.push MM.oneMovieLayer
 
+    MM.allMovieLayer = L.layerGroup()
+    defaultLayers.push MM.allMovieLayer
+    if options.movies
+      options.movies.map((movie) ->
+        markers = MM.getMarkersOf movie
+        MM.allMovieLayer.addLayer markers if markers
+      )
+
     MM.map = L.map 'map', {worldCopyJump: true, layers: defaultLayers}  # need a #map container here
     MM.map.setView([0.0, 0.0], 2)
 
@@ -32,21 +40,27 @@ MapModule = (MM, App, Backbone, Marionette, $, _, L) ->
   MM.onShowIndex = ->
     MM.map.setView([0.0, 0.0], 2)
     MM.map.addLayer MM.oneMovieLayer.clearLayers()
+    MM.map.addLayer MM.allMovieLayer
 
   MM.onShowMovie = (movie) ->
+    MM.map.removeLayer MM.allMovieLayer if MM.map.hasLayer MM.allMovieLayer
     @listenTo movie, 'change', MM.updateMarkers, movie
     MM.updateMarkers(movie)
 
   MM.updateMarkers = (movie) ->
     MM.oneMovieLayer.clearLayers()
-    if movie.get("locations").length > 0
-      markers = L.featureGroup movie.get("locations").map((location) ->
-        location.markerWithPopup(JST["templates/movies/popup"](movie.toJSON())).openPopup()
-      )
+    markers = MM.getMarkersOf movie
     if markers
       MM.oneMovieLayer.addLayer markers
       MM.map.addLayer MM.oneMovieLayer unless MM.map.hasLayer MM.oneMovieLayer
       MM.map.setView(markers.getBounds().getCenter(), 3)
+
+  MM.getMarkersOf = (movie) ->
+    if movie.get("locations").length > 0
+      markers = L.featureGroup movie.get("locations").map((location) ->
+        location.markerWithPopup(JST["templates/movies/popup"](movie.toJSON())).openPopup()
+      )
+    markers
 
 Shothere.App.module "MapModule", MapModule, L
 

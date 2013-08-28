@@ -1,2 +1,2 @@
 %td
-  %a{:href=> "/movie/#{@id}" }= @title
+  %a{:href=> "/movies/#{@id}" }= @title

@@ -26,7 +26,7 @@ class Shothere.Controllers.MoviesController extends Marionette.Controller
           movie = new Shothere.Models.Movie(item)
           @movies.add movie
 
-    Backbone.history.navigate "/movie/#{movie.id}", true
+    Backbone.history.navigate "/movies/#{movie.id}", true
 
   show: (id) ->
     movie = @movies.get(id)
@@ -43,7 +43,7 @@ class Shothere.Controllers.MoviesController extends Marionette.Controller
     movie = @movies.get(id)
     movie.save(null,
       success : (movie) =>
-        Backbone.history.navigate "/movie/#{movie.id}", true
+        Backbone.history.navigate "/movies/#{movie.id}", true
       error: (movie, jqXHR) =>
         console.warn($.parseJSON(jqXHR.responseText))
     ) if movie

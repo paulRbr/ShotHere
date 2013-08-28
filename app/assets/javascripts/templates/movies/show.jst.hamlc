@@ -1,4 +1,9 @@
 %p
+  %a{:href=>"/index"} Back
+
+  %a{:href=> "/movies/#{@id}/update"} Update
+
+%p
   %b Title: #{@title}
 
 %p
@@ -34,6 +39,3 @@
     - for location in @locations
       %li 
         = location.address
-
-%a{:href=>"/index"} Back
-%a{:href=> "/movie/#{@id}/update"} Update

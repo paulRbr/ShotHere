@@ -13,14 +13,14 @@ TokenInputModule = (TIM, App, Backbone, Marionette, $, _) ->
       minChars: 3,
       tokenLimit: 1,
       onAdd: (item) =>
-        Backbone.history.navigate "/movie/#{item.id}", true if item.id
+        Backbone.history.navigate "/movies/#{item.id}", true if item.id
         if item.imdb_id
           $("#overlay").show()
           model = new options.movies.model({imdb_id:item.imdb_id})
           options.movies.create(model.toJSON(),
             success: (movie) =>
               $("#overlay").hide()
-              Backbone.history.navigate "/movie/#{movie.id}", true
+              Backbone.history.navigate "/movies/#{movie.id}", true
 
             error: (movie, jqXHR) =>
               $("#overlay").hide()

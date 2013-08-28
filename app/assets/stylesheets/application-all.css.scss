@@ -11,6 +11,8 @@
  *= require_self
  *= require token-input
  *= require leaflet
+ *= require leaflet.markercluster
+ *= require leaflet.markercluster.default
  *= require twitter/bootstrap
  *= require twitter/bootstrap-responsive
  *= require_tree ./all

@@ -119,6 +119,8 @@ GEM
     json (1.8.0)
     jwt (0.1.8)
       multi_json (>= 1.5)
+    leaflet-markercluster-rails (0.6.0)
+      railties (>= 3.1)
     leaflet-rails (0.6.2)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -256,6 +258,7 @@ DEPENDENCIES
   haml_coffee_assets
   jquery-rails
   jquery-tokeninput-rails
+  leaflet-markercluster-rails
   leaflet-rails
   marionette-rails
   meta-tags

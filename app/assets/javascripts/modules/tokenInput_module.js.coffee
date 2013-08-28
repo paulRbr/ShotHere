@@ -19,26 +19,25 @@ TokenInputModule = (TIM, App, Backbone, Marionette, $, _) ->
           model = new options.movies.model({imdb_id:item.imdb_id})
           options.movies.create(model.toJSON(),
             success: (movie) =>
-              $("#overlay").hide()
               Backbone.history.navigate "/movies/#{movie.id}", true
-
             error: (movie, jqXHR) =>
-              $("#overlay").hide()
               Backbone.history.navigate "/imdb/#{movie.get('imdb_id').match(/[0-9]+/)}", true if movie.get('imdb_id')
               console.debug $.parseJSON(jqXHR.responseText)
-
+            complete: =>
+              $("#overlay").hide()
             wait: true
           )
-      onDelete: (item) => Backbone.history.navigate "/", true
+        TIM.clearInput()
     )
 
   ## Subscribed events ##
   TIM.addInitializer () ->
     @listenTo Shothere.App, "app:show/index", TIM.clearInput
-    @listenTo Shothere.App, 'click .token-input-token', TIM.clearInput
 
   TIM.clearInput = ->
     $('#searchbox').tokenInput "clear"
+
+  TIM
 
 Shothere.App.module "TokenInputModule", TokenInputModule
 

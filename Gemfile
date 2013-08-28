@@ -32,6 +32,7 @@ group :assets do
   gem 'jquery-rails'
   gem 'jquery-tokeninput-rails'
   gem 'leaflet-rails'
+  gem 'leaflet-markercluster-rails'
 
   # Bootstrap
   gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails', :git => 'https://github.com/anjlab/bootstrap-rails.git',:branch => 'v2.3.0.0'

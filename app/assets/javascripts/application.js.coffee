@@ -15,6 +15,7 @@
 #= require jquery.tokeninput
 #= require twitter/bootstrap
 #= require leaflet
+#= require leaflet.markercluster
 #= require hamlcoffee
 #= require backbone-rails
 #= require backbone-relational

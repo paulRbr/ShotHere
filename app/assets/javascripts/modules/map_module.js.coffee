@@ -24,7 +24,7 @@ MapModule = (MM, App, Backbone, Marionette, $, _, L) ->
 
     MM.allMovieLayer = L.layerGroup()
     defaultLayers.push MM.allMovieLayer
-    if options.movies
+    if options && options.movies
       options.movies.map((movie) ->
         markers = MM.getMarkersOf movie
         MM.allMovieLayer.addLayer markers if markers

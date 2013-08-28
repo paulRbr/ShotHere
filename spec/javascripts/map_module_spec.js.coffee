@@ -34,17 +34,18 @@ describe "The Map Module", ->
         @model = jasmine.createSpyObj("movie", ["markers"])
         @getCenter = jasmine.createSpy("getCenter").andReturn [48.32, 2.23]
         @getBounds = jasmine.createSpy("getBounds").andReturn {getCenter: @getCenter}
-        @model.markers.andReturn {getBounds: @getBounds}
+        spyOn(@mapModule, "getMarkersOf").andReturn {getBounds: @getBounds}
+        @markers = @mapModule.getMarkersOf(@model)
         @mapModule.updateMarkers(@model)
       it "should clear layers contained in the #oneMovie layer group", ->
         expect(@mapModule.oneMovieLayer.clearLayers).toHaveBeenCalled()
       it "retrieve the markers from the model", ->
-        expect(@model.markers).toHaveBeenCalled()
+        expect(@mapModule.getMarkersOf).toHaveBeenCalledWith(@model)
       it "and add them to the #oneMovie layer group", ->
-        expect(@mapModule.oneMovieLayer.addLayer).toHaveBeenCalledWith(@model.markers())
+        expect(@mapModule.oneMovieLayer.addLayer).toHaveBeenCalledWith(@markers)
       it "should check that the #oneMovie layer group is visible", ->
         expect(@mapModule.map.hasLayer).toHaveBeenCalledWith(@mapModule.oneMovieLayer)
         expect(@mapModule.map.addLayer).toHaveBeenCalled()
       it "and finally center the view on the markers", ->
         expect(@mapModule.map.setView).toHaveBeenCalledWith([48.32, 2.23] , jasmine.any(Number))
-        expect(@model.markers().getBounds().getCenter).toHaveBeenCalled()
+        expect(@markers.getBounds().getCenter).toHaveBeenCalled()

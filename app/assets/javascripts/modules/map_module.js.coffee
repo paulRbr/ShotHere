@@ -25,10 +25,8 @@ MapModule = (MM, App, Backbone, Marionette, $, _, L) ->
     MM.allMovieLayer = new L.MarkerClusterGroup()
     defaultLayers.push MM.allMovieLayer
     if options && options.movies
-      options.movies.map((movie) ->
-        markers = MM.getMarkersOf movie
-        MM.allMovieLayer.addLayer markers if markers
-      )
+      @movies = options.movies
+      @movies.map (movie) -> MM.addMarkers movie
 
     MM.map = L.map 'map', {worldCopyJump: true, layers: defaultLayers}  # need a #map container here
     MM.map.setView([0.0, 0.0], 2)
@@ -36,6 +34,11 @@ MapModule = (MM, App, Backbone, Marionette, $, _, L) ->
   MM.addInitializer () ->
     @listenTo Shothere.App, "app:show/index", MM.onShowIndex
     @listenTo Shothere.App, "app:show/movie", MM.onShowMovie
+    @listenTo @movies, "add", MM.addMarkers if @movies
+
+  MM.addMarkers = (movie) ->
+    markers = MM.getMarkersOf movie
+    MM.allMovieLayer.addLayer markers if markers
 
   MM.onShowIndex = ->
     MM.map.setView([0.0, 0.0], 2)

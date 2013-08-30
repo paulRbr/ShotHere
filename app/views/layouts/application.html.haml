@@ -6,9 +6,11 @@
     = display_meta_tags :site => "ShotHere"
     = stylesheet_link_tag    "application-all", :media => "all"
     = stylesheet_link_tag    "application-mobile", :media => "(max-device-width: 1279px)"
-    = javascript_include_tag "application"
+    = requirejs_include_tag ""
     = csrf_meta_tags
   %body
+    #starting
+      .message Loading...
     #map
     #search.pull-right
       %i.icon-search.absolute-left.middle
@@ -27,5 +29,6 @@
     #overlay.container
       .message= "#{I18n.t "movie.loading"} #{I18n.t "wait"}"
     :coffeescript
-      $ ->
-        Shothere.App.start {movies: #{@movies.to_json(:include => :locations).html_safe} }
+      require ['jquery', 'application'], ($) ->
+        $ ->
+          Shothere.App.start {}

@@ -16,12 +16,17 @@ describe "The global application", ->
       expect(Shothere.App).not.toBe(null)
     describe "starting", ->
       beforeEach ->
+        @fakeMoviesRsp = {responseText : '[{"movie": "1"}, {"movie": "2"}]'}
+        spyOn($, "ajax").andCallFake (params) => params.complete @fakeMoviesRsp
+        spyOn($, "parseJSON").andCallThrough()
         spyOn Backbone.history, "start"
         spyOn Shothere.Controllers, "MoviesController"
         spyOn Shothere.Routers, "MainRouter"
         Shothere.App.start({})
-      it "should create the main router with its controller and start backbone's history", ->
+
+      it "should make an ajax call to get movies to populate the app, should parse the JSON response and should create the main router with its controller and start backbone's history", ->
+        expect($.ajax).toHaveBeenCalled()
+        expect($.parseJSON).toHaveBeenCalledWith(@fakeMoviesRsp.responseText)
         expect(Backbone.history.start).toHaveBeenCalled()
         expect(Shothere.Controllers.MoviesController).toHaveBeenCalled()
         expect(Shothere.Routers.MainRouter).toHaveBeenCalledWith({controller: new Shothere.Controllers.MoviesController()})
-

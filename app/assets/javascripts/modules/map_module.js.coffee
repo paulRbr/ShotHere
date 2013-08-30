@@ -34,7 +34,7 @@ MapModule = (MM, App, Backbone, Marionette, $, _, L) ->
   MM.addInitializer () ->
     @listenTo Shothere.App, "app:show/index", MM.onShowIndex
     @listenTo Shothere.App, "app:show/movie", MM.onShowMovie
-    @listenTo @movies, "add", MM.addMarkers
+    @listenTo @movies, "add", MM.addMarkers if @movies
 
   MM.addMarkers = (movie) ->
     markers = MM.getMarkersOf movie

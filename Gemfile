@@ -26,6 +26,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'haml_coffee_assets'
 
+  gem 'requirejs-rails'
   gem 'backbone-rails', :git => 'https://github.com/popox/backbone-rails.git',:branch => 'v1.1'
   gem 'backbone-relational-rails'
   gem 'marionette-rails'

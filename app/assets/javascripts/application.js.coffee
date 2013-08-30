@@ -50,6 +50,13 @@ Shothere.App.addInitializer () ->
 
 # Create main router and start history
 Shothere.App.addInitializer (options) ->
-  moviesController = new Shothere.Controllers.MoviesController options
-  new Shothere.Routers.MainRouter {controller: moviesController}
-  Backbone.history.start {pushState: true}
+  $.ajax
+    url: "/movies.json"
+    async: false
+    complete: (jqXHR) =>
+      resp = $.parseJSON(jqXHR.responseText)
+      _.extend options, movies: resp
+      moviesController = new Shothere.Controllers.MoviesController options
+      new Shothere.Routers.MainRouter {controller: moviesController}
+      Backbone.history.start {pushState: true}
+      $("#starting").fadeOut(1000)

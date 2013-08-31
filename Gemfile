@@ -43,7 +43,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'requirejs-rails'
+gem 'requirejs-rails', :git => 'https://github.com/popox/requirejs-rails.git',:branch => 'expe'
 
 # Move to Haml templating framework instead of erb
 gem 'haml-rails'

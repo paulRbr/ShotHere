@@ -26,7 +26,6 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'haml_coffee_assets'
 
-  gem 'requirejs-rails'
   gem 'backbone-rails', :git => 'https://github.com/popox/backbone-rails.git',:branch => 'v1.1'
   gem 'backbone-relational-rails'
   gem 'marionette-rails'
@@ -43,6 +42,8 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
+
+gem 'requirejs-rails', :git => 'https://github.com/popox/requirejs-rails.git',:branch => 'expe'
 
 # Move to Haml templating framework instead of erb
 gem 'haml-rails'

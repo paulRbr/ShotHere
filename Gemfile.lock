@@ -15,6 +15,14 @@ GIT
     backbone-rails (1.0.0.1)
       rails (>= 3.0.0)
 
+GIT
+  remote: https://github.com/popox/requirejs-rails.git
+  revision: 34d0306c48a509296beb865eaee0958007aa9309
+  branch: expe
+  specs:
+    requirejs-rails (0.9.1)
+      railties (>= 3.1.1, < 4.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -195,8 +203,6 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     redis (3.0.4)
-    requirejs-rails (0.9.1)
-      railties (>= 3.1.1, < 3.3)
     rspec-core (2.13.1)
     rspec-expectations (2.13.0)
       diff-lcs (>= 1.1.3, < 2.0)
@@ -271,7 +277,7 @@ DEPENDENCIES
   omniauth-twitter
   rails (= 3.2.13)
   redis
-  requirejs-rails
+  requirejs-rails!
   rspec-rails
   sass-rails (~> 3.2.3)
   selenium-webdriver

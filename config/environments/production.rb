@@ -21,12 +21,9 @@ Shothere::Application.configure do
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   config.assets.precompile += %w(
-    application.js.coffee
-    start.js.coffee
+    start.js
     application-all.css
     application-mobile.css
-  	application-all.css.scss
-    application-mobile.css.scss
   )
 
   # Generate digests for assets URLs

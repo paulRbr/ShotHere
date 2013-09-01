@@ -1,4 +1,9 @@
 shim:
   'application':
-    deps: ['jquery']
-    export: 'ShothereApp'
+    deps: []
+    exports: 'TheApp'
+modules:
+  - name: 'application'
+  - name: 'start'
+    exclude: ['application']
+priority: ['application']

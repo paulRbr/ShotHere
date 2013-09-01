@@ -1,3 +1,2 @@
-require ['jquery', 'application'], ($) ->
-  $ ->
-    Shothere.App.start {}
+require ['application'], () ->
+  Shothere.App.start {}

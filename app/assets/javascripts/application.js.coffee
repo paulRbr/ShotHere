@@ -13,6 +13,7 @@
 #= require jquery
 #= require jquery_ujs
 #= require jquery.tokeninput
+#= require jquery.effects
 #= require twitter/bootstrap
 #= require leaflet
 #= require leaflet.markercluster
@@ -26,7 +27,7 @@
 #= require_tree ./views
 #= require_tree ./routers
 #= require_tree ./modules
-#= require_tree .
+#= require_tree ./controllers
 
 # Define namespaces for the app
 window.Shothere =
@@ -52,7 +53,6 @@ Shothere.App.addInitializer () ->
 Shothere.App.addInitializer (options) ->
   $.ajax
     url: "/movies.json"
-    async: false
     complete: (jqXHR) =>
       resp = $.parseJSON(jqXHR.responseText)
       _.extend options, movies: resp

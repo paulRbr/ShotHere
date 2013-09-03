@@ -5,7 +5,6 @@ class Shothere.Views.Movies.IndexView extends Backbone.View
 
   initialize: () ->
     @listenTo @options.movies, 'reset', @addAll
-    $('#movies').hover (-> $(@).fadeSlideLeft()), (-> $(@).fadeSlideRight 380)
 
   addAll: () =>
     @options.movies.each(@addOne)

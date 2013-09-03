@@ -13,7 +13,6 @@
 #= require jquery
 #= require jquery_ujs
 #= require jquery.tokeninput
-#= require jquery.effects
 #= require twitter/bootstrap
 #= require leaflet
 #= require leaflet.markercluster
@@ -42,10 +41,15 @@ Shothere.App = new Backbone.Marionette.Application();
 
 # Prevent default clicks on links for a pushState ready app
 Shothere.App.addInitializer () ->
+  $(document).on 'click', '#sidebarLink', (evt) ->
+    div = $(@).attr('data')
+    $(@).toggleClass("active")
+    $(div).parent().toggleClass("active-l")
+    $(div).toggleClass("active-l")
   $(document).on 'click', 'a:not([data-bypass])', (evt) ->
     href = $(@).attr('href')
     protocol = @.protocol + '//'
-    if (href.slice(protocol.length) != protocol)
+    if (href && href.slice(protocol.length) != protocol)
       evt.preventDefault()
       Backbone.history.navigate(href, true)
 
@@ -59,4 +63,4 @@ Shothere.App.addInitializer (options) ->
       moviesController = new Shothere.Controllers.MoviesController options
       new Shothere.Routers.MainRouter {controller: moviesController}
       Backbone.history.start {pushState: true}
-      $("#starting").fadeOut(1000)
+      $("#overlay").fadeOut(1000)

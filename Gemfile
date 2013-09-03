@@ -34,11 +34,11 @@ group :assets do
   gem 'leaflet-rails'
   gem 'leaflet-markercluster-rails'
 
+  # Purecss
+  gem 'purecss-rails', :git => 'https://github.com/popox/purecss-rails.git',:tag => 'global'
+
   # Bootstrap
   gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails', :git => 'https://github.com/anjlab/bootstrap-rails.git',:branch => 'v2.3.0.0'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
 end

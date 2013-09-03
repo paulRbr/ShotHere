@@ -22,8 +22,6 @@ Shothere::Application.configure do
   config.assets.precompile += %w(
     application-all.css
     application-mobile.css
-  	application-all.css.scss
-    application-mobile.css.scss
   )
 
   # Generate digests for assets URLs

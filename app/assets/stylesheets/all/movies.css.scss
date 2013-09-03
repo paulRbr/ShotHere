@@ -1,22 +1,3 @@
 // Place all the styles related to the Movies controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-$white: #fff;
-$black: #000;
-
-#movies {
-  z-index: 1;
-  margin: 0 auto;
-  padding: 20px;
-  padding-top: 50px;
-  background-color: $white;
-  -moz-box-shadow: 0 0 3px $black;
-  -webkit-box-shadow: 0 0 3px $black;
-  box-shadow: 0 0 3px $black;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: -380px;
-  width: 400px;
-  overflow-y: scroll;
-}

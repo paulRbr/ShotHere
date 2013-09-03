@@ -13,7 +13,6 @@
 #= require jquery
 #= require jquery_ujs
 #= require jquery.tokeninput
-#= require jquery.effects
 #= require twitter/bootstrap
 #= require leaflet
 #= require leaflet.markercluster
@@ -48,6 +47,7 @@ Shothere.App.addInitializer () ->
     if (href.slice(protocol.length) != protocol)
       evt.preventDefault()
       Backbone.history.navigate(href, true)
+  $(document).on 'click',
 
 # Create main router and start history
 Shothere.App.addInitializer (options) ->
@@ -59,4 +59,4 @@ Shothere.App.addInitializer (options) ->
       moviesController = new Shothere.Controllers.MoviesController options
       new Shothere.Routers.MainRouter {controller: moviesController}
       Backbone.history.start {pushState: true}
-      $("#starting").fadeOut(1000)
+      $("#overlay").fadeOut(1000)

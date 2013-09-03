@@ -8,101 +8,141 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
  *= require token-input
  *= require leaflet
  *= require leaflet.markercluster
  *= require leaflet.markercluster.default
  *= require twitter/bootstrap
- *= require twitter/bootstrap-responsive
  *= require_tree ./all
+ *= require_self
+ *= require twitter/bootstrap-responsive
+ *= require application-responsive
  */
 $light_gray: #dcdcdc;
 $white: #fff;
 $black: #000;
 $transparent_50black: rgba(0,0,0,0.5);
 
+$sidebar-width: 300px;
+$menu-width: 150px;
+
+@import url(http://fonts.googleapis.com/css?family=Lato:400,300,700);
 html {
   height: 100%;
   background-color: transparent;
-  body {
-    padding: 0;
-    margin: 0;
-    height: 100%;
-  	overflow: hidden;
-    #search {
-      z-index: 100;
-      position: absolute;
-      top: 10px;
-      right: 20px;
+}
+body {
+  padding: 0;
+  padding-top: 40px; // For top fixed-navbar
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Lato',sans-serif;
+  font-weight: 400;
+  h1, h2, .lato-light {
+    font-family: 'Lato',sans-serif;
+    font-weight: 300;
+  }
+}
+.absolute-left {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+}
+#search {
+  z-index: 100;
+  position: relative;
+  top: 0;
+  right: 0;
+  left: 0;
 
-      ul.token-input-list {
-        padding-left: 30px;
-        width: 300px;
-      }
-    }
-    #page {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      right: 0;
-    }
-    #body {
-      margin-bottom: 10px;
-    }
-    #overlay {
-      display: none;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-      background-color: $transparent_50black;
-      z-index: 1000;
-    }
-    .absolute-left {
-      position: absolute;
-      left: 10px;
-      top: 10px;
-    }
-    .message {
-      background-color: $white;
-      border: 1px solid #E5E5E5;
-      border-radius: 5px 5px 5px 5px;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-      margin: 0 auto 20px;
-      max-width: 300px;
-      padding: 19px 29px 29px;
-      position: relative;
-      top: 35%;
-    }
-    #starting {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-      background-color: $transparent_50black;
-      z-index: 1001;
-    }
-    #map {
-      height: 100%;
-    }
-    // Overwrite Leaflet defaults
-    .leaflet-top {
-      .leaflet-control {
-        margin-top: 50px;
-      }
-    }
+  ul.token-input-list {
+    width: 100%;
+  }
+}
+#layout, #sidebar, #menu, .pure-menu-link {
+  transition: all 0.2s ease-out 0s;
+}
+#sidebar {
+  bottom: 0;
+  left: $sidebar-width;
+  margin-left: -$sidebar-width;
+  overflow-y: auto;
+  position: fixed;
+  top: 40px; // For top fixed-navbar
+  width: $sidebar-width;
+  z-index: 101;
+}
+#overlay {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $transparent_50black;
+  z-index: 1000;
+}
+.message {
+  background-color: $white;
+  border: 1px solid #E5E5E5;
+  border-radius: 5px 5px 5px 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  margin: 0 auto 20px;
+  max-width: 300px;
+  padding: 19px 29px 29px;
+  position: relative;
+  top: 35%;
+}
+#layout {
+  height: 100%;
+  left: 0;
+  // For sidebar
+  padding-left: $sidebar-width;
 
-    .leaflet-right {
-      .leaflet-control {
-        margin-right: 80px;
-      }
-    }
+}
+#main {
+  height: 100%;
+}
+#map {
+  height: 100%;
+}
+// Overwrite Leaflet defaults
+.leaflet-top {
+  .leaflet-control {
+    margin-top: 50px;
+  }
+}
+
+.leaflet-right {
+  .leaflet-control {
+    margin-right: 80px;
+  }
+}
+@media (max-width: 870px) {
+  #layout {
+    margin: -20px -20px 0;
+    padding-left: 0; // for sidebar
+    padding-right: 0; // for menu
+    position: relative;
+  }
+  #layout.active-l {
+    left: $sidebar-width;
+    position: relative;
+  }
+  #layout.active-l #sidebar {
+    left: $sidebar-width;
+    width: $sidebar-width;
+  }
+  #sidebar {
+    top: 50px;
+    left: 0;
+    background: white;
+  }
+  #main {
+    position: fixed;
+    top: 50px;
   }
 }

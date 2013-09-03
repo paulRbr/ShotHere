@@ -8,23 +8,33 @@
     = stylesheet_link_tag    "application-mobile", :media => "(max-device-width: 1279px)"
     = requirejs_include_tag "start"
     = csrf_meta_tags
-  %body
-    #starting
-      .message Loading...
-    #map
-    #search.pull-right
-      %i.icon-search.absolute-left.middle
-      %input#searchbox{:type => 'text', :name => 'search'}
-    #page
-      #body
-        / Devise flash msgs
-        - unless alert.nil?
-          %p.notice= notice
-        - unless alert.nil?
-          %p.alert= alert
-        = yield
-        = yield :body
-      #footer
-        = yield :footer
+  %body.pure-skin-shothere
+    .navbar.navbar-inverse.navbar-fixed-top
+      .navbar-inner
+        .container-fluid
+          %button.btn.btn-navbar.collapsed{"data-target" => ".nav-collapse", "data-toggle" => "collapse", :type=>"button"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.brand{:href=>"/"} ShotHere
+          .nav-collapse.collapse
+            %ul.nav
+              %li.active
+                %a{:href => "/"} Home
+              %li.active
+                %a{:href => "/about"} About
+              %li.active
+                %a{:href => "/about"} Contact
+    #layout.pure-g-r
+      #main.pure-u-1
+        #map
+      %a#sidebarLink.pure-menu-link.top.left{:href => "/", :data => "#sidebar"}
+        %span
+      #sidebar.pure-u
+        #search.l-box
+          %i.icon-search.absolute-left
+          %input#searchbox{:type => 'text', :name => 'search'}
+        .l-box
+          = yield
     #overlay.container
-      .message= "#{I18n.t "movie.loading"} #{I18n.t "wait"}"
+      .message= "#{I18n.t "wait"}"

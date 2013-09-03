@@ -16,6 +16,14 @@ GIT
       rails (>= 3.0.0)
 
 GIT
+  remote: https://github.com/popox/purecss-rails.git
+  revision: d0be7139edbcc61f1f15347ba304f53f5f563d0c
+  tag: global
+  specs:
+    purecss-rails (0.2.1)
+      railties (>= 3.2.6, < 5)
+
+GIT
   remote: https://github.com/popox/requirejs-rails.git
   revision: 34d0306c48a509296beb865eaee0958007aa9309
   branch: expe
@@ -275,6 +283,7 @@ DEPENDENCIES
   omniauth-github
   omniauth-google-oauth2
   omniauth-twitter
+  purecss-rails!
   rails (= 3.2.13)
   redis
   requirejs-rails!

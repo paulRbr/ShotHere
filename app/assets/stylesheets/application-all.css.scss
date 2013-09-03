@@ -60,7 +60,7 @@ body {
     width: 100%;
   }
 }
-#layout, #sidebar, #menu, .pure-menu-link {
+#layout, #sidebar, #menu {
   transition: all 0.2s ease-out 0s;
 }
 #sidebar {
@@ -144,5 +144,14 @@ body {
   #main {
     position: fixed;
     top: 50px;
+  }
+  .pure-menu-link {
+    display: block;
+    left: 0;
+    top: 50px;
+    position: fixed;
+  }
+  #layout.active-l .pure-menu-link {
+    left: $sidebar-width;
   }
 }

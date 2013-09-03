@@ -41,13 +41,17 @@ Shothere.App = new Backbone.Marionette.Application();
 
 # Prevent default clicks on links for a pushState ready app
 Shothere.App.addInitializer () ->
+  $(document).on 'click', '#sidebarLink', (evt) ->
+    div = $(@).attr('data')
+    $(@).toggleClass("active")
+    $(div).parent().toggleClass("active-l")
+    $(div).toggleClass("active-l")
   $(document).on 'click', 'a:not([data-bypass])', (evt) ->
     href = $(@).attr('href')
     protocol = @.protocol + '//'
-    if (href.slice(protocol.length) != protocol)
+    if (href && href.slice(protocol.length) != protocol)
       evt.preventDefault()
       Backbone.history.navigate(href, true)
-  $(document).on 'click',
 
 # Create main router and start history
 Shothere.App.addInitializer (options) ->

@@ -128,11 +128,11 @@ body {
     padding-right: 0; // for menu
     position: relative;
   }
-  #layout.active-l {
+  #layout.active {
     left: $sidebar-width;
     position: relative;
   }
-  #layout.active-l #sidebar {
+  #layout.active #sidebar {
     left: $sidebar-width;
     width: $sidebar-width;
   }
@@ -151,7 +151,7 @@ body {
     top: 50px;
     position: fixed;
   }
-  #layout.active-l .pure-menu-link {
+  #layout.active .pure-menu-link {
     left: $sidebar-width;
   }
 }

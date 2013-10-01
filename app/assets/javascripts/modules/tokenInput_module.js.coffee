@@ -12,6 +12,12 @@ TokenInputModule = (TIM, App, Backbone, Marionette, $, _) ->
       propertyToSearch: "title",
       minChars: 3,
       tokenLimit: 1,
+      resultsFormatter: (item) =>
+        res = "<li>"
+        res += "<img src='" + item.poster + "' title='" + item.title + "' height='25px' width='40px' /><div style='display: inline-block; padding-left: 10px;'>" if item.poster
+        res += "<div>" + item.title + "</div></li>"
+        res
+
       onAdd: (item) =>
         Backbone.history.navigate "/movies/#{item.id}", true if item.id
         if item.imdb_id

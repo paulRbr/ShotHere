@@ -28,7 +28,8 @@ MapModule = (MM, App, Backbone, Marionette, $, _, L) ->
       @movies = options.movies
       @movies.map (movie) -> MM.addMarkers movie
 
-    MM.map = L.map 'map', {worldCopyJump: true, layers: defaultLayers}  # need a #map container here
+    MM.map = L.map 'map', {worldCopyJump: true, layers: defaultLayers, zoomControl: false}  # need a #map container here
+    MM.map.addControl(new L.control.zoom(position: "bottomleft"))
     MM.map.setView([0.0, 0.0], 2)
 
   MM.addInitializer () ->

@@ -41,11 +41,12 @@ Shothere.App = new Backbone.Marionette.Application();
 
 # Prevent default clicks on links for a pushState ready app
 Shothere.App.addInitializer () ->
-  $(document).on 'click', '#sidebarLink', (evt) ->
+  $(document).on 'click', '.sidebarLink', (evt) ->
     div = $(@).attr('data')
+    $(@).parent().toggleClass("active")
     $(@).toggleClass("active")
-    $(div).parent().toggleClass("active-l")
-    $(div).toggleClass("active-l")
+    $(div).parent().toggleClass("active")
+    $(div).toggleClass("active")
   $(document).on 'click', 'a:not([data-bypass])', (evt) ->
     href = $(@).attr('href')
     protocol = @.protocol + '//'

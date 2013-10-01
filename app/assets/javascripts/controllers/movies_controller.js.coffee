@@ -1,6 +1,5 @@
 class Shothere.Controllers.MoviesController extends Marionette.Controller
   initialize: (options) ->
-    $('#movies').hover (-> $(@).fadeSlideLeft()), (-> $(@).fadeSlideRight 380)
     @movies = new Shothere.Collections.MoviesCollection()
     @movies.reset options.movies if options.movies
     Shothere.App.trigger "app:after:router/init", @movies

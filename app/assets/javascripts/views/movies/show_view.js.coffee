@@ -6,7 +6,6 @@ class Shothere.Views.Movies.ShowView extends Backbone.View
   initialize: ->
     @model.fetch()
     @listenTo @model, 'change', @render, @
-    $('#movies').fadeSlideLeft().off()
 
   render: ->
     $(@el).html(@template(@model.toJSON()))

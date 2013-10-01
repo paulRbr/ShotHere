@@ -8,23 +8,25 @@
     = stylesheet_link_tag    "application-mobile", :media => "(max-device-width: 1279px)"
     = requirejs_include_tag "start"
     = csrf_meta_tags
-  %body
-    #starting
-      .message Loading...
-    #map
-    #search.pull-right
-      %i.icon-search.absolute-left.middle
-      %input#searchbox{:type => 'text', :name => 'search'}
-    #page
-      #body
-        / Devise flash msgs
-        - unless alert.nil?
-          %p.notice= notice
-        - unless alert.nil?
-          %p.alert= alert
-        = yield
-        = yield :body
-      #footer
-        = yield :footer
+  %body.pure-skin-shothere
+    .navbar.navbar-inverse.navbar-fixed-top
+      .navbar-inner
+        .container-fluid
+          %a.sidebarLink.top.left{:data => "#sidebar"}
+            %button.btn.btn-navbar
+              %span.icon-align-justify
+          %button.btn.btn-navbar.collapsed{"data-target" => ".nav-collapse", "data-toggle" => "collapse", :type=>"button"}
+            %span.icon-search
+          %a.brand{:href=>"/"} ShotHere
+          .nav-collapse.collapse
+            #search
+              %input#searchbox{:type => 'text', :name => 'search'}
+    #layout.pure-g-r
+      #main.pure-u-1
+        #map
+      #sidebarMenu
+      #sidebar.pure-u
+        .l-box
+          = yield
     #overlay.container
-      .message= "#{I18n.t "movie.loading"} #{I18n.t "wait"}"
+      .message= "#{I18n.t "wait"}"

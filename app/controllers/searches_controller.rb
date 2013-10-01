@@ -2,7 +2,7 @@ class SearchesController < ApplicationController
   def movies
     search do
       by = params[:by] || "title"
-      list = Movie.select("title, id").limit(Rails.configuration.search_limit).where "#{by} LIKE ?", "%#{params[:q]}%"
+      list = Movie.select("title, id, poster").limit(Rails.configuration.search_limit).where "#{by} LIKE ?", "%#{params[:q]}%"
       if params[:imdb]
         begin
           list = list.concat search_imdb_data(params[:q], by)

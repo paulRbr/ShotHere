@@ -34,25 +34,33 @@ class Movie < ActiveRecord::Base
   def imdb_id=(imdb_id_or_url)
     an_id = imdb_id_or_url.to_s.gsub(/\D/, "")
     self[:imdb_id] = an_id
-    data = get_imdb_data an_id
-    %w(title imdb_url poster year rating).each do |attr|
-      self[attr] = "#{data[attr]}" unless data[attr].nil? or data[attr].respond_to?(:keys)
+    m = Imdb::Movie.new(an_id)
+    self[:imdb_url] = m.url
+    %w(title poster year rating).each do |attr|
+      self[attr] = m.send :"#{attr}" unless m.send(:"#{attr}").nil? or m.send(:"#{attr}").respond_to?(:keys)
     end
-    %w(directors genres).each do |attr|
-      self.send("set_#{attr}", data[attr])
+    set_directors([m.director])
+    %w(genres filming_locations).each do |attr|
+      self.send("set_#{attr}", m.send(:"#{attr}"))
     end
-    find_main_location data["filming_locations"]
   rescue => e
     errors.add :imdb_id, e.message
     Rails.logger.warn e
   end
 
+  # TODO: Ugly Hack for the moment.. to map an Imdb::Movie object in a json we want
+  def self.imdb_movie_to_json(imdb_movie)
+    "{ 'imdb_id': #{imdb_movie.id}, 'poster': #{imdb_movie.poster}, 'title': #{imdb_movie.title}}"
+  end
+
   private
 
-  def find_main_location(location_name)
-    return if location_name.nil?
-    location = Location.where(address: location_name).first_or_create
-    locations << location
+  def set_filming_locations(locations_name)
+    return if locations_name.nil?
+    locations_name.each do |location_name|
+      location = Location.where(address: location_name).first_or_create
+      locations << location
+    end
   end
 
   def set_directors(directors_name)
@@ -70,29 +78,4 @@ class Movie < ActiveRecord::Base
       genres << genre
     end
   end
-
-  def get_imdb_data(imdb_id)
-    Rails.logger.debug imdb_id
-    uri = URI.parse("http://mymovieapi.com/?ids=tt#{imdb_id}&type=json")
-    response = Net::HTTP.get_response(uri)
-    Rails.logger.debug response.body
-    begin
-      data = JSON.parse(response.body)
-    rescue => e
-      Rails.logger.warn "Bad response from mymovieapi: #{e}"
-      data = nil
-    end
-    if data.nil?
-      raise "Unable to use mymovieapi.com"
-    elsif !data.kind_of?(Array) and data["error"]
-      raise data["error"]
-    elsif data.kind_of?(Array) and data.empty?
-      raise "No result found"
-    end
-    movie = data.first
-    movie['poster'] = movie['poster']['imdb'] unless movie['poster'].nil?
-    Rails.logger.debug movie['poster']
-    movie
-  end
-
 end

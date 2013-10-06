@@ -2,38 +2,66 @@ TokenInputModule = (TIM, App, Backbone, Marionette, $, _) ->
   TIM.startWithParent = false;
 
   # Public Data
-  # -------------------------
-  TIM.map
+  TIM.search_controller = "movies"
 
+  TIM.last_query = ""
+  # -------------------------
   ## Definition of TokenInputModule
   TIM.addInitializer (options) ->
+    search_controller = options.controller || "movies"
     $("#searchbox").tokenInput(
-      "/search/movies/?format=json&imdb=1",
-      propertyToSearch: "title",
-      minChars: 3,
-      tokenLimit: 1,
+      ->
+        "/search/#{TIM.search_controller}/?format=json"
+      propertyToSearch: "title"
+      minChars: 3
+      tokenLimit: 1
+      resultsLimit: 10
+      zindex: 1050 # To be above bootstrap's navbar
       resultsFormatter: (item) =>
-        res = "<li>"
-        res += "<img src='" + item.poster + "' title='" + item.title + "' height='25px' width='40px' /><div style='display: inline-block; padding-left: 10px;'>" if item.poster
-        res += "<div>" + item.title + "</div></li>"
+        if !!item.more
+          res = "<li class='separator'>"
+        else
+          res = "<li>"
+        res += "<img src='#{item.poster}' title='#{item.title}' height='25px' width='40px' /><div style='display: inline-block; padding-left: 10px;'>" if item.poster
+        if item.year
+          res += "<div>#{item.title} (#{item.year})</div></li>"
+        else
+          res += "<div>#{item.title}</div></li>"
         res
-
+      onResult: (results) =>
+        results.push(title: "<b>Get more results..</b>", more: true)
+        TIM.last_query = $("#token-input-searchbox").val()
+        return results
       onAdd: (item) =>
-        Backbone.history.navigate "/movies/#{item.id}", true if item.id
-        if item.imdb_id
+        TIM.search_controller = "movies"
+        if item.id && !item.url
+          TIM.navigateTo(item)
+        if item.url
           $("#overlay").show()
-          model = new options.movies.model({imdb_id:item.imdb_id})
-          options.movies.create(model.toJSON(),
-            success: (movie) =>
-              Backbone.history.navigate "/movies/#{movie.id}", true
-            error: (movie, jqXHR) =>
-              Backbone.history.navigate "/imdb/#{movie.get('imdb_id').match(/[0-9]+/)}", true if movie.get('imdb_id')
-              console.debug $.parseJSON(jqXHR.responseText)
-            complete: =>
-              $("#overlay").hide()
-            wait: true
-          )
+          exist = options.movies.findWhere {imdb_id:item.id}
+          if (exist)
+            $("#overlay").hide()
+            TIM.navigateTo(exist)
+          else
+            options.movies.create {imdb_id:item.id},
+              success: (movie) =>
+                TIM.navigateTo(movie)
+              error: (movie, jqXHR) =>
+                Backbone.history.navigate "/imdb/#{movie.get('imdb_id').match(/[0-9]+/)}", true if movie.get('imdb_id')
+                console.debug $.parseJSON(jqXHR.responseText)
+              complete: =>
+                $("#overlay").hide()
+              wait: true
         TIM.clearInput()
+        if item.more
+          TIM.search_controller = "imdb_movies"
+          setTimeout(
+            ->
+              e = $.Event 'keydown'
+              e.which = 32 # SPACE
+              $("#token-input-searchbox").val(TIM.last_query).focus().trigger(e).change()
+            5
+          )
     )
 
   ## Subscribed events ##
@@ -42,6 +70,11 @@ TokenInputModule = (TIM, App, Backbone, Marionette, $, _) ->
 
   TIM.clearInput = ->
     $('#searchbox').tokenInput "clear"
+
+  TIM.navigateTo = (movie) ->
+    Backbone.history.navigate "/movies/#{movie.id}", true
+    $("#toggleSidebar").click()
+    $("#toggleSearch").click()
 
   TIM
 

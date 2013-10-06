@@ -51,7 +51,7 @@ gem 'haml-rails'
 gem 'meta-tags', :require => 'meta_tags'
 
 # Devise - Authentication gem
-gem 'devise'
+gem 'devise', '~> 2.2.3'
 gem 'devise-encryptable'
 
 gem 'omniauth'
@@ -64,6 +64,9 @@ gem 'omniauth-github'
 
 # Ruby Geocoder
 gem 'geocoder'
+
+# Imdb Data directly from www.imdb.com
+gem 'imdb', :git => 'https://github.com/popox/imdb'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

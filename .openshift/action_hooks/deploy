@@ -20,11 +20,6 @@ then
     exit 5
 fi
 
-# Load extra ENV variables
-if [ -f ../.env ]; then
-    . ../.env
-fi
-
 pushd ${OPENSHIFT_REPO_DIR} > /dev/null
 bundle exec rake db:migrate RAILS_ENV=production
 bundle exec rake assets:precompile:all RAILS_ENV=production RAILS_GROUPS=assets

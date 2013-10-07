@@ -58,14 +58,13 @@ body {
 #search {
   z-index: 10;
   float: right;
-  margin: 5px 20px;
   ul.token-input-list {
     width: 380px;
     z-index: 40;
   }
 }
 .separator {
-  border-top: 3px solid gray;
+  border-top: 4px dashed gray;
 }
 #layout, #sidebar, #menu {
   transition: all 0.2s ease-out 0s;

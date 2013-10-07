@@ -28,8 +28,7 @@ MapModule = (MM, App, Backbone, Marionette, $, _, L) ->
       @movies = options.movies
       @movies.map (movie) -> MM.addMarkers movie
 
-    MM.map = L.map 'map', {worldCopyJump: true, layers: defaultLayers, zoomControl: false}  # need a #map container here
-    MM.map.addControl(new L.control.zoom(position: "bottomleft"))
+    MM.map = L.map 'map', {worldCopyJump: true, layers: defaultLayers}  # need a #map container here
     MM.map.setView([0.0, 0.0], 2)
 
   MM.addInitializer () ->
@@ -62,8 +61,9 @@ MapModule = (MM, App, Backbone, Marionette, $, _, L) ->
   MM.getMarkersOf = (movie) ->
     if movie.get("locations").length > 0
       markers = L.featureGroup(
-        movie.get("locations").chain().filter((m)->m).map((location) ->
-          location.markerWithPopup(JST["templates/movies/popup"](movie.toJSON())).openPopup() if location
+        movie.get("locations").chain().map((location) ->
+          m = location.markerWithPopup(JST["templates/movies/popup"](movie.toJSON())) if location
+          m.openPopup() if m
         ).filter((m)->m).value()
       )
     markers

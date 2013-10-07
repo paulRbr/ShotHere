@@ -2,7 +2,7 @@ language: ruby
 rvm:
   - 1.9.3
 env:
-  - DB=sqlite DISPLAY=":99.0"
+  - DB=sqlite DISPLAY=":99.0" DEVISE_PEPER="0f443a4c39f9c5bf753020eebeee7cba60182a8429ad51703aa4b2176d4b4f3afd58ccabe1abacfb83c91349ec7e41a52fb436d9f8d152fec3015f1bb0cff157" DEVISE_KEY="6f13e0e0e8dbc4bc0f87e90f928e93160d289eb6ed62b633ee425c3487ce9c780fc3390f1e1ca09b55b9f94d060edf09e538095f43dc099f5a8c64c6cda838a9"
 before_script:
   - 'sh -e /etc/init.d/xvfb start'
 script: 

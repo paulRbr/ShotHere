@@ -1,4 +1,4 @@
-class Shothere.Models.Director extends Shothere.Models.AbsMarkerModel
+class Shothere.Models.Director extends Backbone.RelationalModel
   urlRoot: '/directors'
 
   defaults:

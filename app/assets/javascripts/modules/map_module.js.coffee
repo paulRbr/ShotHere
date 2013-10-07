@@ -61,8 +61,10 @@ MapModule = (MM, App, Backbone, Marionette, $, _, L) ->
 
   MM.getMarkersOf = (movie) ->
     if movie.get("locations").length > 0
-      markers = L.featureGroup movie.get("locations").map((location) ->
-        location.markerWithPopup(JST["templates/movies/popup"](movie.toJSON())).openPopup()
+      markers = L.featureGroup(
+        movie.get("locations").chain().filter((m)->m).map((location) ->
+          location.markerWithPopup(JST["templates/movies/popup"](movie.toJSON())).openPopup() if location
+        ).filter((m)->m).value()
       )
     markers
 

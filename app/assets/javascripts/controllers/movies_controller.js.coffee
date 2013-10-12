@@ -46,3 +46,6 @@ class Shothere.Controllers.MoviesController extends Marionette.Controller
       error: (movie, jqXHR) =>
         console.warn($.parseJSON(jqXHR.responseText))
     ) if movie
+
+  load: (movies) ->
+    @movies.add movies

@@ -1,4 +1,17 @@
 describe "The global application", ->
+
+  fakeMoviesRsps = [
+    responseText : '[{"movie": "1"}, {"movie": "2"}]'
+    responseText : '[]'
+  ]
+
+  i = 0
+
+  nextFakeMoviesRsp = () ->
+    rsp = fakeMoviesRsps[i]
+    i++
+    rsp
+
   describe "namespaces", ->
     it "should define a Models namespace", ->
       expect(Shothere.Models).toBeDefined()
@@ -16,17 +29,16 @@ describe "The global application", ->
       expect(Shothere.App).not.toBe(null)
     describe "starting", ->
       beforeEach ->
-        @fakeMoviesRsp = {responseText : '[{"movie": "1"}, {"movie": "2"}]'}
-        spyOn($, "ajax").andCallFake (params) => params.complete @fakeMoviesRsp
+        spyOn($, "ajax").andCallFake (params) => params.complete nextFakeMoviesRsp()
         spyOn($, "parseJSON").andCallThrough()
         spyOn Backbone.history, "start"
-        spyOn Shothere.Controllers, "MoviesController"
+        spyOn(Shothere.Controllers, "MoviesController").andReturn load: ->
         spyOn Shothere.Routers, "MainRouter"
-        Shothere.App.start({})
+        Shothere.App.start {}
 
-      it "should make an ajax call to get movies to populate the app, should parse the JSON response and should create the main router with its controller and start backbone's history", ->
-        expect($.ajax).toHaveBeenCalled()
-        expect($.parseJSON).toHaveBeenCalledWith(@fakeMoviesRsp.responseText)
-        expect(Backbone.history.start).toHaveBeenCalled()
+      it "should create the main router with its controller and start backbone's history then should make an ajax call to get movies to populate the app", ->
         expect(Shothere.Controllers.MoviesController).toHaveBeenCalled()
         expect(Shothere.Routers.MainRouter).toHaveBeenCalledWith({controller: new Shothere.Controllers.MoviesController()})
+        expect(Backbone.history.start).toHaveBeenCalled()
+        expect($.ajax).toHaveBeenCalled()
+        expect($.parseJSON).toHaveBeenCalledWith(fakeMoviesRsps[0].responseText)

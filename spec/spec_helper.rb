@@ -8,6 +8,9 @@ require 'rspec/autorun'
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
+# avoid network calls for Geocoder gem
+require 'geocoder_spec_helper'
+
 RSpec.configure do |config|
   # ## Mock Framework
   #

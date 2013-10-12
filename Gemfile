@@ -1,9 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.14'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+gem 'mysql2', :group => :production
 
 group :test, :development do
   gem 'sqlite3' # test
@@ -13,11 +12,6 @@ group :test, :development do
   gem 'teaspoon'
   gem 'selenium-webdriver'
 end
-
-gem 'mysql2', :group => :production
-
-# For caching
-gem 'redis' 
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -30,7 +24,7 @@ group :assets do
   gem 'backbone-relational-rails'
   gem 'marionette-rails'
   gem 'jquery-rails'
-  gem 'jquery-tokeninput-rails'
+  gem 'jquery-tokeninput-rails', :git => 'https://github.com/popox/jquery-tokeninput-rails'
   gem 'leaflet-rails'
   gem 'leaflet-markercluster-rails'
 
@@ -67,6 +61,8 @@ gem 'geocoder'
 
 # Imdb Data directly from www.imdb.com
 gem 'imdb', :git => 'https://github.com/popox/imdb'
+
+gem 'will_paginate'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

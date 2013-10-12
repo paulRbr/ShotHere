@@ -5,6 +5,7 @@ class Shothere.Views.Movies.IndexView extends Backbone.View
 
   initialize: () ->
     @listenTo @options.movies, 'reset', @addAll
+    @listenTo @options.movies, 'add', @addOne
 
   addAll: () =>
     @options.movies.each(@addOne)

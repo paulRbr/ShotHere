@@ -5,6 +5,7 @@ TokenInputModule = (TIM, App, Backbone, Marionette, $, _) ->
   TIM.search_controller = "movies"
 
   TIM.last_query = ""
+
   # -------------------------
   ## Definition of TokenInputModule
   TIM.addInitializer (options) ->
@@ -59,7 +60,7 @@ TokenInputModule = (TIM, App, Backbone, Marionette, $, _) ->
             ->
               e = $.Event 'keydown'
               e.which = 32 # SPACE
-              $("#token-input-searchbox").val(TIM.last_query).focus().trigger(e).change()
+              $("#token-input-searchbox").val(TIM.last_query).trigger(e).change()
             5
           )
     )
@@ -69,7 +70,7 @@ TokenInputModule = (TIM, App, Backbone, Marionette, $, _) ->
     @listenTo Shothere.App, "app:show/index", TIM.clearInput
 
   TIM.clearInput = ->
-    $('#searchbox').tokenInput "clear"
+    $('#searchbox').tokenInput "clear", focus: false
 
   TIM.navigateTo = (movie) ->
     Backbone.history.navigate "/movies/#{movie.id}", true

@@ -7,6 +7,8 @@ class Shothere.Controllers.MoviesController extends Marionette.Controller
   index: ->
     Shothere.App.trigger "app:show/index"
 
+    @closeSidebar()
+
     @view = new Shothere.Views.Movies.IndexView(movies: @movies)
     $("#movies").html(@view.render().el)
 
@@ -30,10 +32,12 @@ class Shothere.Controllers.MoviesController extends Marionette.Controller
   show: (id) ->
     movie = @movies.get(id)
     unless movie
-      movie = new Shothere.Models.Movie({id:id})
+      movie = new Shothere.Models.Movie(id:id)
       @movies.add movie
 
     Shothere.App.trigger "app:show/movie", movie
+
+    @openSidebar()
 
     @view = new Shothere.Views.Movies.ShowView(model: movie)
     $("#movies").html(@view.render().el)
@@ -49,3 +53,10 @@ class Shothere.Controllers.MoviesController extends Marionette.Controller
 
   load: (movies) ->
     @movies.add movies
+
+  openSidebar: () ->
+    $("#toggleSidebar").click() unless $("#toggleSidebar").hasClass("active")
+    $("#toggleSearch").click() unless $("#toggleSearch").hasClass("collapsed")
+  closeSidebar: () ->
+    $("#toggleSidebar").click() if $("#toggleSidebar").hasClass("active")
+    $("#toggleSearch").click() if $("#toggleSearch").hasClass("collapsed")

@@ -59,16 +59,15 @@ Shothere.App.addInitializer (options) ->
   moviesController = new Shothere.Controllers.MoviesController options
   new Shothere.Routers.MainRouter {controller: moviesController}
   Backbone.history.start {pushState: true}
-  $("#overlay").find(".message").append(" Loading movies..")
-  r = (p) ->
+  $("#overlay").fadeOut(1000)
+  loadMovies = (progress) ->
     $.ajax
-      url: "/movies.json?page=#{p}"
+      url: "/movies.json?page=#{progress}"
       complete: (jqXHR) =>
         resp = $.parseJSON(jqXHR.responseText)
         moviesController.load resp
         if _.isEmpty(resp)
-          $("#overlay").fadeOut(1000)
+          $("#loading").hide()
         else
-          $("#overlay").find(".message").append(".")
-          r(p+1)
-  r(1)
+          loadMovies(progress+1)
+  loadMovies(1)

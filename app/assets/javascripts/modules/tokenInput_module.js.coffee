@@ -39,12 +39,12 @@ TokenInputModule = (TIM, App, Backbone, Marionette, $, _) ->
           TIM.navigateTo(item)
         if item.url
           $("#overlay").show()
-          exist = options.movies.findWhere {imdb_id:item.id}
+          exist = options.movies.findWhere imdb_id:item.id
           if (exist)
             $("#overlay").hide()
             TIM.navigateTo(exist)
           else
-            options.movies.create {imdb_id:item.id},
+            options.movies.create imdb_id:item.id,
               success: (movie) =>
                 TIM.navigateTo(movie)
               error: (movie, jqXHR) =>
@@ -53,24 +53,27 @@ TokenInputModule = (TIM, App, Backbone, Marionette, $, _) ->
               complete: =>
                 $("#overlay").hide()
               wait: true
-        TIM.clearInput()
         if item.more
           TIM.search_controller = "imdb_movies"
+          TIM.clearInput focus: true
           setTimeout(
             ->
+              # Kind of a hack: Trigger a keyboard event to perform the search in tokenInput...
               e = $.Event 'keydown'
               e.which = 32 # SPACE
-              $("#token-input-searchbox").val(TIM.last_query).trigger(e).change()
-            5
+              $("#token-input-searchbox").focus().val(TIM.last_query).trigger(e).change()
+            100
           )
+        else
+          TIM.clearInput focus: false
     )
 
   ## Subscribed events ##
   TIM.addInitializer () ->
     @listenTo Shothere.App, "app:show/index", TIM.clearInput
 
-  TIM.clearInput = ->
-    $('#searchbox').tokenInput "clear", focus: false
+  TIM.clearInput = (options)->
+    $('#searchbox').tokenInput "clear", options
 
   TIM.navigateTo = (movie) ->
     Backbone.history.navigate "/movies/#{movie.id}", true

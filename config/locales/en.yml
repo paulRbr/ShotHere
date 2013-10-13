@@ -18,5 +18,5 @@ en:
   list:
     movies: "List all movies"
   movie:
-    loading: "Loading movie.."
+    loading: "Loading movies..."
   wait: "Please wait.."

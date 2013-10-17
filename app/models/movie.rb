@@ -42,7 +42,7 @@ class Movie < ActiveRecord::Base
     %w(title poster year rating).each do |attr|
       self[attr] = m.send :"#{attr}" unless m.send(:"#{attr}").nil? or m.send(:"#{attr}").respond_to?(:keys)
     end
-    set_directors([m.director])
+    set_directors(m.director)
     %w(genres filming_locations).each do |attr|
       self.send("set_#{attr}", m.send(:"#{attr}"))
     end

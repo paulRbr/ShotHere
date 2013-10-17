@@ -72,7 +72,7 @@ describe MoviesController do
 
       it "return the created movie in JSON including the locations, genres and directors" do
         post :create, {:movie => valid_attributes, format: :json}, valid_session
-        response.body.should == Movie.last.to_json(include: [:locations, :directors, :genres])
+        response.body.should eq Movie.last.to_json(include: [:locations, :directors, :genres])
       end
     end
 

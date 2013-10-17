@@ -4,4 +4,5 @@ class Director < ActiveRecord::Base
   has_many :movies, :through => :movie_director_infos
 
   attr_accessible :name
+  validates_uniqueness_of :name
 end

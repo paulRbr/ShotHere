@@ -67,5 +67,13 @@ module Shothere
 
     # Search limits when querying ...?q=search
     config.search_limit = 10
+
+    # Load specific env file
+    config.before_configuration do
+      env_file = File.join(Rails.root, 'config', "#{Rails.env.downcase}_env.yml")
+      YAML.load(File.open(env_file)).each do |key, value|
+        ENV[key.to_s] = value
+      end if File.exists?(env_file)
+    end
   end
 end

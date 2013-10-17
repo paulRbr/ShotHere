@@ -20,5 +20,19 @@ describe Movie do
       @movie.locations.should_not be nil
       @movie.locations.should be_an Array
     end
+
+    describe "retrieve Scarface movie from imdb" do
+      before(:each) do
+        @scarface = create :scarface
+      end
+      it "should have 'Scarface' as title" do
+        @scarface.title.should eq 'Scarface'
+      end
+      it "should have a director called 'Brian De Palma '" do
+        @scarface.directors.should be_an Array
+        STDOUT.puts @scarface.directors.first.to_json
+        @scarface.directors.first.name.should include 'Brian De Palma'
+      end
+    end
   end
 end

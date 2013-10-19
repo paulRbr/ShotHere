@@ -62,7 +62,7 @@ Shothere.App.addInitializer (options) ->
   $("#overlay").fadeOut(1000)
   loadMovies = (progress) ->
     $.ajax
-      url: "/movies.json?page=#{progress}"
+      url: "/movies.json?page=#{progress}&only=locations"
       complete: (jqXHR) =>
         resp = $.parseJSON(jqXHR.responseText)
         moviesController.load resp

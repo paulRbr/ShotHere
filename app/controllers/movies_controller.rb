@@ -1,4 +1,20 @@
 class MoviesController < ApplicationController
+
+  # GET /
+  def empty_index
+    respond_to do |format|
+      format.html { render :index } # index.html.haml
+    end
+  end
+
+  ## =====================================
+  ## =====================================
+  ##
+  ## ShotHere API v1
+  ##
+  ## =====================================
+  ## =====================================
+
   # GET /movies
   # GET /movies.json
   def index
@@ -10,17 +26,17 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.haml
-      format.json { render json: @movies, include: [:locations, :directors, :genres] }
+      format.json do
+        ## Not safe
+        if (params[:only])
+          includes = params[:only].sub(/ /, '').split(',').map{ |i| i.to_sym}
+          render json: @movies, include: includes
+        else
+          render json: @movies, include: [:locations, :directors, :genres]
+        end
+      end
     end
   end
-
-  # GET /
-  def empty_index
-    respond_to do |format|
-      format.html { render :index } # index.html.haml
-    end
-  end
-
 
   # GET /movies/1.json
   def show

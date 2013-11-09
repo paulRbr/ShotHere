@@ -18,15 +18,15 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
-    if (params[:page])
-      @movies = Movie.paginate(page: params[:page]).order(:rating)
-    else
-      @movies = Movie.order(:rating)
-    end
-
     respond_to do |format|
       format.html # index.html.haml
       format.json do
+        if (params[:page])
+          @movies = Movie.paginate(page: params[:page]).order(:rating)
+        else
+          @movies = Movie.order(:rating)
+        end
+
         ## Not safe
         if (params[:only])
           includes = params[:only].sub(/ /, '').split(',').map{ |i| i.to_sym}

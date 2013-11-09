@@ -32,12 +32,51 @@ describe MoviesController do
   # MoviesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  describe "GET empty index" do
+    it "should only render the index html page" do
+      get :empty_index, {}, valid_session
+      response.status.should be 200
+    end
+  end
+
   describe "GET index" do
-    it "assigns all movies as @movies" do
-      movie = create :movie
-      get :index, {}, valid_session
-      assigns(:movies).should eq([movie])
-      response.should_not == ""
+    describe "with no parameters"  do
+      describe "in json format" do
+        it "assigns all movies as @movies" do
+          movie = create :movie
+          get :index, {format: :json}, valid_session
+          assigns(:movies).should eq([movie])
+          response.should_not be ""
+        end
+      end
+      describe "in html format" do
+        it "should only render the index html page" do
+          get :empty_index, {}, valid_session
+          response.status.should be 200
+        end
+      end
+    end
+    describe "with pagination parameter" do
+      before do
+        class Movie
+          self.per_page = 1
+        end
+      end
+      it "assigns only movies from desired page as @movies" do
+        create :movie
+        movie = create :scarface
+        get :index, {page: 2, format: :json}, valid_session
+        assigns(:movies).should eq [movie]
+        response.body.should_not be ""
+        response.status.should be 200
+      end
+      it "returns an empty array if page number is too low or too high" do
+        create :movie
+        get :index, {page: 2, format: :json}, valid_session
+        assigns(:movies).should eq []
+        response.body.should_not be "[]"
+        response.status.should be 200
+      end
     end
   end
 
@@ -151,5 +190,4 @@ describe MoviesController do
       response.status.should eq(204)
     end
   end
-
 end

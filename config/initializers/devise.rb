@@ -214,6 +214,9 @@ Devise.setup do |config|
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
 
+  # Secret Key
+  config.secret_key = ENV['DEVISE_KEY']
+
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   config.omniauth :github, ENV['GITHUB_KEY_SHOTHERE'], ENV['GITHUB_SECRET_SHOTHERE'], :scope => 'popox,ShotHere'

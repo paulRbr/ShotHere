@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.14'
+gem 'rails', '3.2.15'
 
 gem 'mysql2', :group => :production
 
@@ -46,7 +46,7 @@ gem 'haml-rails'
 gem 'meta-tags', :require => 'meta_tags'
 
 # Devise - Authentication gem
-gem 'devise', '~> 2.2.3'
+gem 'devise'
 gem 'devise-encryptable'
 
 gem 'omniauth'

@@ -44,7 +44,6 @@ TokenInputModule = (TIM, App, Backbone, Marionette, $, _) ->
             $("#overlay").hide()
             TIM.navigateTo(exist)
           else
-            $("#overlay .message").append(" Loading movie..")
             options.movies.create imdb_id:item.id,
               success: (movie) =>
                 TIM.navigateTo(movie)

@@ -1,18 +1,4 @@
 class MoviesController < ApplicationController
-  # GET /movies
-  # GET /movies.json
-  def index
-    if (params[:page])
-      @movies = Movie.paginate(page: params[:page]).order(:rating)
-    else
-      @movies = Movie.order(:rating)
-    end
-
-    respond_to do |format|
-      format.html # index.html.haml
-      format.json { render json: @movies, include: [:locations, :directors, :genres] }
-    end
-  end
 
   # GET /
   def empty_index
@@ -21,6 +7,36 @@ class MoviesController < ApplicationController
     end
   end
 
+  ## =====================================
+  ## =====================================
+  ##
+  ## ShotHere API v1
+  ##
+  ## =====================================
+  ## =====================================
+
+  # GET /movies
+  # GET /movies.json
+  def index
+    respond_to do |format|
+      format.html # index.html.haml
+      format.json do
+        if (params[:page])
+          @movies = Movie.paginate(page: params[:page]).order(:rating)
+        else
+          @movies = Movie.order(:rating)
+        end
+
+        ## Not safe
+        if (params[:only])
+          includes = params[:only].sub(/ /, '').split(',').map{ |i| i.to_sym}
+          render json: @movies, include: includes
+        else
+          render json: @movies, include: [:locations, :directors, :genres]
+        end
+      end
+    end
+  end
 
   # GET /movies/1.json
   def show

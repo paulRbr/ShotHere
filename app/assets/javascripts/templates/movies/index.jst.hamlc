@@ -1,5 +1,5 @@
-%h1 All movies
+%h1 ShotHere
 
-%table#movies-table
-  %tr
-    %th
+%h2 The answer to where this movie was shot
+
+Explore the map and find a filming location. Or simply use the search to find your movie!

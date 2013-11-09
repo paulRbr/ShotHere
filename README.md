@@ -1,5 +1,5 @@
 ### ShotHere - The answer to where ###
-[![Build Status](https://travis-ci.org/popox/ShotHere.png?branch=master)](https://travis-ci.org/popox/ShotHere)
+[![Build Status](https://travis-ci.org/popox/ShotHere.png?branch=master)](https://travis-ci.org/popox/ShotHere) [![Dependency Status](https://gemnasium.com/popox/ShotHere.png)](https://gemnasium.com/popox/ShotHere)
 
 ## Introduction ##
 

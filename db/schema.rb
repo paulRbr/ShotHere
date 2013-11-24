@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130823201733) do
+ActiveRecord::Schema.define(:version => 20131124223916) do
 
   create_table "directors", :force => true do |t|
     t.string   "name"
@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(:version => 20130823201733) do
     t.datetime "updated_at",  :null => false
   end
 
+  add_index "movie_director_infos", ["movie_id", "director_id"], :name => "index_movie_director_infos_on_movie_id_and_director_id"
+
   create_table "movie_genre_infos", :force => true do |t|
     t.string   "comment"
     t.integer  "movie_id"
@@ -50,6 +52,8 @@ ActiveRecord::Schema.define(:version => 20130823201733) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "movie_genre_infos", ["movie_id", "genre_id"], :name => "index_movie_genre_infos_on_movie_id_and_genre_id"
+
   create_table "movie_location_infos", :force => true do |t|
     t.integer  "movie_id"
     t.integer  "location_id"
@@ -57,6 +61,8 @@ ActiveRecord::Schema.define(:version => 20130823201733) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  add_index "movie_location_infos", ["movie_id", "location_id"], :name => "index_movie_location_infos_on_movie_id_and_location_id"
 
   create_table "movies", :force => true do |t|
     t.string   "title"
@@ -68,6 +74,8 @@ ActiveRecord::Schema.define(:version => 20130823201733) do
     t.integer  "year"
     t.decimal  "rating",     :precision => 2, :scale => 0
   end
+
+  add_index "movies", ["title", "imdb_id", "rating"], :name => "index_movies_on_title_and_imdb_id_and_rating"
 
   create_table "users", :force => true do |t|
     t.string   "name",                   :default => ""

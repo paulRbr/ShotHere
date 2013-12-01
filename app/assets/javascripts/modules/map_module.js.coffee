@@ -29,11 +29,13 @@ MapModule = (MM, App, Backbone, Marionette, $, _, L) ->
       @movies.map (movie) -> MM.addMarkers movie
 
     # need a #map container at this point
-    MM.map = L.map 'map',
-      center: new L.LatLng 0.0, 0.0
-      zoom: 2
-      worldCopyJump: true
-      layers: defaultLayers
+    MM.map = L.map 'map', {worldCopyJump: true, layers: defaultLayers}
+    # For leaflet 0.7.0
+    # MM.map = L.map 'map',
+    #  center: new L.LatLng 0.0, 0.0
+    #  zoom: 2
+    #  worldCopyJump: true
+    #  layers: defaultLayers
     MM.map.setView([0.0, 0.0], 2)
 
   MM.addInitializer () ->

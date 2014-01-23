@@ -6,11 +6,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable,
          :omniauthable, :omniauth_providers => [:google_oauth2, :twitter, :github]
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
-  attr_accessible :provider, :uid, :name
-  # attr_accessible :title, :body
-
   def self.find_for_any(access_token, signed_in_resource=nil)
     Rails.logger.debug access_token.inspect.to_yaml
     user = User.where(:provider => access_token.provider, :uid => access_token.uid).first

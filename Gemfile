@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.15'
+gem 'rails', '4.0.2'
 
 gem 'mysql2', :group => :production
 
@@ -17,11 +17,10 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails',   '~> 4.0.1'
+  gem 'coffee-rails', '~> 4.0.1'
   gem 'haml_coffee_assets'
 
-  gem 'foundation-rails'
   gem 'backbone-rails', :git => 'https://github.com/popox/backbone-rails.git',:branch => 'v1.1'
   gem 'backbone-relational-rails'
   gem 'marionette-rails'

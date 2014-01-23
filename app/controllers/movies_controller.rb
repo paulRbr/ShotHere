@@ -21,14 +21,14 @@ class MoviesController < ApplicationController
     respond_to do |format|
       format.html # index.html.haml
       format.json do
-        if (params[:page])
+        if params[:page]
           @movies = Movie.paginate(page: params[:page]).order(:rating)
         else
           @movies = Movie.order(:rating)
         end
 
         ## Not safe
-        if (params[:only])
+        if params[:only]
           includes = params[:only].sub(/ /, '').split(',').map{ |i| i.to_sym}
           render json: @movies, include: includes
         else
@@ -59,11 +59,11 @@ class MoviesController < ApplicationController
 
   # POST /movies.json
   def create
-    @movie = Movie.where(params[:movie].select {|k,v| k == "imdb_id"}).first_or_create
+    @movie = Movie.where(params[:movie].select {|k| k == 'imdb_id'}).first_or_create movie_params
 
     respond_to do |format|
       if @movie.save
-        format.json { render json: @movie, include: [:locations, :directors, :genres], status: :created, location: @movie, notice: 'Movie was successfully created.' }
+        format.json { render json: @movie, include: [:locations, :directors, :genres], status: :created, notice: 'Movie was successfully created.' }
       else
         format.json { render json: @movie.errors, status: :unprocessable_entity }
       end
@@ -75,7 +75,7 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
 
     respond_to do |format|
-      if @movie.update_attributes(params[:movie].select {|k,v| k == "imdb_id"})
+      if @movie.update_attributes movie_params
         format.json { head :no_content, notice: 'Movie was successfully updated.' }
       else
         format.json { render json: @movie.errors, status: :unprocessable_entity }
@@ -91,5 +91,11 @@ class MoviesController < ApplicationController
     respond_to do |format|
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def movie_params
+    params.require(:movie).permit(:imdb_id)
   end
 end

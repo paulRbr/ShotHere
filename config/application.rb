@@ -2,12 +2,7 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
-if defined?(Bundler)
-  # If you precompile assets before deploying to production, use this line
-  Bundler.require(*Rails.groups(:assets => %w(development test)))
-  # If you want your assets lazily compiled in production, use this line
-  # Bundler.require(:default, :assets, Rails.env)
-end
+Bundler.require(:default, Rails.env)
 
 module Shothere
   class Application < Rails::Application
@@ -58,10 +53,10 @@ module Shothere
 
     # Load specific env file
     config.before_configuration do
-      env_file = File.join(Rails.root, 'config', "#{Rails.env.downcase}_env.yml")
-      YAML.load(File.open(env_file)).each do |key, value|
-        ENV[key.to_s] = value
-      end if File.exists?(env_file)
+      secret_file = File.join(Rails.root, 'config', 'secrets.yml')
+      YAML.load(File.open(secret_file))[Rails.env.downcase].each do |key, value|
+        ENV[key.to_s.upcase] = value
+      end if File.exists?(secret_file)
     end
   end
 end

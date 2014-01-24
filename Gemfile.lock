@@ -8,6 +8,14 @@ GIT
       sass (>= 3.2)
 
 GIT
+  remote: https://github.com/jwhitley/requirejs-rails.git
+  revision: f2330104aeca4d193fd5680a22ae7eee85d814b5
+  branch: master
+  specs:
+    requirejs-rails (0.9.1)
+      railties (>= 3.1.1, < 4.1)
+
+GIT
   remote: https://github.com/popox/backbone-rails.git
   revision: ae65c1b5b3d74feea7e1b1df64d3abacd1f71563
   branch: v1.1
@@ -35,14 +43,6 @@ GIT
   specs:
     purecss-rails (0.2.1)
       railties (>= 3.2.6, < 5)
-
-GIT
-  remote: https://github.com/popox/requirejs-rails.git
-  revision: 34d0306c48a509296beb865eaee0958007aa9309
-  branch: expe
-  specs:
-    requirejs-rails (0.9.1)
-      railties (>= 3.1.1, < 4.1)
 
 GEM
   remote: https://rubygems.org/
@@ -260,7 +260,7 @@ DEPENDENCIES
   anjlab-bootstrap-rails!
   backbone-rails!
   backbone-relational-rails
-  coffee-rails (~> 4.0.1)
+  coffee-rails
   debugger
   devise
   devise-encryptable
@@ -284,7 +284,7 @@ DEPENDENCIES
   rails (= 4.0.2)
   requirejs-rails!
   rspec-rails
-  sass-rails (~> 4.0.1)
+  sass-rails
   selenium-webdriver
   simplecov
   sqlite3

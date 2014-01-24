@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.15'
+gem 'rails', '4.0.2'
 
 gem 'mysql2', :group => :production
 
@@ -14,11 +14,11 @@ group :test, :development do
   gem 'selenium-webdriver'
 end
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+# Gems used only for assets thus not needed for production
+# (group :assets in Rails 3.2)
+group :test, :development do
+  gem 'sass-rails'
+  gem 'coffee-rails'
   gem 'haml_coffee_assets'
 
   gem 'backbone-rails', :git => 'https://github.com/popox/backbone-rails.git',:branch => 'v1.1'
@@ -38,7 +38,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'requirejs-rails', :git => 'https://github.com/popox/requirejs-rails.git',:branch => 'expe'
+gem 'requirejs-rails', :git => 'https://github.com/jwhitley/requirejs-rails.git',:branch => 'master'
 
 # Move to Haml templating framework instead of erb
 gem 'haml-rails'

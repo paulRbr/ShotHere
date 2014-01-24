@@ -18,7 +18,7 @@ describe Movie do
     end
     it "should have filming locations" do
       @movie.locations.should_not be nil
-      @movie.locations.should be_an Array
+      @movie.locations.should_not  be_empty
     end
 
     describe "retrieve Scarface movie from imdb" do
@@ -29,8 +29,7 @@ describe Movie do
         @scarface.title.should eq 'Scarface'
       end
       it "should have a director called 'Brian De Palma '" do
-        @scarface.directors.should be_an Array
-        STDOUT.puts @scarface.directors.first.to_json
+        @scarface.directors.should_not be_empty
         @scarface.directors.first.name.should include 'Brian De Palma'
       end
     end

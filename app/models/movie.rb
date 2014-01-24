@@ -14,8 +14,6 @@ class Movie < ActiveRecord::Base
   has_many :movie_genre_infos
   has_many :genres, :through => :movie_genre_infos
 
-  attr_accessible :imdb_id, :title, :id, :updated_at, :created_at, :poster, :imdb_url, :year, :rating
-
   validates_presence_of :imdb_id
   validates_uniqueness_of :imdb_id
 

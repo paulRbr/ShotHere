@@ -1,19 +1,8 @@
 require File.expand_path('../boot', __FILE__)
 
-# Pick the frameworks you want:
-require "active_record/railtie"
-require "action_controller/railtie"
-require "action_mailer/railtie"
-require "active_resource/railtie"
-require "sprockets/railtie"
-# require "rails/test_unit/railtie"
+require 'rails/all'
 
-if defined?(Bundler)
-  # If you precompile assets before deploying to production, use this line
-  Bundler.require(*Rails.groups(:assets => %w(development test)))
-  # If you want your assets lazily compiled in production, use this line
-  # Bundler.require(:default, :assets, Rails.env)
-end
+Bundler.require(:default, Rails.env)
 
 module Shothere
   class Application < Rails::Application
@@ -53,12 +42,6 @@ module Shothere
     # like if you have constraints or database-specific column types
     # config.active_record.schema_format = :sql
 
-    # Enforce whitelist mode for mass assignment.
-    # This will create an empty whitelist of attributes available for mass-assignment for all models
-    # in your app. As such, your models will need to explicitly whitelist or blacklist accessible
-    # parameters by using an attr_accessible or attr_protected declaration.
-    config.active_record.whitelist_attributes = true
-
     # Enable the asset pipeline
     config.assets.enabled = true
 
@@ -70,10 +53,10 @@ module Shothere
 
     # Load specific env file
     config.before_configuration do
-      env_file = File.join(Rails.root, 'config', "#{Rails.env.downcase}_env.yml")
-      YAML.load(File.open(env_file)).each do |key, value|
-        ENV[key.to_s] = value
-      end if File.exists?(env_file)
+      secret_file = File.join(Rails.root, 'config', 'secrets.yml')
+      YAML.load(File.open(secret_file))[Rails.env.downcase].each do |key, value|
+        ENV[key.to_s.upcase] = value
+      end if File.exists?(secret_file)
     end
   end
 end

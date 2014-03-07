@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.2'
+gem 'rails', '4.0.3'
 
 gem 'mysql2', :group => :production
 
@@ -8,6 +8,7 @@ group :test, :development do
   gem 'sqlite3' # test
   gem 'rspec-rails'
   gem 'simplecov', require: false
+  gem 'coveralls', require: false
   gem 'debugger'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'teaspoon'

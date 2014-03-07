@@ -23,6 +23,6 @@ fi
 pushd ${OPENSHIFT_REPO_DIR} > /dev/null
 echo "exec rake db:migrate RAILS_ENV=${RAILS_ENV:-production}"
 bundle exec rake db:migrate RAILS_ENV=${RAILS_ENV:-production}
-#exec "exec rake assets:precompile RAILS_ENV=${RAILS_ENV:-production} RAILS_GROUPS=assets"
-#bundle exec rake assets:precompile RAILS_ENV=${RAILS_ENV:-production} RAILS_GROUPS=assets
+echo "exec rake assets:precompile RAILS_ENV=${RAILS_ENV:-production} RAILS_GROUPS=assets"
+bundle exec rake assets:precompile RAILS_ENV=${RAILS_ENV:-production} RAILS_GROUPS=assets
 popd > /dev/null

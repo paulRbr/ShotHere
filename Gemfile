@@ -14,9 +14,9 @@ group :test, :development do
   gem 'selenium-webdriver'
 end
 
-# Gems used only for assets thus not needed for production
+# Gems used only for assets (needed to precompile assets in production while the precompilation is not handled by anyone else for now..)
 # (group :assets in Rails 3.2)
-group :test, :development do
+group :test, :development, :production do
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'haml_coffee_assets'

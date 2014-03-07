@@ -1,5 +1,5 @@
 ### ShotHere - The answer to where ###
-[![Build Status](https://travis-ci.org/popox/ShotHere.png?branch=master)](https://travis-ci.org/popox/ShotHere) [![Dependency Status](https://gemnasium.com/popox/ShotHere.png)](https://gemnasium.com/popox/ShotHere) [![Code Climate](https://codeclimate.com/github/popox/ShotHere.png)](https://codeclimate.com/github/popox/ShotHere)
+[![Build Status](https://travis-ci.org/popox/ShotHere.png?branch=master)](https://travis-ci.org/popox/ShotHere) [![Dependency Status](https://gemnasium.com/popox/ShotHere.png)](https://gemnasium.com/popox/ShotHere) [![Code Climate](https://codeclimate.com/github/popox/ShotHere.png)](https://codeclimate.com/github/popox/ShotHere) [![Coverage Status](https://coveralls.io/repos/popox/ShotHere/badge.png)](https://coveralls.io/r/popox/ShotHere)
 
 ## Introduction ##
 

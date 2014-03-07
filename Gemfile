@@ -17,7 +17,7 @@ end
 
 # Gems used only for assets (needed to precompile assets in production while the precompilation is not handled by anyone else for now..)
 # (group :assets in Rails 3.2)
-group :test, :development, :production do
+group :test, :development do
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'haml_coffee_assets'

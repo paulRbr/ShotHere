@@ -26,7 +26,7 @@ group :test, :development do
   gem 'marionette-rails'
   gem 'jquery-rails'
   gem 'jquery-tokeninput-rails', :git => 'https://github.com/popox/jquery-tokeninput-rails'
-  gem 'leaflet-rails', '0.6.2'
+  gem 'leaflet-rails'
   gem 'leaflet-markercluster-rails'
 
   # Purecss

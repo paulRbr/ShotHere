@@ -1,6 +1,8 @@
 %h4
   %a{:href=> "/movies/#{@id}"}= @title
 
+%h4= @address
+
 %h6
   %a{:href=>@imdb_url} More details on imdb
 

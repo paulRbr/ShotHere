@@ -117,6 +117,30 @@ body {
 }
 #map {
   height: 100%;
+  .movie-icon {
+    width: 4px;
+    height: 4px;
+    background-color: rgba(255, 19, 29, 0.40);
+    border-radius: 20px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border: 2px solid rgba(120, 0, 0, 0.40);
+    /*box-shadow: 0 0 3px 0 rgba(0,0,0,0.5);
+    -moz-box-shadow: 0 0 3px 0 rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 0 3px 0 rgba(0,0,0,0.5);*/
+  }
+  .leaflet-popup {
+    pointer-events: none;
+    .leaflet-popup-content-wrapper {
+      pointer-events: auto;
+    }
+    .leaflet-popup-tip-container {
+      pointer-events: none;
+      .leaflet-popup-tip {
+        pointer-events: none;
+      }
+    }
+  }
 }
 // Overwrite Leaflet defaults
 .leaflet-bottom {

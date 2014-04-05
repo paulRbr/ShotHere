@@ -13,16 +13,23 @@ MapModule = (MM, App, Backbone, Marionette, $, _, L) ->
     subDomains = ['otile1','otile2','otile3','otile4']
     cloudmadeAttrib = 'Data, imagery and map information provided by <a href="http://open.mapquest.co.uk" target="_blank">MapQuest</a>, <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a>'
     cloudmade = new L.TileLayer(cloudmadeUrl, {minZoom: 6, maxZoom: 18, attribution: cloudmadeAttrib, subdomains: subDomains})
+
+#    mapboxUrl = 'https://{s}.tiles.mapbox.com/v3/mapbox.natural-earth-2/{z}/{x}/{y}.png'
+    mapboxUrl = 'https://{s}.tiles.mapbox.com/v3/popox.gobll1in/{z}/{x}/{y}.png'
+#    mapboxUrl = 'http://{s}.tiles.mapbox.com/v3/mapbox.control-room/{z}/{x}/{y}.png'
+    mapboxAttrib = "&copy; <a href=\"https://www.mapbox.com/\" target=\"_blank\">Mapbox</a> &copy; <a href=\"http://osm.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors"
+    mapbox = new L.tileLayer(mapboxUrl, {minZoom: 0, maxZoom: 18, attribution: mapboxAttrib})
+
     osmUrl = "http://{s}.tile.osm.org/{z}/{x}/{y}.png"
     osmAttrib = "&copy; <a href=\"http://osm.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors"
     osm = new L.tileLayer(osmUrl, {minZoom: 0, maxZoom: 6, attribution: osmAttrib})
 
-    defaultLayers = [osm, cloudmade]
+    defaultLayers = [mapbox]
 
     MM.oneMovieLayer = L.layerGroup()
     defaultLayers.push MM.oneMovieLayer
 
-    MM.allMovieLayer = new L.MarkerClusterGroup()
+    MM.allMovieLayer = new L.FeatureGroup()
     defaultLayers.push MM.allMovieLayer
     if options && options.movies
       @movies = options.movies
@@ -69,7 +76,7 @@ MapModule = (MM, App, Backbone, Marionette, $, _, L) ->
     if movie.get("locations").length > 0
       markers = L.featureGroup(
         movie.get("locations").chain().map((location) ->
-          m = location.markerWithPopup(JST["templates/movies/popup"](movie.toJSON())) if location
+          m = location.markerWithPopup(JST["templates/movies/popup"](_.extend(location.toJSON(),movie.toJSON()))) if location
           m.openPopup() if m
         ).filter((m)->m).value()
       )

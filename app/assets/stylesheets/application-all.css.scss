@@ -120,21 +120,21 @@ body {
   .movie-icon {
     width: 4px;
     height: 4px;
-    background-color: rgba(153, 255, 102, 0.4);
+    background-color: rgba(153, 255, 102, 0.40);
     border-radius: 20px;
     -moz-border-radius: 20px;
     -webkit-border-radius: 20px;
-    border: 2px solid rgba(23, 82, 10, 0.4);
+    border: 2px solid rgba(23, 82, 10, 0.40);
     /*box-shadow: 0 0 3px 0 rgba(0,0,0,0.5);
     -moz-box-shadow: 0 0 3px 0 rgba(0,0,0,0.5);
     -webkit-box-shadow: 0 0 3px 0 rgba(0,0,0,0.5);*/
     &:hover {
-      margin-left: -8px !important;
-      margin-top: -8px !important;
-      width: 12px !important;
-      height: 12px !important;
+      margin-left: -10px !important;
+      margin-top: -10px !important;
+      width: 16px !important;
+      height: 16px !important;
       border: 4px solid rgb(23, 82, 10);
-      background-color: rgb(153, 255, 102);
+      background-color: #9F6;
     }
   }
   .leaflet-popup {

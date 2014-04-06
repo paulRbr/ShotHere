@@ -1,10 +1,4 @@
-%h4
+%h4{:class => 'title'}
   %a{:href=> "/movies/#{@id}"}= @title
 
-%h4= @address
-
-%h6
-  %a{:href=>@imdb_url} More details on imdb
-
-%a{:href=> "/movies/#{@id}"}
-  %img{:src=>@poster, :alt=>@title, :width=>"100px"}
+%h4{:class => 'address'}= @address

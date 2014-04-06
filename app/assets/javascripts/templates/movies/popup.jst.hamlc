@@ -2,3 +2,6 @@
   %a{:href=> "/movies/#{@id}"}= @title
 
 %h4{:class => 'address'}= @address
+
+%a{:href=> "/movies/#{@id}"}
+  %img{:src=>@poster, :alt=>@title, :width=>"100%"}

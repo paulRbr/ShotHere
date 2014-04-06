@@ -6,47 +6,51 @@ TokenInputModule = (TIM, App, Backbone, Marionette, $, _) ->
 
   TIM.last_query = ""
 
+  TIM.cache = {}
+
   # -------------------------
-  ## Definition of TokenInputModule
+  ## Module private methods
+  TIM._navigateTo = (movie) ->
+    Backbone.history.navigate "/movies/#{movie.id}", true
+
+  TIM._url = () ->
+    "/search/#{TIM.search_controller}.json"
+
+  # -------------------------
+  ## Init of TokenInputModule
   TIM.addInitializer (options) ->
     search_controller = options.controller || "movies"
-    $("#searchbox").tokenInput(
-      ->
-        "/search/#{TIM.search_controller}/?format=json"
-      propertyToSearch: "title"
-      minChars: 3
-      tokenLimit: 1
-      resultsLimit: 10
-      zindex: 1050 # To be above bootstrap's navbar
-      resultsFormatter: (item) =>
-        if !!item.more
-          res = "<li class='separator'>"
+    input = $( "#searchbox" ).autocomplete
+      minLength: 3,
+      source: (request, response) ->
+        term = request.term
+        if TIM.search_controller == "movies" && term of TIM.cache
+          response TIM.cache[term]
         else
-          res = "<li>"
-        res += "<img src='#{item.poster}' title='#{item.title}' height='25px' width='40px' /><div style='display: inline-block; padding-left: 10px;'>" if item.poster
-        if item.year
-          res += "<div>#{item.title} (#{item.year})</div></li>"
-        else
-          res += "<div>#{item.title}</div></li>"
-        res
-      onResult: (results) =>
-        results.push(title: "<b>Get more results..</b>", more: true)
-        TIM.last_query = $("#token-input-searchbox").val()
-        return results
-      onAdd: (item) =>
+          $("#search .loading").show()
+          $.getJSON TIM._url(), {q: term}, (data) ->
+            $("#search .loading").hide()
+            TIM.cache[term] = data
+            response data
+      response: (e, results) ->
         TIM.search_controller = "movies"
+        results.content.push(title: "<b>Get more results..</b>", more: true)
+        TIM.last_query = $( "#searchbox" ).val()
+        results
+      select: (e, result) =>
+        item = result.item
         if item.id && !item.url
-          TIM.navigateTo(item)
+          TIM._navigateTo(item)
         if item.url
           $("#overlay").show()
           exist = options.movies.findWhere imdb_id:item.id
           if (exist)
             $("#overlay").hide()
-            TIM.navigateTo(exist)
+            TIM._navigateTo(exist)
           else
             options.movies.create imdb_id:item.id,
               success: (movie) =>
-                TIM.navigateTo(movie)
+                TIM._navigateTo(movie)
               error: (movie, jqXHR) =>
                 Backbone.history.navigate "/imdb/#{movie.get('imdb_id').match(/[0-9]+/)}", true if movie.get('imdb_id')
                 console.debug $.parseJSON(jqXHR.responseText)
@@ -55,28 +59,20 @@ TokenInputModule = (TIM, App, Backbone, Marionette, $, _) ->
               wait: true
         if item.more
           TIM.search_controller = "imdb_movies"
-          TIM.clearInput focus: true
-          setTimeout(
-            ->
-              # Kind of a hack: Trigger a keyboard event to perform the search in tokenInput...
-              e = $.Event 'keydown'
-              e.which = 32 # SPACE
-              $("#token-input-searchbox").focus().val(TIM.last_query).trigger(e).change()
-            100
-          )
-        else
-          TIM.clearInput focus: false
-    )
-
-  ## Subscribed events ##
-  TIM.addInitializer () ->
-    @listenTo Shothere.App, "app:show/index", TIM.clearInput
-
-  TIM.clearInput = (options)->
-    $('#searchbox').tokenInput "clear", options
-
-  TIM.navigateTo = (movie) ->
-    Backbone.history.navigate "/movies/#{movie.id}", true
+          setTimeout ->
+            $( "#searchbox" ).autocomplete "search", TIM.last_query
+          , 300
+    input.data( "ui-autocomplete" )._renderItem = ( ul, item ) ->
+      ul.css("z-index", 1099)
+      title = item.title.replace(TIM.last_query, "<b>#{TIM.last_query}</b>")
+      className = !!item.more ? "separator":""
+      li = $( "<li class='#{className}'>" )
+      li = li.append $( "<img src='#{item.poster}' title='#{item.title}' height='25px' width='40px' />" ) if item.poster
+      if item.year
+        li = li.append $( "<a>#{item.title} (#{item.year})</a>" )
+      else
+        li = li.append $( "<a>#{item.title}</a>" )
+      li.appendTo ul
 
   TIM
 

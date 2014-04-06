@@ -2,26 +2,19 @@
   %a{:href=>"/index"} Back to see all movies
 
 %p
-  %b Title: #{@title}
-
-%p
-  %img{:src=>@poster, :alt=>@title}
-
-%p
-  %b Imdb: 
-  %a{:href=>@imdb_url, :data-bypass => true, :target => "_blank"}= @imdb_id
-
-%p
-  %b Year: #{@year}
+  %b #{@title} (#{@year})
 
 %p
   %b Rating: #{@rating}
 
 %p
+  %img{:src=>@poster, :alt=>@title}
+
+%p
   %b Genres:
   %ul
     - for genre in @genres
-      %li
+      %li{:class=>genre.name}
         = genre.name
 
 %p
@@ -37,6 +30,9 @@
     - for location in @locations
       %li 
         = location.address
+
+%p
+  %a{:href=>@imdb_url, :data-bypass => true, :target => "_blank"} More details
 
 %p
   %a{:href=> "/movies/#{@id}/update"} Update

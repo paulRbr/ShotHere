@@ -11,7 +11,7 @@
 # GO AFTER THE REQUIRES BELOW.
 #= require jquery
 #= require jquery_ujs
-#= require jquery.tokeninput
+#= require vendor/jquery-ui-1.10.4.custom.min
 #= require twitter/bootstrap
 #= require leaflet
 #= require leaflet.markercluster

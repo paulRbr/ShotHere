@@ -22,6 +22,24 @@
           .nav-collapse.collapse
             #search
               %input#searchbox{:type => 'text', :name => 'search'}
+              .loading
+                = I18n.t "movie.loading"
+                .spinner
+                  .spinner-container.container1
+                    .circle1
+                    .circle2
+                    .circle3
+                    .circle4
+                  .spinner-container.container2
+                    .circle1
+                    .circle2
+                    .circle3
+                    .circle4
+                  .spinner-container.container3
+                    .circle1
+                    .circle2
+                    .circle3
+                    .circle4
     #layout.pure-g-r
       #main.pure-u-1
         #map
@@ -30,7 +48,24 @@
         .l-box
           = yield
     #overlay.container
-      .message= I18n.t "wait"
+      .message
+        = I18n.t "wait"
+        .spinner
+          .spinner-container.container1
+            .circle1
+            .circle2
+            .circle3
+            .circle4
+          .spinner-container.container2
+            .circle1
+            .circle2
+            .circle3
+            .circle4
+          .spinner-container.container3
+            .circle1
+            .circle2
+            .circle3
+            .circle4
     %script
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

@@ -8,5 +8,5 @@ class Shothere.Models.AbsMarkerModel extends Backbone.RelationalModel
   markerWithPopup: (htmlData) ->
     m = @marker()
     m.bindPopup(htmlData) if m
-    m.on('mouseover', m.openPopup.bind(m));
+    m.on 'mouseover', m.openPopup.bind(m)  if m
     m

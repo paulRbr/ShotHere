@@ -59,6 +59,11 @@ body {
   left: 20px;
   vertical-align: 50%;
 }
+#toggleSidebar {
+  position: fixed;
+  top: 50px;
+  right: 5px;
+}
 #search {
   z-index: 10;
   float: right;

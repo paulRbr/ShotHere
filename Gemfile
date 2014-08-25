@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.2'
+gem 'rails', '4.0.3'
 
 gem 'mysql2', :group => :production
 
@@ -8,6 +8,7 @@ group :test, :development do
   gem 'sqlite3' # test
   gem 'rspec-rails'
   gem 'simplecov', require: false
+  gem 'coveralls', require: false
   gem 'debugger'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'teaspoon'
@@ -26,7 +27,7 @@ group :test, :development, :production do
   gem 'marionette-rails'
   gem 'jquery-rails'
   gem 'jquery-tokeninput-rails', :git => 'https://github.com/popox/jquery-tokeninput-rails'
-  gem 'leaflet-rails', '0.6.2'
+  gem 'leaflet-rails'
   gem 'leaflet-markercluster-rails'
 
   # Purecss

@@ -111,7 +111,15 @@ describe MoviesController do
 
       it "return the created movie in JSON including the locations, genres and directors" do
         post :create, {:movie => valid_attributes, format: :json}, valid_session
-        response.body.should eq Movie.last.to_json(include: [:locations, :directors, :genres])
+        expected = JSON.load(Movie.find_by_imdb_id(valid_attributes['imdb_id']).to_json(include: [:locations, :directors, :genres]))
+        JSON.load(response.body).each { |k,attr|
+          if attr.is_a? Array
+            # Unordered Array cf: https://github.com/dchelimsky/rspec/blob/master/lib/spec/matchers/match_array.rb
+            attr.should =~ expected[k]
+          else
+            attr.should eql expected[k]
+          end
+        }
       end
     end
 

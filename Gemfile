@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.3'
+gem 'rails', '4.1.5'
 
 gem 'mysql2', :group => :production
 
@@ -18,9 +18,9 @@ end
 # Gems used only for assets (needed to precompile assets in production while the precompilation is not handled by anyone else for now..)
 # (group :assets in Rails 3.2)
 group :test, :development, :production do
-  gem 'sass-rails'
+  gem 'sass-rails', '4.0.3'
   gem 'coffee-rails'
-  gem 'haml_coffee_assets'
+  gem 'haml_coffee_assets', :git => 'https://github.com/netzpirat/haml_coffee_assets', :ref => 'a3c2951eca005d4fcce4837b9a97a139fc022c66'
 
   gem 'backbone-rails', :git => 'https://github.com/popox/backbone-rails.git',:branch => 'v1.1'
   gem 'backbone-relational-rails'

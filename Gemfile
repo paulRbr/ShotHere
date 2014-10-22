@@ -39,7 +39,8 @@ group :test, :development, :production do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'requirejs-rails', :git => 'https://github.com/jwhitley/requirejs-rails.git',:branch => 'master'
+#gem 'requirejs-rails', :git => 'https://github.com/jwhitley/requirejs-rails.git',:branch => 'master'
+gem 'requirejs-rails'
 
 # Move to Haml templating framework instead of erb
 gem 'haml-rails'

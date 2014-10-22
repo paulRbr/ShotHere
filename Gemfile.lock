@@ -8,14 +8,6 @@ GIT
       sass (>= 3.2)
 
 GIT
-  remote: https://github.com/jwhitley/requirejs-rails.git
-  revision: 9d51ed8fffe9b78ef152b8a0ab0cd6ae6ed9edc0
-  branch: master
-  specs:
-    requirejs-rails (0.9.4)
-      railties (>= 3.1.1)
-
-GIT
   remote: https://github.com/netzpirat/haml_coffee_assets
   revision: a3c2951eca005d4fcce4837b9a97a139fc022c66
   ref: a3c2951eca005d4fcce4837b9a97a139fc022c66
@@ -152,12 +144,12 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    marionette-rails (2.1.0)
+    marionette-rails (2.2.1)
       railties (>= 3.1)
     meta-tags (2.0.0)
       actionpack (>= 3.0.0)
     mime-types (1.25.1)
-    minitest (5.4.0)
+    minitest (5.4.2)
     multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -212,6 +204,8 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.3.2)
+    requirejs-rails (0.9.5)
+      railties (>= 3.1.1)
     rest-client (1.7.2)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
@@ -309,7 +303,7 @@ DEPENDENCIES
   omniauth-twitter
   purecss-rails!
   rails (= 4.1.5)
-  requirejs-rails!
+  requirejs-rails
   rspec-rails
   sass-rails (= 4.0.3)
   selenium-webdriver

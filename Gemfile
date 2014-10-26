@@ -20,32 +20,32 @@ end
 # Gems used only for assets (needed to precompile assets in production while the precompilation is not handled by anyone else for now..)
 # (group :assets in Rails 3.2)
 #group :test, :development do
-  gem 'sass-rails'
-  gem 'coffee-rails'
-  gem 'haml_coffee_assets'
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'haml_coffee_assets'
 
-  gem 'backbone-rails', :git => 'https://github.com/popox/backbone-rails.git',:branch => 'v1.1'
-  gem 'backbone-relational-rails'
-  gem 'marionette-rails'
-  gem 'jquery-rails'
-  gem 'jquery-tokeninput-rails', :git => 'https://github.com/popox/jquery-tokeninput-rails'
-  gem 'leaflet-rails'
-  gem 'leaflet-markercluster-rails'
+gem 'backbone-rails', :git => 'https://github.com/popox/backbone-rails.git',:branch => 'v1.1'
+gem 'backbone-relational-rails'
+gem 'marionette-rails'
+gem 'jquery-rails'
+gem 'jquery-tokeninput-rails', :git => 'https://github.com/popox/jquery-tokeninput-rails'
+gem 'leaflet-rails'
+gem 'leaflet-markercluster-rails'
 
-  # Purecss
-  gem 'purecss-rails', :git => 'https://github.com/popox/purecss-rails.git',:tag => 'global'
+# Purecss
+gem 'purecss-rails', :git => 'https://github.com/popox/purecss-rails.git',:tag => 'global'
 
-  # Bootstrap
-  gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails', :git => 'https://github.com/anjlab/bootstrap-rails.git',:branch => 'v2.3.0.0'
+# Bootstrap
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails', :git => 'https://github.com/anjlab/bootstrap-rails.git',:branch => 'v2.3.0.0'
 
-  gem 'uglifier', '>= 1.0.3'
-#end
+gem 'uglifier', '>= 1.0.3'
 
 #gem 'requirejs-rails', :git => 'https://github.com/jwhitley/requirejs-rails.git',:branch => 'master'
-gem 'requirejs-rails'
+#gem 'requirejs-rails'
 
 # Move to Haml templating framework instead of erb
 gem 'haml-rails'
+#end
 
 gem 'meta-tags', :require => 'meta_tags'
 

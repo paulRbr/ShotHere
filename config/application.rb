@@ -50,7 +50,6 @@ module Shothere
 
     # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
     config.assets.precompile += %w(
-      start.js
       application-all.css
       application-mobile.css
     )

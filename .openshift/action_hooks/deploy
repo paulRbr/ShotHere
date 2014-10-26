@@ -15,7 +15,16 @@ then
     echo 1>&2
 fi
 
-if [ -z "$OPENSHIFT_MYSQL_DB_HOST" ]
+if [ -z "$OPENSHIFT_POSTGRESQL_DB_HOST" ]
+then
+    echo 1>&2
+    echo "Could not find postgres database.  Please run:" 1>&2
+    echo "rhc cartridge add -a $OPENSHIFT_APP_NAME -c postgresql-9.2" 1>&2
+    echo "then make a sample commit (add whitespace somewhere) and re-push" 1>&2
+    echo 1>&2
+fi
+
+if [ -z "$OPENSHIFT_MYSQL_DB_HOST" ] && [ -z "$OPENSHIFT_POSTGRESQL_DB_HOST" ]
 then
     exit 5
 fi
@@ -23,6 +32,7 @@ fi
 pushd ${OPENSHIFT_REPO_DIR} > /dev/null
 echo "exec rake db:migrate RAILS_ENV=${RAILS_ENV:-production}"
 bundle exec rake db:migrate RAILS_ENV=${RAILS_ENV:-production}
-echo "exec rake assets:precompile RAILS_ENV=${RAILS_ENV:-production} RAILS_GROUPS=assets"
-bundle exec rake assets:precompile RAILS_ENV=${RAILS_ENV:-production} RAILS_GROUPS=assets
+# Already done by the Ruby 2.0 openshift cartridge
+#echo "exec rake assets:precompile RAILS_ENV=${RAILS_ENV:-production} RAILS_GROUPS=assets"
+#bundle exec rake assets:precompile RAILS_ENV=${RAILS_ENV:-production} RAILS_GROUPS=assets
 popd > /dev/null

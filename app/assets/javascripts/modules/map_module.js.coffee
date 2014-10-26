@@ -29,7 +29,7 @@ MapModule = (MM, App, Backbone, Marionette, $, _, L) ->
     MM.oneMovieLayer = L.layerGroup()
     defaultLayers.push MM.oneMovieLayer
 
-    MM.allMovieLayer = new L.FeatureGroup()
+    MM.allMovieLayer = new L.MarkerClusterGroup(maxClusterRadius: 30, disableClusteringAtZoom: 10)
     defaultLayers.push MM.allMovieLayer
     if options && options.movies
       @movies = options.movies

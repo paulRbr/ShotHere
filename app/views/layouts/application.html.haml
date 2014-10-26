@@ -6,7 +6,7 @@
     = display_meta_tags :site => "ShotHere"
     = stylesheet_link_tag    "application-all", :media => "all"
     = stylesheet_link_tag    "application-mobile", :media => "(max-device-width: 1279px)"
-    = requirejs_include_tag "start"
+    = javascript_include_tag "application"
     = csrf_meta_tags
   %body.pure-skin-shothere
     .navbar.navbar-inverse.navbar-fixed-top

@@ -29,20 +29,21 @@ MapModule = (MM, App, Backbone, Marionette, $, _, L) ->
     MM.oneMovieLayer = L.layerGroup()
     defaultLayers.push MM.oneMovieLayer
 
-    MM.allMovieLayer = new L.FeatureGroup()
+    MM.allMovieLayer = new L.MarkerClusterGroup(maxClusterRadius: 30, disableClusteringAtZoom: 10)
     defaultLayers.push MM.allMovieLayer
     if options && options.movies
       @movies = options.movies
       @movies.map (movie) -> MM.addMarkers movie
 
     # need a #map container at this point
-    MM.map = L.map 'map', {worldCopyJump: true, layers: defaultLayers}
+    MM.map = L.map 'map', {worldCopyJump: true, layers: defaultLayers, zoomControl: false}
     # For leaflet 0.7.0
     # MM.map = L.map 'map',
     #  center: new L.LatLng 0.0, 0.0
     #  zoom: 2
     #  worldCopyJump: true
     #  layers: defaultLayers
+    L.control.zoom({position: 'bottomleft'}).addTo MM.map
     MM.map.setView([0.0, 0.0], 2)
 
   MM.addInitializer () ->

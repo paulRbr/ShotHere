@@ -59,7 +59,7 @@ class MoviesController < ApplicationController
 
   # POST /movies.json
   def create
-    @movie = Movie.where(params[:movie].select {|k| k == 'imdb_id'}).first_or_create movie_params
+    @movie = Movie.where(params[:movie].select {|k| k == 'imdb_id'}).first_or_create(params[:movie].select {|k,_| k == 'imdb_id'})
 
     respond_to do |format|
       if @movie.save

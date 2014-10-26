@@ -70,3 +70,6 @@ Shothere.App.addInitializer (options) ->
         else
           loadMovies(progress+1)
   loadMovies(1)
+
+$ ->
+  Shothere.App.start {}

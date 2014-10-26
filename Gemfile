@@ -19,7 +19,7 @@ end
 
 # Gems used only for assets (needed to precompile assets in production while the precompilation is not handled by anyone else for now..)
 # (group :assets in Rails 3.2)
-group :test, :development do
+#group :test, :development do
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'haml_coffee_assets'
@@ -39,7 +39,7 @@ group :test, :development do
   gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails', :git => 'https://github.com/anjlab/bootstrap-rails.git',:branch => 'v2.3.0.0'
 
   gem 'uglifier', '>= 1.0.3'
-end
+#end
 
 #gem 'requirejs-rails', :git => 'https://github.com/jwhitley/requirejs-rails.git',:branch => 'master'
 gem 'requirejs-rails'

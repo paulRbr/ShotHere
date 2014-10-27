@@ -1,8 +1,7 @@
 class SearchesController < ApplicationController
   def movies
     search do
-      by = params[:by] || "title"
-      Movie.select("title, id, poster, year").limit(Rails.configuration.search_limit).where "#{by} LIKE ?", "%#{params[:q]}%"
+      Movie.select("title, id, poster, year").limit(Rails.configuration.search_limit).where "title ILIKE ?", "%#{params[:q]}%"
     end
   end
 
@@ -17,14 +16,13 @@ class SearchesController < ApplicationController
 
   def locations
     search do
-      by = params[:by] || "address"
-      Location.select("address, id").limit(Rails.configuration.search_limit).where "#{by} LIKE ?", "%#{params[:q]}%"
+      Location.select("address, id").limit(Rails.configuration.search_limit).where "address ILIKE ?", "%#{params[:q]}%"
     end
   end
 
   private
 
-  def search(&block)    
+  def search(&block)
     if params[:q]
       @results = yield if block_given?
 

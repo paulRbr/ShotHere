@@ -1,12 +1,5 @@
 class MoviesController < ApplicationController
 
-  # GET /
-  def empty_index
-    respond_to do |format|
-      format.html { render :index } # index.html.haml
-    end
-  end
-
   ## =====================================
   ## =====================================
   ##

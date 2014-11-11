@@ -10,8 +10,8 @@ Shothere::Application.routes.draw do
   get 'search/:action' => 'searches#:action'
 
   # Make frontend routes available on backend for a pushState ready app
-  get 'index' => 'movies#empty_index'
-  get 'imdb/:imdb_id' => 'movies#empty_index'
+  get 'index' => 'application#empty_index'
+  get 'imdb/:imdb_id' => 'application#empty_index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -61,7 +61,7 @@ Shothere::Application.routes.draw do
   #   end
 
   # My root url!
-  root :to => 'movies#empty_index'
+  root :to => 'application#empty_index'
 
   # See how all your routes lay out with "rake routes"
 

@@ -1,6 +1,5 @@
 #!/bin/bash
 
 pushd $OPENSHIFT_REPO_DIR
-echo `date` >> $OPENSHIFT_DATA_DIR/log/poll.log
-bundle exec rake data:poll_imdb >> $OPENSHIFT_DATA_DIR/log/poll.log
+RAILS_ENV=production bundle exec rake data:poll_imdb
 popd

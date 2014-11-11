@@ -1,0 +1,6 @@
+#!/bin/bash
+
+pushd $OPENSHIFT_REPO_DIR
+echo `date` >> $OPENSHIFT_DATA_DIR/log/weekly.log
+RAILS_ENV=production bundle exec rake data:update_box_office >> $OPENSHIFT_DATA_DIR/log/weekly.log
+popd

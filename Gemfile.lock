@@ -17,10 +17,10 @@ GIT
 
 GIT
   remote: https://github.com/popox/imdb
-  revision: b62b2359900f63727525530a3d7871251c151dd2
+  revision: 098b6e92b020c9dc5cbc32d176cff8053db0c1bb
   specs:
-    imdb (0.7.0)
-      nokogiri (~> 1.5.6)
+    imdb (0.8.2)
+      nokogiri (= 1.6.2.1)
 
 GIT
   remote: https://github.com/popox/jquery-tokeninput-rails
@@ -143,13 +143,15 @@ GEM
       actionpack (>= 3.0.0)
     method_source (0.8.2)
     mime-types (1.25.1)
+    mini_portile (0.6.0)
     minitest (4.7.5)
     multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     netrc (0.7.7)
     newrelic_rpm (3.7.2.192)
-    nokogiri (1.5.11)
+    nokogiri (1.6.2.1)
+      mini_portile (= 0.6.0)
     oauth (0.4.7)
     oauth2 (1.0.0)
       faraday (>= 0.8, < 0.10)

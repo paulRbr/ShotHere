@@ -1,7 +1,9 @@
 class Shothere.Controllers.MoviesController extends Marionette.Controller
   initialize: (options) ->
     @movies = new Shothere.Collections.MoviesCollection()
+    @movies.comparator = 'box_office'
     @movies.reset options.movies if options.movies
+    @count = options.movies_count if options.movies_count
     Shothere.App.trigger "app:after:router/init", @movies
 
   index: ->
@@ -9,7 +11,7 @@ class Shothere.Controllers.MoviesController extends Marionette.Controller
 
     @closeSidebar()
 
-    @view = new Shothere.Views.Movies.IndexView(movies: @movies)
+    @view = new Shothere.Views.Movies.IndexView(movies: @movies, count: @count)
     $("#movies").html(@view.render().el)
 
   show_imdb: (id) ->

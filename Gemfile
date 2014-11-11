@@ -69,6 +69,8 @@ gem 'imdb', :git => 'https://github.com/popox/imdb'
 
 gem 'will_paginate'
 
+gem 'pry'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

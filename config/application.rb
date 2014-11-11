@@ -64,5 +64,12 @@ module Shothere
         ENV[key.to_s.upcase] = value
       end if File.exists?(secret_file)
     end
+
+    # Change default console
+    require 'pry'
+    case Rails::VERSION::MAJOR
+    when 3 then Rails::Console::IRB = Pry if defined?(Rails::Console)
+    when 4 then config.console = Pry
+    end
   end
 end

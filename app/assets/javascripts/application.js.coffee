@@ -60,6 +60,7 @@ Shothere.App.addInitializer (options) ->
   Backbone.history.start {pushState: true}
   $("#overlay").fadeOut(1000)
   loadMovies = (progress) ->
+    progress = 1 unless progress
     $.ajax
       url: "/movies.json?page=#{progress}&only=locations"
       complete: (jqXHR) =>
@@ -69,4 +70,4 @@ Shothere.App.addInitializer (options) ->
           $("#loading").hide()
         else
           loadMovies(progress+1)
-  loadMovies(1)
+  setTimeout loadMovies, 0

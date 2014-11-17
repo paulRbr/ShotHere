@@ -9,7 +9,6 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'simplecov', require: false
   gem 'coveralls', require: false
-  gem 'debugger'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'teaspoon'
   gem 'selenium-webdriver'
@@ -80,6 +79,3 @@ gem 'pry'
 
 # Deploy with Capistrano
 # gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'

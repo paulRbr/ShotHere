@@ -4,6 +4,9 @@ namespace :data do
     old_box_office = Movie.where.not(box_office: nil).pluck(:imdb_id)
     new_box_office = Imdb::BoxOffice.new.movies.map(&:id)
 
+    # Remove old box office movies
+    Movie.where(imdb_id: old_box_office).update_all(box_office: nil)
+
     # Get new movies and set box office flag on them
     new_box_office.each_with_index do |imdb_id, position|
       exist = Movie.where(imdb_id: imdb_id)
@@ -11,8 +14,5 @@ namespace :data do
       m = exist.first_or_create(imdb_id: imdb_id)
       m.update(box_office: position+1)
     end
-
-    # Remove old box office movies
-    Movie.where(imdb_id: old_box_office).update_all(box_office: nil)
   end
 end

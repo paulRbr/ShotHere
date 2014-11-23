@@ -41,3 +41,5 @@
 
 .idea
 coverage/
+.ig*
+/backup/

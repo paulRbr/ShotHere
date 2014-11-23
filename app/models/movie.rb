@@ -18,7 +18,7 @@ class Movie < ActiveRecord::Base
   validates_uniqueness_of :imdb_id
 
   # For the pagination (will_paginate gem)
-  self.per_page = 40
+  self.per_page = 100
 
   def self.create_imdb_movie(imdb_id_or_url_or_array)
     if imdb_id_or_url_or_array.is_a? Array

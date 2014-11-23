@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141111181927) do
+ActiveRecord::Schema.define(version: 20141123221159) do
 
   create_table "directors", force: true do |t|
     t.string   "name"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 20141111181927) do
     t.integer  "box_office", limit: 1
   end
 
+  add_index "movies", ["rating"], name: "index_movies_on_rating"
   add_index "movies", ["title", "imdb_id", "rating"], name: "index_movies_on_title_and_imdb_id_and_rating"
 
   create_table "users", force: true do |t|

@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
     box_office_movies = Movie.where.not(box_office: nil)
 
     @startup_data = {
+      week_number: Time.now.strftime('%V'),
       movies_count: Movie.count,
       movies: latest_movies+box_office_movies
     }

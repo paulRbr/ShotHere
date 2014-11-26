@@ -6,7 +6,7 @@
 
 Explore the map and find a filming location. Or simply use the search to find your movie!
 
-%h1 Box Office - Week #{new Date().toLocaleFormat('%U')}
+%h1 Box Office - Week #{@weekNumber}
 
 %ul
 - for movie in @movies

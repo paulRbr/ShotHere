@@ -69,7 +69,8 @@ body {
   float: right;
   position: relative;
   #searchbox {
-    width: 300px;
+    min-width: 260px;
+    max-width: 320px;
     height: 38px;
     margin: 0;
     padding: 0;

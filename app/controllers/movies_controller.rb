@@ -20,12 +20,19 @@ class MoviesController < ApplicationController
           @movies = Movie.order(:rating)
         end
 
-        ## Not safe
-        if params[:only]
-          includes = params[:only].sub(/ /, '').split(',').map{ |i| i.to_sym}
-          render json: @movies, include: includes
+        if params[:only] == 'locations'
+          @movies = @movies.includes(:locations)
+          render json: @movies,
+                 include: {
+                  locations: {
+                    only: [:address, :longitude, :latitude]
+                  }
+                 },
+                 except: [:created_at, :updated_at]
         else
-          render json: @movies, include: [:locations, :directors, :genres]
+          render json: @movies,
+                 include: [:locations, :directors, :genres],
+                 except: [:created_at, :updated_at]
         end
       end
     end

@@ -15,7 +15,8 @@ MapModule = (MM, App, Backbone, Marionette, $, _, L) ->
     cloudmade = new L.TileLayer(cloudmadeUrl, {minZoom: 6, maxZoom: 18, attribution: cloudmadeAttrib, subdomains: subDomains})
 
 #    mapboxUrl = 'https://{s}.tiles.mapbox.com/v3/mapbox.natural-earth-2/{z}/{x}/{y}.png'
-    mapboxUrl = 'https://{s}.tiles.mapbox.com/v3/popox.gobll1in/{z}/{x}/{y}.png'
+#    mapboxUrl = 'https://{s}.tiles.mapbox.com/v3/popox.gobll1in/{z}/{x}/{y}.png'
+    mapboxUrl = 'https://{s}.tiles.mapbox.com/v4/saman.ed44282c/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic2FtYW4iLCJhIjoiS1ptdnd0VSJ9.19qza-F_vXkgpnh80oZJww'
 #    mapboxUrl = 'http://{s}.tiles.mapbox.com/v3/mapbox.control-room/{z}/{x}/{y}.png'
     mapboxAttrib = "&copy; <a href=\"https://www.mapbox.com/\" target=\"_blank\">Mapbox</a> &copy; <a href=\"http://osm.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors"
     mapbox = new L.tileLayer(mapboxUrl, {minZoom: 0, maxZoom: 18, attribution: mapboxAttrib})

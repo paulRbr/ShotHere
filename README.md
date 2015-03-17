@@ -8,7 +8,7 @@
 Ever thought about that when whatching a movie? Well I did :)!
 I also wanted to gain experience in developing a [Rails](http://rubyonrails.org/ "Rails") app with a strong front-end integration with [Backbone.js](http://backbonejs.org/ "Backbone.js"). So here is the result!
 
-You can see it live hosted by the coool paas service -OpenShift- here: [https://app-shothere.rhcloud.com](https://app-shothere.rhcloud.com)
+You can see it live hosted by the coool paas service -OpenShift- here: [https://shothere.io](https://shothere.io)
 
 ## Contribute ##
 

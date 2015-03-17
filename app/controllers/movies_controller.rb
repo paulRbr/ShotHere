@@ -11,13 +11,15 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
+    scope = Movie.where.not(title: nil).order(rating: :desc)
+
     respond_to do |format|
       format.html # index.html.haml
       format.json do
         if params[:page]
-          @movies = Movie.paginate(page: params[:page]).order(:rating)
+          @movies = scope.paginate(page: params[:page])
         else
-          @movies = Movie.order(:rating)
+          @movies = scope
         end
 
         if params[:only] == 'locations'

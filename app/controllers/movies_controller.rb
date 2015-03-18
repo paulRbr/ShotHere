@@ -11,7 +11,7 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
-    scope = Movie.where.not(title: nil).order(rating: :desc)
+    scope = Movie.where.not(title: nil, rating: nil).order(rating: :desc)
 
     respond_to do |format|
       format.html # index.html.haml

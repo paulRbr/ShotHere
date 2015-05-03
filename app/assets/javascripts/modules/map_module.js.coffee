@@ -14,9 +14,14 @@ MapModule = (MM, App, Backbone, Marionette, $, _, L) ->
     cloudmadeAttrib = 'Data, imagery and map information provided by <a href="http://open.mapquest.co.uk" target="_blank">MapQuest</a>, <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a>'
     cloudmade = new L.TileLayer(cloudmadeUrl, {minZoom: 6, maxZoom: 18, attribution: cloudmadeAttrib, subdomains: subDomains})
 
+#    REAL map
 #    mapboxUrl = 'https://{s}.tiles.mapbox.com/v3/mapbox.natural-earth-2/{z}/{x}/{y}.png'
+#   DARK map
     mapboxUrl = 'https://{s}.tiles.mapbox.com/v3/popox.gobll1in/{z}/{x}/{y}.png'
-#    mapboxUrl = 'http://{s}.tiles.mapbox.com/v3/mapbox.control-room/{z}/{x}/{y}.png'
+#    CARTOON map
+#    mapboxUrl = 'https://{s}.tiles.mapbox.com/v4/saman.ed44282c/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic2FtYW4iLCJhIjoiS1ptdnd0VSJ9.19qza-F_vXkgpnh80oZJww'
+#   Light colors
+#    mapboxUrl = 'http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpeg'
     mapboxAttrib = "&copy; <a href=\"https://www.mapbox.com/\" target=\"_blank\">Mapbox</a> &copy; <a href=\"http://osm.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors"
     mapbox = new L.tileLayer(mapboxUrl, {minZoom: 0, maxZoom: 18, attribution: mapboxAttrib})
 

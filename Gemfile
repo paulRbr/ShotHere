@@ -7,10 +7,13 @@ gem 'pg', :group => :production
 group :test, :development do
   gem 'sqlite3' # test
   gem 'rspec-rails'
+  gem 'webmock', require: false
   gem 'simplecov', require: false
   gem 'coveralls', require: false
   gem 'factory_girl_rails'
   gem 'teaspoon'
+  gem 'teaspoon-jasmine'
+  gem 'phantomjs'
   gem 'selenium-webdriver'
 end
 
@@ -22,7 +25,7 @@ group :test, :development, :production do
   gem 'sass-rails'
   gem 'font-awesome-sass'
   gem 'coffee-rails'
-  gem 'haml_coffee_assets', :git => 'https://github.com/popox/haml_coffee_assets'
+  gem 'haml_coffee_assets', :git => 'https://github.com/paulrbr/haml_coffee_assets'
 
   gem 'backbone-rails'
   gem 'backbone-relational-rails'

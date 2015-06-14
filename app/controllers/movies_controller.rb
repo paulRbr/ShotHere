@@ -12,7 +12,6 @@ class MoviesController < ApplicationController
   # GET /movies.json
   def index
     scope = Movie.where.not(title: nil, rating: nil).order(rating: :desc)
-
     respond_to do |format|
       format.html # index.html.haml
       format.json do
@@ -61,7 +60,7 @@ class MoviesController < ApplicationController
 
   # POST /movies.json
   def create
-    @movie = Movie.where(params[:movie].select {|k| k == 'imdb_id'}).first_or_create(params[:movie].select {|k,_| k == 'imdb_id'})
+    @movie = Movie.where(movie_params).first_or_create(movie_params)
 
     respond_to do |format|
       if @movie.save
@@ -76,8 +75,8 @@ class MoviesController < ApplicationController
   def update
     @movie = Movie.find(params[:id])
 
-    respond_to do |format|
-      if @movie.update_attributes movie_params
+   respond_to do |format|
+      if movie_params.present? && @movie.update_attributes(movie_params)
         format.json { head :no_content, notice: 'Movie was successfully updated.' }
       else
         format.json { render json: @movie.errors, status: :unprocessable_entity }

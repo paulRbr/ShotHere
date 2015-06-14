@@ -29,10 +29,10 @@ describe "The global application", ->
       expect(Shothere.App).not.toBe(null)
     describe "starting", ->
       beforeEach ->
-        spyOn($, "ajax").andCallFake (params) => params.complete nextFakeMoviesRsp()
-        spyOn($, "parseJSON").andCallThrough()
+        spyOn($, "ajax").and.callFake (params) => params.complete(nextFakeMoviesRsp())
+        spyOn($, "parseJSON").and.callThrough()
         spyOn Backbone.history, "start"
-        spyOn(Shothere.Controllers, "MoviesController").andReturn load: ->
+        spyOn(Shothere.Controllers, "MoviesController").and.returnValue load: ->
         spyOn Shothere.Routers, "MainRouter"
         Shothere.App.start {}
 

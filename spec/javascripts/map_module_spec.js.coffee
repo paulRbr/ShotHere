@@ -7,9 +7,9 @@ describe "The Map Module", ->
   describe "starting", ->
     beforeEach ->
       @fakeLayer = 'm3:/#é231dqls'
-      spyOn(L, "map").andReturn jasmine.createSpyObj('map', ['setView', 'hasLayer', 'addLayer'])
+      spyOn(L, "map").and.returnValue jasmine.createSpyObj('map', ['setView', 'hasLayer', 'addLayer'])
       spyOn(L, "TileLayer")
-      spyOn(L, "layerGroup").andReturn jasmine.createSpyObj('group', ['clearLayers', 'addLayer'])
+      spyOn(L, "layerGroup").and.returnValue jasmine.createSpyObj('group', ['clearLayers', 'addLayer'])
       fixture.set '<div id="map"></div>'
       @mapModule.start()
     afterEach ->
@@ -32,9 +32,9 @@ describe "The Map Module", ->
       beforeEach ->
         @mapModule.map.setView.reset()
         @model = jasmine.createSpyObj("movie", ["markers"])
-        @getCenter = jasmine.createSpy("getCenter").andReturn [48.32, 2.23]
-        @getBounds = jasmine.createSpy("getBounds").andReturn {getCenter: @getCenter}
-        spyOn(@mapModule, "getMarkersOf").andReturn {getBounds: @getBounds}
+        @getCenter = jasmine.createSpy("getCenter").and.returnValue [48.32, 2.23]
+        @getBounds = jasmine.createSpy("getBounds").and.returnValue {getCenter: @getCenter}
+        spyOn(@mapModule, "getMarkersOf").and.returnValue {getBounds: @getBounds}
         @markers = @mapModule.getMarkersOf(@model)
         @mapModule.updateMarkers(@model)
       it "should clear layers contained in the #oneMovie layer group", ->

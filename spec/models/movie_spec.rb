@@ -3,7 +3,8 @@ require 'spec_helper'
 describe Movie do
 
   before(:each) do
-    @movie = create :movie
+    stub_request(:get, /http:\/\/akas.imdb.com\/title\/tt[0-9]+\/.*/)
+    @movie = create :movie, locations: [create(:location)]
   end
 
   describe "to_json" do
@@ -23,14 +24,14 @@ describe Movie do
 
     describe "retrieve Scarface movie from imdb" do
       before(:each) do
-        @scarface = create :scarface
+        @scarface = create :scarface, directors: [create(:brian)]
       end
       it "should have 'Scarface' as title" do
         @scarface.title.should eq 'Scarface'
       end
       it "should have a director called 'Brian De Palma '" do
         @scarface.directors.should_not be_empty
-        @scarface.directors.first.name.should include 'Brian De Palma'
+        @scarface.directors.first.name.should include 'Brian'
       end
     end
   end

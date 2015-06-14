@@ -6,10 +6,14 @@ class ApplicationController < ActionController::Base
     latest_movies = Movie.last(3)
     box_office_movies = Movie.where.not(box_office: nil)
 
+    @movies = latest_movies + box_office_movies
+    @movies_count = Movie.count
+    @week_number = Time.now.strftime('%V')
+
     @startup_data = {
-      week_number: Time.now.strftime('%V'),
-      movies_count: Movie.count,
-      movies: latest_movies+box_office_movies
+      week_number: @week_number,
+      movies_count: @movies_count,
+      movies: @movies
     }
 
     respond_to do |format|

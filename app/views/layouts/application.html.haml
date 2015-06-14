@@ -12,14 +12,13 @@
     .navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner
         .container-fluid
-          %a#toggleSidebar.sidebarLink.top.left{ data: '#sidebar' }
+          %a#toggleSidebar.sidebarLink.pull-right.top.left{ data: '#sidebar' }
             %button.btn.btn-navbar
               %span.icon-align-justify
-          %button#toggleSearch.btn.btn-navbar.collapsed{ 'data-target' => '.nav-collapse', 'data-toggle' => 'collapse', type: 'button' }
-            %span.icon-search
-          %a.brand.absolute-left{ href: '/' } ShotHere
+                = icon('toggle-left')
+          %a.brand{ href: '/' } ShotHere
           #loading.pull-left= I18n.t 'movie.loading'
-          .nav-collapse.collapse{ style: 'clear: none' }
+          .nav-collapse.pull-right
             #search
               %input#searchbox{ type: 'text', name: 'search', placeholder: 'Search by movie title..'}
               .loading

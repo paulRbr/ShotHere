@@ -12,7 +12,7 @@ class Shothere.Controllers.MoviesController extends Marionette.Controller
 
     @closeSidebar()
 
-    @view = new Shothere.Views.Movies.IndexView(movies: @movies, count: @count, weekNumber: @weekNumber)
+    @view = new Shothere.Views.Movies.IndexView(model: { movies: @movies, count: @count, weekNumber: @weekNumber})
     $("#movies").html(@view.render().el)
 
   show_imdb: (id) ->

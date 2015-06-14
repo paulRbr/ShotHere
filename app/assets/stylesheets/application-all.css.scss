@@ -8,16 +8,23 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require token-input
- *= require leaflet
- *= require leaflet.markercluster
- *= require leaflet.markercluster.default
- *= require twitter/bootstrap
- *= require_tree ./all
- *= require_self
- *= require twitter/bootstrap-responsive
- *= require application-responsive
  */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "token-input";
+@import "leaflet";
+@import "leaflet.markercluster";
+@import "leaflet.markercluster.default";
+@import "purecss/base";
+@import "purecss/buttons";
+@import "purecss/forms";
+@import "purecss/grids-responsive";
+@import "purecss/menus";
+@import "all/**/*";
+@import "application-responsive";
+
 $light-gray: #dcdcdc;
 $white: #fff;
 $black: #000;
@@ -58,11 +65,6 @@ body {
   position: absolute;
   left: 20px;
   vertical-align: 50%;
-}
-#toggleSidebar {
-  position: fixed;
-  top: 50px;
-  right: 5px;
 }
 #search {
   z-index: 10;
@@ -227,6 +229,9 @@ ul.ui-autocomplete{
 #layout, #sidebar, #menu {
   transition: all 0.2s ease-out 0s;
 }
+#toggleSidebar {
+  display: none;
+}
 #sidebar {
   bottom: 0;
   right: $sidebar-width;
@@ -344,6 +349,9 @@ ul.ui-autocomplete{
   #layout.active #sidebar {
     right: $sidebar-width;
     width: $sidebar-width;
+  }
+  #toggleSidebar {
+    display: block;
   }
   #sidebar {
     top: 50px;

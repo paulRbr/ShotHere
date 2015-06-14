@@ -12,7 +12,7 @@
 #= require jquery
 #= require jquery_ujs
 #= require vendor/jquery-ui-1.10.4.custom.min
-#= require twitter/bootstrap
+#= require bootstrap-sprockets
 #= require leaflet
 #= require leaflet.markercluster
 #= require hamlcoffee
@@ -52,6 +52,8 @@ Shothere.App.addInitializer () ->
     if (href && href.slice(protocol.length) != protocol)
       evt.preventDefault()
       Backbone.history.navigate(href, true)
+  $("#toggleSidebar").on 'click', '.btn', () ->
+    $(@).find('.fa-toggle-right, .fa-toggle-left').toggleClass("fa-toggle-right fa-toggle-left")
 
 # Create main router and start history
 Shothere.App.addInitializer (options) ->

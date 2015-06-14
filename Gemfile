@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.3'
+gem 'rails'
 
 gem 'pg', :group => :production
 
@@ -9,7 +9,7 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'simplecov', require: false
   gem 'coveralls', require: false
-  gem 'factory_girl_rails', '~> 4.0'
+  gem 'factory_girl_rails'
   gem 'teaspoon'
   gem 'selenium-webdriver'
 end
@@ -17,11 +17,14 @@ end
 # Gems used only for assets (needed to precompile assets in production while the precompilation is not handled by anyone else for now..)
 # (group :assets in Rails 3.2)
 group :test, :development, :production do
+  gem 'sprockets-rails', :require => 'sprockets/railtie'
+  gem 'bootstrap-sass'
   gem 'sass-rails'
+  gem 'font-awesome-sass'
   gem 'coffee-rails'
-  gem 'haml_coffee_assets'
+  gem 'haml_coffee_assets', :git => 'https://github.com/popox/haml_coffee_assets'
 
-  gem 'backbone-rails', :git => 'https://github.com/popox/backbone-rails.git',:branch => 'v1.1'
+  gem 'backbone-rails'
   gem 'backbone-relational-rails'
   gem 'marionette-rails'
   gem 'jquery-rails'
@@ -30,12 +33,9 @@ group :test, :development, :production do
   gem 'leaflet-markercluster-rails'
 
   # Purecss
-  gem 'purecss-rails', :git => 'https://github.com/popox/purecss-rails.git',:tag => 'global'
+  gem 'purecss-rails'
 
-  # Bootstrap
-  gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails', :git => 'https://github.com/anjlab/bootstrap-rails.git',:branch => 'v2.3.0.0'
-
-  gem 'uglifier', '>= 1.0.3'
+ gem 'uglifier', '>= 1.0.3'
 end
 
 #gem 'requirejs-rails', :git => 'https://github.com/jwhitley/requirejs-rails.git',:branch => 'master'

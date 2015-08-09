@@ -2,4 +2,5 @@
 
 pushd $OPENSHIFT_DATA_DIR
 pg_dump $OPENSHIFT_APP_NAME | gzip > shothere-pg-$(date +"%Y_%m_%d").sql.gz
+[ $? -eq 0 ] && find $OPENSHIFT_DATA_DIR -name "shothere-pg*" -mtime +60 -exec rm -f {} \
 popd
